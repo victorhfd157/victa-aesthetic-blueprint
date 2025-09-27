@@ -114,8 +114,18 @@ export default {
           },
         },
         "float": {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-10px)" },
+          "0%, 100%": { 
+            transform: "translateY(0px)",
+            opacity: "0"
+          },
+          "50%": { 
+            transform: "translateY(-20px)",
+            opacity: "1"
+          },
+        },
+        "spin-slow": {
+          from: { transform: "rotate(0deg)" },
+          to: { transform: "rotate(360deg)" },
         },
       },
       animation: {
@@ -125,6 +135,7 @@ export default {
         "fade-in-up": "fade-in-up 0.8s ease forwards",
         "scale-in": "scale-in 0.6s ease forwards",
         "float": "float 6s ease-in-out infinite",
+        "spin-slow": "spin-slow 20s linear infinite",
       },
     },
   },

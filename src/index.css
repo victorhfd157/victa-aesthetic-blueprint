@@ -151,6 +151,12 @@ All colors MUST be HSL.
     animation: gradientShift 20s ease-in-out infinite;
   }
 
+  /* Animated gradient text */
+  .animate-gradient-text {
+    background-size: 200% 200%;
+    animation: gradientShift 8s linear infinite;
+  }
+
   /* Smooth transitions */
   .transition-smooth {
     transition: var(--transition-smooth);
@@ -191,8 +197,19 @@ All colors MUST be HSL.
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  0%, 100% { 
+    transform: translateY(0px);
+    opacity: 0;
+  }
+  50% { 
+    transform: translateY(-20px);
+    opacity: 1;
+  }
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* Animation classes */
@@ -206,4 +223,12 @@ All colors MUST be HSL.
 
 .float-animation {
   animation: float 6s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 2s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spinSlow 20s linear infinite;
 }
