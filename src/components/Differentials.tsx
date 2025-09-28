@@ -1,25 +1,25 @@
-import { Target, Clock, Users, TrendingUp } from 'lucide-react';
+import { TrendingUp, DollarSign, Zap, BarChart3 } from 'lucide-react';
 
 const differentials = [
   {
-    icon: Target,
-    title: 'Precisão Cirúrgica',
-    description: 'Soluções desenvolvidas especificamente para seu negócio, garantindo máxima eficácia.'
-  },
-  {
-    icon: Clock,
-    title: 'Implementação Rápida',
-    description: 'Do projeto à produção em semanas, não meses. Resultados visíveis desde o primeiro dia.'
-  },
-  {
-    icon: Users,
-    title: 'Suporte Especializado',
-    description: 'Equipe dedicada de especialistas em IA disponível para otimizar continuamente seus resultados.'
-  },
-  {
     icon: TrendingUp,
-    title: 'ROI Comprovado',
-    description: 'Nossos clientes veem em média 3x de retorno sobre investimento nos primeiros 6 meses.'
+    title: 'Mais Conversões',
+    description: 'Estratégias orientadas por dados que aumentam taxas de fecho.'
+  },
+  {
+    icon: DollarSign,
+    title: 'Menos Custos Operacionais',
+    description: 'Redução significativa de tarefas manuais.'
+  },
+  {
+    icon: Zap,
+    title: 'Implementação Rápida',
+    description: 'Projetos prontos em semanas, não meses.'
+  },
+  {
+    icon: BarChart3,
+    title: 'Escalabilidade Real',
+    description: 'Cresça sem expandir equipas grandes.'
   }
 ];
 
@@ -30,7 +30,7 @@ const Differentials = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            Por que escolher a <span className="gradient-text">VICTA?</span>
+            <span className="gradient-text">Resultados que fazem diferença</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Mais de 100 empresas já transformaram suas operações conosco. 
@@ -93,24 +93,24 @@ const Differentials = () => {
               <div className="w-20 h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-6 shadow-glow">
                 <span className="text-2xl font-bold text-white">1</span>
               </div>
-              <h4 className="text-xl font-semibold text-white mb-3">Análise Detalhada</h4>
-              <p className="text-muted-foreground">Mapeamos seus processos atuais e identificamos oportunidades de automação com maior impacto.</p>
+              <h4 className="text-xl font-semibold text-white mb-3">Consultoria Gratuita</h4>
+              <p className="text-muted-foreground">Diagnóstico inicial com engenheiro de IA.</p>
             </div>
             
             <div className="text-center">
               <div className="w-20 h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-6 shadow-glow">
                 <span className="text-2xl font-bold text-white">2</span>
               </div>
-              <h4 className="text-xl font-semibold text-white mb-3">Desenvolvimento Ágil</h4>
-              <p className="text-muted-foreground">Criamos e implementamos soluções personalizadas usando metodologias ágeis para entregas rápidas.</p>
+              <h4 className="text-xl font-semibold text-white mb-3">Escopo e Proposta</h4>
+              <p className="text-muted-foreground">Soluções à medida, custos claros e previsíveis.</p>
             </div>
             
             <div className="text-center">
               <div className="w-20 h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-6 shadow-glow">
                 <span className="text-2xl font-bold text-white">3</span>
               </div>
-              <h4 className="text-xl font-semibold text-white mb-3">Otimização Contínua</h4>
-              <p className="text-muted-foreground">Monitoramos performance e otimizamos constantemente para maximizar seus resultados.</p>
+              <h4 className="text-xl font-semibold text-white mb-3">Início do Projeto</h4>
+              <p className="text-muted-foreground">Implementação rápida com ganhos em semanas.</p>
             </div>
           </div>
         </div>

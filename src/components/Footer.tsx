@@ -1,4 +1,4 @@
-import { Linkedin, Mail, Phone } from 'lucide-react';
+import { Linkedin, Mail, Phone, Instagram, Twitter } from 'lucide-react';
 import victaLogo from '@/assets/victa-logo.png';
 
 const Footer = () => {
@@ -28,7 +28,7 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <a 
-                href="mailto:contato@victa.ai" 
+                href="mailto:info@victa.ai" 
                 className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center hover:scale-105 transition-transform shadow-glow"
               >
                 <Mail className="h-5 w-5 text-white" />
@@ -46,6 +46,22 @@ const Footer = () => {
                 className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center hover:scale-105 transition-transform shadow-glow"
               >
                 <Linkedin className="h-5 w-5 text-white" />
+              </a>
+              <a 
+                href="https://instagram.com/victa.ai" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center hover:scale-105 transition-transform shadow-glow"
+              >
+                <Instagram className="h-5 w-5 text-white" />
+              </a>
+              <a 
+                href="https://twitter.com/victa_ai" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center hover:scale-105 transition-transform shadow-glow"
+              >
+                <Twitter className="h-5 w-5 text-white" />
               </a>
             </div>
           </div>
@@ -95,7 +111,7 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="text-muted-foreground">
                 <span className="text-white font-medium">Email:</span><br />
-                contato@victa.ai
+                info@victa.ai
               </li>
               <li className="text-muted-foreground">
                 <span className="text-white font-medium">Telefone:</span><br />

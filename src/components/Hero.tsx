@@ -38,12 +38,12 @@ const Hero = () => {
               <br />
               <span className="text-white">que escalam</span>
               <br />
-              <span className="text-white">seu negócio</span>
+              <span className="text-white">o seu negócio</span>
             </h1>
             
             <p className="text-xl text-foreground/70 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
               Automatize processos, aumente conversões e reduza custos com agentes inteligentes 
-              e integrações estratégicas que transformam sua operação.
+              e integrações estratégicas.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">

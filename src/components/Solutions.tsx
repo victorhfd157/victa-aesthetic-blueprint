@@ -3,39 +3,27 @@ import { Brain, MessageSquare, Zap, BarChart3, Shield, Cog } from 'lucide-react'
 const solutions = [
   {
     icon: Brain,
-    title: 'Agentes Inteligentes',
-    description: 'Chatbots avançados com IA conversacional para atendimento 24/7 e automação de vendas.',
-    features: ['Processamento Natural', 'Aprendizado Contínuo', 'Integração Multi-canal']
-  },
-  {
-    icon: MessageSquare,
-    title: 'Automação de Conversas',
-    description: 'Sistemas que qualificam leads, agendam reuniões e nutrem prospects automaticamente.',
-    features: ['Qualificação de Leads', 'Agendamento Automático', 'Follow-up Inteligente']
-  },
-  {
-    icon: Zap,
-    title: 'Integração de Sistemas',
-    description: 'Conectamos suas ferramentas existentes para criar fluxos de trabalho inteligentes.',
-    features: ['APIs Personalizadas', 'Sincronização Automática', 'Fluxos Otimizados']
-  },
-  {
-    icon: BarChart3,
-    title: 'Analytics Preditiva',
-    description: 'Dashboards inteligentes que antecipam tendências e otimizam decisões estratégicas.',
-    features: ['Previsões Precisas', 'Insights Acionáveis', 'Relatórios Automáticos']
-  },
-  {
-    icon: Shield,
-    title: 'Segurança Avançada',
-    description: 'Proteção de dados com criptografia e compliance total com LGPD e regulamentações.',
-    features: ['LGPD Compliant', 'Criptografia End-to-End', 'Auditoria Completa']
+    title: 'Agentes de IA Personalizados',
+    description: 'Automatizam vendas e atendimento, gerando mais leads qualificados.',
+    features: ['Aumenta conversão em até 40%', 'Qualificação automática de leads', 'Atendimento 24/7 inteligente']
   },
   {
     icon: Cog,
-    title: 'Personalização Total',
-    description: 'Soluções sob medida que se adaptam perfeitamente aos processos do seu negócio.',
-    features: ['Desenvolvimento Custom', 'Treinamento Específico', 'Suporte Dedicado']
+    title: 'Sistemas Inteligentes',
+    description: 'Eliminam processos manuais e reduzem até 70% do tempo operacional.',
+    features: ['Redução drástica de tarefas manuais', 'Fluxos automatizados', 'Integração total com sistemas existentes']
+  },
+  {
+    icon: Zap,
+    title: 'Integrações Estratégicas',
+    description: 'Unificam operações e centralizam dados para maior eficiência.',
+    features: ['Centralização de dados', 'Operações unificadas', 'Maior eficiência operacional']
+  },
+  {
+    icon: BarChart3,
+    title: 'Automação de Marketing e Vendas',
+    description: 'Funis otimizados, campanhas mais precisas e maior ROI.',
+    features: ['Funis de venda automatizados', 'Campanhas precisas por IA', 'ROI comprovadamente maior']
   }
 ];
 
@@ -46,11 +34,10 @@ const Solutions = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            <span className="gradient-text">Nossas Soluções</span>
+            <span className="gradient-text">As nossas soluções em IA</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Transforme sua operação com inteligência artificial personalizada para cada etapa 
-            do seu processo de negócio.
+            Soluções inteligentes que geram resultados comprovados e transformam a sua operação.
           </p>
         </div>
 
