@@ -54,7 +54,7 @@ const Navbar = () => {
             <img 
               src={victaLogo} 
               alt="VICTA AI Solutions" 
-              className="h-16 w-auto glow-primary transition-smooth hover:scale-105 cursor-pointer"
+              className="h-24 w-auto glow-primary transition-smooth hover:scale-105 cursor-pointer"
               onClick={() => scrollToSection('hero')}
             />
           </div>
