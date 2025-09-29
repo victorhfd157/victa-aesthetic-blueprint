@@ -12,7 +12,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative bg-black/40 border-t border-foreground/10 backdrop-blur-xl">
+    <footer className="bg-background border-t border-muted/20">
       <div className="container mx-auto px-6 py-12">
         <div className="grid md:grid-cols-4 gap-8">
           {/* Logo and Description */}
@@ -22,7 +22,7 @@ const Footer = () => {
               alt="VICTA AI Solutions" 
               className="h-12 w-auto mb-6 glow-primary"
             />
-            <p className="text-foreground/70 mb-6 leading-relaxed max-w-md">
+            <p className="text-muted-foreground mb-6 leading-relaxed max-w-md">
               Transformamos negócios através de soluções inteligentes em IA. 
               Automatização, conversão e crescimento sustentável para empresas que pensam no futuro.
             </p>
@@ -68,12 +68,12 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-foreground font-semibold mb-4">Links Rápidos</h3>
+            <h3 className="text-white font-semibold mb-4">Links Rápidos</h3>
             <ul className="space-y-3">
               <li>
                 <button 
                   onClick={() => scrollToSection('hero')}
-                  className="text-foreground/70 hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   Home
                 </button>
@@ -81,7 +81,7 @@ const Footer = () => {
               <li>
                 <button 
                   onClick={() => scrollToSection('solutions')}
-                  className="text-foreground/70 hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   Soluções
                 </button>
@@ -89,7 +89,7 @@ const Footer = () => {
               <li>
                 <button 
                   onClick={() => scrollToSection('differentials')}
-                  className="text-foreground/70 hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   Sobre Nós
                 </button>
@@ -97,7 +97,7 @@ const Footer = () => {
               <li>
                 <button 
                   onClick={() => scrollToSection('contact')}
-                  className="text-foreground/70 hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   Contato
                 </button>
@@ -107,18 +107,18 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-foreground font-semibold mb-4">Contato</h3>
+            <h3 className="text-white font-semibold mb-4">Contato</h3>
             <ul className="space-y-3">
-              <li className="text-foreground/70">
-                <span className="text-foreground font-medium">Email:</span><br />
+              <li className="text-muted-foreground">
+                <span className="text-white font-medium">Email:</span><br />
                 info@victa.ai
               </li>
-              <li className="text-foreground/70">
-                <span className="text-foreground font-medium">Telefone:</span><br />
+              <li className="text-muted-foreground">
+                <span className="text-white font-medium">Telefone:</span><br />
                 +55 (11) 9 9999-9999
               </li>
-              <li className="text-foreground/70">
-                <span className="text-foreground font-medium">Localização:</span><br />
+              <li className="text-muted-foreground">
+                <span className="text-white font-medium">Localização:</span><br />
                 São Paulo, Brasil
               </li>
             </ul>
@@ -126,19 +126,19 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-foreground/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-foreground/70 text-sm">
+        <div className="border-t border-muted/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-muted-foreground text-sm">
             © {currentYear} VICTA AI Solutions. Todos os direitos reservados.
           </p>
           
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="text-foreground/70 hover:text-primary text-sm transition-colors">
+            <a href="#" className="text-muted-foreground hover:text-primary text-sm transition-colors">
               Política de Privacidade
             </a>
-            <a href="#" className="text-foreground/70 hover:text-primary text-sm transition-colors">
+            <a href="#" className="text-muted-foreground hover:text-primary text-sm transition-colors">
               Termos de Uso
             </a>
-            <a href="#" className="text-foreground/70 hover:text-primary text-sm transition-colors">
+            <a href="#" className="text-muted-foreground hover:text-primary text-sm transition-colors">
               LGPD
             </a>
           </div>

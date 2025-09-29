@@ -7,23 +7,20 @@ import CTA from '@/components/CTA';
 import FAQ from '@/components/FAQ';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
-import { AuroraBackground } from '@/components/ui/aurora-background';
 
 const Index = () => {
   return (
-    <AuroraBackground className="!h-auto !min-h-screen">
-      <div className="relative z-10">
-        <Navbar />
-        <Hero />
-        <Solutions />
-        <Differentials />
-        <Clients />
-        <CTA />
-        <FAQ />
-        <Contact />
-        <Footer />
-      </div>
-    </AuroraBackground>
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <Hero />
+      <Solutions />
+      <Differentials />
+      <Clients />
+      <CTA />
+      <FAQ />
+      <Contact />
+      <Footer />
+    </div>
   );
 };
 

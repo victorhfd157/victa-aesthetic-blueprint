@@ -25,9 +25,8 @@ const differentials = [
 
 const Differentials = () => {
   return (
-    <section id="differentials" className="py-24 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/20" />
-      <div className="container mx-auto px-6 relative z-10">
+    <section id="differentials" className="py-24 bg-gradient-to-br from-background via-muted/10 to-background">
+      <div className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
@@ -43,19 +42,19 @@ const Differentials = () => {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           <div className="text-center">
             <div className="text-4xl lg:text-5xl font-bold gradient-text mb-2">100+</div>
-            <div className="text-foreground/70">Clientes Ativos</div>
+            <div className="text-muted-foreground">Clientes Ativos</div>
           </div>
           <div className="text-center">
             <div className="text-4xl lg:text-5xl font-bold gradient-text mb-2">95%</div>
-            <div className="text-foreground/70">Taxa de Sucesso</div>
+            <div className="text-muted-foreground">Taxa de Sucesso</div>
           </div>
           <div className="text-center">
             <div className="text-4xl lg:text-5xl font-bold gradient-text mb-2">24/7</div>
-            <div className="text-foreground/70">Suporte Ativo</div>
+            <div className="text-muted-foreground">Suporte Ativo</div>
           </div>
           <div className="text-center">
             <div className="text-4xl lg:text-5xl font-bold gradient-text mb-2">3x</div>
-            <div className="text-foreground/70">ROI Médio</div>
+            <div className="text-muted-foreground">ROI Médio</div>
           </div>
         </div>
 
@@ -74,8 +73,8 @@ const Differentials = () => {
                     <Icon className="h-7 w-7 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-foreground mb-3">{differential.title}</h3>
-                    <p className="text-foreground/70 leading-relaxed">{differential.description}</p>
+                    <h3 className="text-xl font-bold text-white mb-3">{differential.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed">{differential.description}</p>
                   </div>
                 </div>
               </div>
@@ -94,24 +93,24 @@ const Differentials = () => {
               <div className="w-20 h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-6 shadow-glow">
                 <span className="text-2xl font-bold text-white">1</span>
               </div>
-              <h4 className="text-xl font-semibold text-foreground mb-3">Consultoria Gratuita</h4>
-              <p className="text-foreground/70">Diagnóstico inicial com engenheiro de IA.</p>
+              <h4 className="text-xl font-semibold text-white mb-3">Consultoria Gratuita</h4>
+              <p className="text-muted-foreground">Diagnóstico inicial com engenheiro de IA.</p>
             </div>
             
             <div className="text-center">
               <div className="w-20 h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-6 shadow-glow">
                 <span className="text-2xl font-bold text-white">2</span>
               </div>
-              <h4 className="text-xl font-semibold text-foreground mb-3">Escopo e Proposta</h4>
-              <p className="text-foreground/70">Soluções à medida, custos claros e previsíveis.</p>
+              <h4 className="text-xl font-semibold text-white mb-3">Escopo e Proposta</h4>
+              <p className="text-muted-foreground">Soluções à medida, custos claros e previsíveis.</p>
             </div>
             
             <div className="text-center">
               <div className="w-20 h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-6 shadow-glow">
                 <span className="text-2xl font-bold text-white">3</span>
               </div>
-              <h4 className="text-xl font-semibold text-foreground mb-3">Início do Projeto</h4>
-              <p className="text-foreground/70">Implementação rápida com ganhos em semanas.</p>
+              <h4 className="text-xl font-semibold text-white mb-3">Início do Projeto</h4>
+              <p className="text-muted-foreground">Implementação rápida com ganhos em semanas.</p>
             </div>
           </div>
         </div>

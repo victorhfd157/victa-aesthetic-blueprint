@@ -1,6 +1,5 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 const Hero = () => {
   const scrollToContact = () => {
@@ -18,23 +17,17 @@ const Hero = () => {
   };
 
   return (
-    <motion.section 
-      id="hero" 
-      className="relative w-full min-h-screen flex items-center justify-center pt-20"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-    >
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Animated Background */}
+      <div className="absolute inset-0 hero-bg">
+        <div className="absolute inset-0 bg-black/60" />
+      </div>
+
       {/* Content */}
-      <div className="container mx-auto px-6">
+      <div className="relative z-10 container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Text Content */}
-          <motion.div 
-            className="text-center lg:text-left"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-          >
+          <div className="text-center lg:text-left">
             <div className="flex items-center justify-center lg:justify-start mb-6">
               <Sparkles className="h-6 w-6 text-primary mr-2 animate-pulse" />
               <span className="text-primary font-semibold">Inteligência Artificial Avançada</span>
@@ -43,12 +36,12 @@ const Hero = () => {
             <h1 className="text-5xl lg:text-7xl font-bold mb-6 leading-tight">
               <span className="gradient-text">Soluções de IA</span>
               <br />
-              <span className="text-foreground">que escalam</span>
+              <span className="text-white">que escalam</span>
               <br />
-              <span className="text-foreground">o seu negócio</span>
+              <span className="text-white">o seu negócio</span>
             </h1>
             
-            <p className="text-xl text-foreground/80 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+            <p className="text-xl text-foreground/70 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
               Automatize processos, aumente conversões e reduza custos com agentes inteligentes 
               e integrações estratégicas.
             </p>
@@ -65,38 +58,33 @@ const Hero = () => {
               
               <Button 
                 onClick={scrollToSolutions}
-                variant="secondary" 
+                variant="outline" 
                 size="lg"
-                className="font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:scale-105"
+                className="glass glass-hover border-primary/30 text-white hover:text-primary font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:scale-105"
               >
                 Conhecer Soluções
               </Button>
             </div>
-          </motion.div>
+          </div>
 
           {/* Right Column - Visual Element */}
-          <motion.div 
-            className="relative"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-          >
-            <div className="glass rounded-3xl p-8 shadow-glass float-animation backdrop-blur-xl">
+          <div className="relative">
+            <div className="glass rounded-3xl p-8 shadow-glass float-animation">
               <div className="bg-gradient-primary rounded-2xl p-6 text-center">
                 <div className="grid grid-cols-2 gap-4 mb-6">
-                  <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
+                  <div className="bg-white/10 rounded-lg p-4">
                     <div className="text-2xl font-bold text-white mb-1">95%</div>
                     <div className="text-sm text-white/70">Automação</div>
                   </div>
-                  <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
+                  <div className="bg-white/10 rounded-lg p-4">
                     <div className="text-2xl font-bold text-white mb-1">3x</div>
                     <div className="text-sm text-white/70">ROI Médio</div>
                   </div>
-                  <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
+                  <div className="bg-white/10 rounded-lg p-4">
                     <div className="text-2xl font-bold text-white mb-1">24/7</div>
                     <div className="text-sm text-white/70">Disponibilidade</div>
                   </div>
-                  <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
+                  <div className="bg-white/10 rounded-lg p-4">
                     <div className="text-2xl font-bold text-white mb-1">60%</div>
                     <div className="text-sm text-white/70">Redução Custos</div>
                   </div>
@@ -106,7 +94,7 @@ const Hero = () => {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 
@@ -118,7 +106,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 };
 

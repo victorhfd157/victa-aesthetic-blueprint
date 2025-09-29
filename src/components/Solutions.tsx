@@ -29,9 +29,8 @@ const solutions = [
 
 const Solutions = () => {
   return (
-    <section id="solutions" className="py-24 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-transparent" />
-      <div className="container mx-auto px-6 relative z-10">
+    <section id="solutions" className="py-24 bg-background">
+      <div className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
@@ -56,15 +55,15 @@ const Solutions = () => {
                   <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                     <Icon className="h-8 w-8 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground mb-3">{solution.title}</h3>
-                  <p className="text-foreground/70 leading-relaxed">{solution.description}</p>
+                  <h3 className="text-2xl font-bold text-white mb-3">{solution.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{solution.description}</p>
                 </div>
 
                 <div className="space-y-2">
                   {solution.features.map((feature, featureIndex) => (
                     <div key={featureIndex} className="flex items-center text-sm">
                       <div className="w-2 h-2 bg-primary rounded-full mr-3 flex-shrink-0"></div>
-                      <span className="text-foreground/70">{feature}</span>
+                      <span className="text-muted-foreground">{feature}</span>
                     </div>
                   ))}
                 </div>
@@ -75,11 +74,11 @@ const Solutions = () => {
 
         {/* CTA */}
         <div className="text-center mt-16">
-          <div className="glass rounded-2xl p-8 max-w-4xl mx-auto backdrop-blur-xl">
-            <h3 className="text-3xl font-bold text-foreground mb-4">
+          <div className="glass rounded-2xl p-8 max-w-4xl mx-auto">
+            <h3 className="text-3xl font-bold text-white mb-4">
               Pronto para revolucionar seu negócio?
             </h3>
-            <p className="text-foreground/80 mb-6 text-lg">
+            <p className="text-muted-foreground mb-6 text-lg">
               Nossa equipe está pronta para desenvolver a solução perfeita para sua empresa.
             </p>
             <button 
