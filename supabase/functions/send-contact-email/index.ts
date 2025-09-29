@@ -59,7 +59,7 @@ function validateContactData(data: any): ContactEmailRequest {
   };
 }
 
-async function sendEmail(to: string[], subject: string, html: string, from = 'VICTA <info@victaaisolutions.com>') {
+async function sendEmail(to: string[], subject: string, html: string, from = 'VICTA <onboarding@resend.dev>') {
   const response = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: {
