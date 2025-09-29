@@ -84,8 +84,9 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-background">
-      <div className="container mx-auto px-6">
+    <section id="contact" className="py-24 relative">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-transparent" />
+      <div className="container mx-auto px-6 relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
@@ -99,34 +100,34 @@ const Contact = () => {
 
         <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* Contact Form */}
-          <div className="glass rounded-2xl p-8 shadow-card">
-            <h3 className="text-2xl font-bold text-white mb-6">Solicite sua demonstração</h3>
+          <div className="glass rounded-2xl p-8 shadow-card backdrop-blur-xl">
+            <h3 className="text-2xl font-bold text-foreground mb-6">Solicite sua demonstração</h3>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-sm font-medium text-muted-foreground mb-2 block">
+                  <label className="text-sm font-medium text-foreground/80 mb-2 block">
                     Nome *
                   </label>
                   <Input 
                     name="name"
                     required 
                     placeholder="Seu nome completo"
-                    className="bg-muted/20 border-muted text-white placeholder:text-muted-foreground"
+                    className="bg-muted/20 border-muted text-foreground placeholder:text-foreground/50"
                   />
                   {errors.name && (
                     <p className="text-red-400 text-sm mt-1">{errors.name}</p>
                   )}
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-muted-foreground mb-2 block">
+                  <label className="text-sm font-medium text-foreground/80 mb-2 block">
                     Empresa *
                   </label>
                   <Input 
                     name="company"
                     required 
                     placeholder="Nome da empresa"
-                    className="bg-muted/20 border-muted text-white placeholder:text-muted-foreground"
+                    className="bg-muted/20 border-muted text-foreground placeholder:text-foreground/50"
                   />
                   {errors.company && (
                     <p className="text-red-400 text-sm mt-1">{errors.company}</p>
@@ -136,7 +137,7 @@ const Contact = () => {
               
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-sm font-medium text-muted-foreground mb-2 block">
+                  <label className="text-sm font-medium text-foreground/80 mb-2 block">
                     Email *
                   </label>
                   <Input 
@@ -144,20 +145,20 @@ const Contact = () => {
                     type="email" 
                     required 
                     placeholder="seu@email.com"
-                    className="bg-muted/20 border-muted text-white placeholder:text-muted-foreground"
+                    className="bg-muted/20 border-muted text-foreground placeholder:text-foreground/50"
                   />
                   {errors.email && (
                     <p className="text-red-400 text-sm mt-1">{errors.email}</p>
                   )}
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-muted-foreground mb-2 block">
+                  <label className="text-sm font-medium text-foreground/80 mb-2 block">
                     Telefone
                   </label>
                   <Input 
                     name="phone"
                     placeholder="(11) 99999-9999"
-                    className="bg-muted/20 border-muted text-white placeholder:text-muted-foreground"
+                    className="bg-muted/20 border-muted text-foreground placeholder:text-foreground/50"
                   />
                   {errors.phone && (
                     <p className="text-red-400 text-sm mt-1">{errors.phone}</p>
@@ -166,14 +167,14 @@ const Contact = () => {
               </div>
               
               <div>
-                <label className="text-sm font-medium text-muted-foreground mb-2 block">
+                <label className="text-sm font-medium text-foreground/80 mb-2 block">
                   Conte-nos sobre seu desafio
                 </label>
                 <Textarea 
                   name="message"
                   placeholder="Descreva como podemos ajudar sua empresa..."
                   rows={4}
-                  className="bg-muted/20 border-muted text-white placeholder:text-muted-foreground"
+                  className="bg-muted/20 border-muted text-foreground placeholder:text-foreground/50"
                 />
                 {errors.message && (
                   <p className="text-red-400 text-sm mt-1">{errors.message}</p>
@@ -200,8 +201,8 @@ const Contact = () => {
           {/* Contact Information */}
           <div className="space-y-8">
             {/* Quick Contact */}
-            <div className="glass rounded-2xl p-8 shadow-card">
-              <h3 className="text-2xl font-bold text-white mb-6">Fale conosco diretamente</h3>
+            <div className="glass rounded-2xl p-8 shadow-card backdrop-blur-xl">
+              <h3 className="text-2xl font-bold text-foreground mb-6">Fale conosco diretamente</h3>
               
               <div className="space-y-6">
                 <div className="flex items-center space-x-4">
@@ -209,8 +210,8 @@ const Contact = () => {
                     <Phone className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <div className="text-white font-semibold">Telefone</div>
-                    <div className="text-muted-foreground">+55 (11) 9 9999-9999</div>
+                    <div className="text-foreground font-semibold">Telefone</div>
+                    <div className="text-foreground/70">+55 (11) 9 9999-9999</div>
                   </div>
                 </div>
                 
@@ -219,8 +220,8 @@ const Contact = () => {
                     <Mail className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <div className="text-white font-semibold">Email</div>
-                    <div className="text-muted-foreground">info@victaaisolutions.com</div>
+                    <div className="text-foreground font-semibold">Email</div>
+                    <div className="text-foreground/70">info@victaaisolutions.com</div>
                   </div>
                 </div>
                 
@@ -229,8 +230,8 @@ const Contact = () => {
                     <MapPin className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <div className="text-white font-semibold">Localização</div>
-                    <div className="text-muted-foreground">São Paulo, Brasil</div>
+                    <div className="text-foreground font-semibold">Localização</div>
+                    <div className="text-foreground/70">São Paulo, Brasil</div>
                   </div>
                 </div>
               </div>

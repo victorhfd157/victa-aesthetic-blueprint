@@ -32,8 +32,9 @@ const FAQ = () => {
   };
 
   return (
-    <section className="py-24 bg-gradient-to-br from-background via-muted/10 to-background">
-      <div className="container mx-auto px-6">
+    <section className="py-24 relative">
+      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/20" />
+      <div className="container mx-auto px-6 relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
@@ -55,7 +56,7 @@ const FAQ = () => {
                 onClick={() => toggleFAQ(index)}
                 className="w-full px-8 py-6 text-left flex items-center justify-between hover:bg-white/5 transition-colors"
               >
-                <h3 className="text-lg font-semibold text-white pr-4">
+                <h3 className="text-lg font-semibold text-foreground pr-4">
                   {faq.question}
                 </h3>
                 {openIndex === index ? (
@@ -68,7 +69,7 @@ const FAQ = () => {
               {openIndex === index && (
                 <div className="px-8 pb-6">
                   <div className="border-t border-muted/20 pt-4">
-                    <p className="text-muted-foreground leading-relaxed">
+                    <p className="text-foreground/70 leading-relaxed">
                       {faq.answer}
                     </p>
                   </div>
