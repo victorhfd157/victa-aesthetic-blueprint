@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles } from 'lucide-react';
+import { WavyBackground } from '@/components/ui/wavy-background';
 
 const Hero = () => {
   const scrollToContact = () => {
@@ -17,14 +18,17 @@ const Hero = () => {
   };
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated Background */}
-      <div className="absolute inset-0 hero-bg">
-        <div className="absolute inset-0 bg-black/60" />
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-6">
+    <WavyBackground
+      className="w-full"
+      containerClassName="relative min-h-screen"
+      colors={["#38bdf8", "#818cf8", "#c084fc", "#e879f9", "#22d3ee"]}
+      waveWidth={50}
+      backgroundFill="hsl(var(--background))"
+      blur={10}
+      speed="fast"
+      waveOpacity={0.5}
+    >
+      <section id="hero" className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Text Content */}
           <div className="text-center lg:text-left">
@@ -96,17 +100,8 @@ const Hero = () => {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-        <div className="animate-bounce">
-          <div className="w-6 h-10 border-2 border-primary rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-primary rounded-full mt-2 animate-pulse"></div>
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
+    </WavyBackground>
   );
 };
 
