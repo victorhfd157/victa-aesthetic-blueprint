@@ -4,18 +4,54 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Phone, Mail, MapPin, ArrowRight } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
+import { z } from 'zod';
+
+const contactSchema = z.object({
+  name: z.string().trim().min(1, "Nome é obrigatório").max(100, "Nome deve ter menos de 100 caracteres"),
+  company: z.string().trim().min(1, "Empresa é obrigatória").max(100, "Nome da empresa deve ter menos de 100 caracteres"),
+  email: z.string().trim().email("Email inválido").max(255, "Email deve ter menos de 255 caracteres"),
+  phone: z.string().trim().optional(),
+  message: z.string().trim().max(1000, "Mensagem deve ter menos de 1000 caracteres").optional(),
+});
 
 const Contact = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setErrors({});
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const formData = new FormData(e.currentTarget);
+      const data = {
+        name: formData.get('name') as string,
+        company: formData.get('company') as string,
+        email: formData.get('email') as string,
+        phone: formData.get('phone') as string,
+        message: formData.get('message') as string,
+      };
+
+      // Validate client-side
+      const validatedData = contactSchema.parse(data);
+
+      // Call edge function
+      const { data: result, error } = await supabase.functions.invoke('send-contact-email', {
+        body: validatedData,
+      });
+
+      if (error) {
+        throw new Error(error.message || 'Erro ao enviar mensagem');
+      }
+
+      if (result?.error) {
+        throw new Error(result.message || 'Erro ao enviar mensagem');
+      }
+
+      // Success
       toast({
         title: "Mensagem enviada com sucesso!",
         description: "Nossa equipe entrará em contato em até 24 horas.",
@@ -23,7 +59,28 @@ const Contact = () => {
       
       // Reset form
       (e.target as HTMLFormElement).reset();
-    }, 2000);
+      
+    } catch (error: any) {
+      console.error('Form submission error:', error);
+      
+      if (error.issues) {
+        // Zod validation errors
+        const fieldErrors: Record<string, string> = {};
+        error.issues.forEach((issue: any) => {
+          fieldErrors[issue.path[0]] = issue.message;
+        });
+        setErrors(fieldErrors);
+      } else {
+        // Other errors
+        toast({
+          title: "Erro ao enviar mensagem",
+          description: error.message || "Tente novamente em alguns instantes.",
+          variant: "destructive",
+        });
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -52,20 +109,28 @@ const Contact = () => {
                     Nome *
                   </label>
                   <Input 
+                    name="name"
                     required 
                     placeholder="Seu nome completo"
                     className="bg-muted/20 border-muted text-white placeholder:text-muted-foreground"
                   />
+                  {errors.name && (
+                    <p className="text-red-400 text-sm mt-1">{errors.name}</p>
+                  )}
                 </div>
                 <div>
                   <label className="text-sm font-medium text-muted-foreground mb-2 block">
                     Empresa *
                   </label>
                   <Input 
+                    name="company"
                     required 
                     placeholder="Nome da empresa"
                     className="bg-muted/20 border-muted text-white placeholder:text-muted-foreground"
                   />
+                  {errors.company && (
+                    <p className="text-red-400 text-sm mt-1">{errors.company}</p>
+                  )}
                 </div>
               </div>
               
@@ -75,20 +140,28 @@ const Contact = () => {
                     Email *
                   </label>
                   <Input 
+                    name="email"
                     type="email" 
                     required 
                     placeholder="seu@email.com"
                     className="bg-muted/20 border-muted text-white placeholder:text-muted-foreground"
                   />
+                  {errors.email && (
+                    <p className="text-red-400 text-sm mt-1">{errors.email}</p>
+                  )}
                 </div>
                 <div>
                   <label className="text-sm font-medium text-muted-foreground mb-2 block">
                     Telefone
                   </label>
                   <Input 
+                    name="phone"
                     placeholder="(11) 99999-9999"
                     className="bg-muted/20 border-muted text-white placeholder:text-muted-foreground"
                   />
+                  {errors.phone && (
+                    <p className="text-red-400 text-sm mt-1">{errors.phone}</p>
+                  )}
                 </div>
               </div>
               
@@ -97,10 +170,14 @@ const Contact = () => {
                   Conte-nos sobre seu desafio
                 </label>
                 <Textarea 
+                  name="message"
                   placeholder="Descreva como podemos ajudar sua empresa..."
                   rows={4}
                   className="bg-muted/20 border-muted text-white placeholder:text-muted-foreground"
                 />
+                {errors.message && (
+                  <p className="text-red-400 text-sm mt-1">{errors.message}</p>
+                )}
               </div>
               
               <Button 
@@ -143,7 +220,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <div className="text-white font-semibold">Email</div>
-                    <div className="text-muted-foreground">info@victa.ai</div>
+                    <div className="text-muted-foreground">info@victaaisolutions.com</div>
                   </div>
                 </div>
                 
