@@ -13,14 +13,14 @@ const Footer = () => {
 
   return (
     <footer className="bg-background border-t border-muted/20">
-      <div className="container mx-auto px-6 py-12">
-        <div className="grid md:grid-cols-4 gap-8">
+      <div className="container mx-auto px-4 md:px-6 py-8 md:py-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {/* Logo and Description */}
-          <div className="md:col-span-2">
+          <div className="sm:col-span-2">
             <img 
               src={victaLogo} 
               alt="VICTA AI Solutions" 
-              className="h-12 w-auto mb-6 glow-primary"
+              className="h-10 md:h-12 w-auto mb-4 md:mb-6 glow-primary"
             />
             <p className="text-muted-foreground mb-6 leading-relaxed max-w-md">
               Transformamos negócios através de soluções inteligentes em IA. 
@@ -126,7 +126,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-muted/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <div className="border-t border-muted/20 mt-8 md:mt-12 pt-6 md:pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-muted-foreground text-sm">
             © {currentYear} VICTA AI Solutions. Todos os direitos reservados.
           </p>

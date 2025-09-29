@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Menu } from 'lucide-react';
 import victaLogo from '@/assets/victa-logo.png';
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -25,6 +28,7 @@ const Navbar = () => {
   }, []);
   const scrollToSection = (sectionId: string) => {
     setActiveSection(sectionId);
+    setMobileMenuOpen(false);
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({
@@ -49,14 +53,19 @@ const Navbar = () => {
     label: 'Contato'
   }];
   return <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'glass glass-hover shadow-glass' : 'bg-transparent'}`}>
-      <div className="container px-[40px] my-0 py-[6px] mx-0">
+      <div className="container px-4 md:px-8 lg:px-[40px] py-2 md:py-[6px]">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
-            <img src={victaLogo} alt="VICTA AI Solutions" onClick={() => scrollToSection('hero')} className="h-36 w-auto glow-primary transition-smooth hover:scale-105 cursor-pointer" />
+            <img 
+              src={victaLogo} 
+              alt="VICTA AI Solutions" 
+              onClick={() => scrollToSection('hero')} 
+              className="h-20 md:h-28 lg:h-36 w-auto glow-primary transition-smooth hover:scale-105 cursor-pointer" 
+            />
           </div>
 
-          {/* Pill Navigation */}
+          {/* Desktop Pill Navigation */}
           <div className="hidden md:flex items-center">
             <div className="glass rounded-full p-1 backdrop-blur-xl border border-white/10">
               <div className="flex items-center gap-1">
@@ -71,17 +80,46 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* CTA Button */}
-          <Button onClick={() => scrollToSection('contact')} className="bg-gradient-primary hover:opacity-90 transition-smooth text-white font-semibold px-6 py-2 rounded-full shadow-glow hover:scale-105">
+          {/* Desktop CTA Button */}
+          <Button 
+            onClick={() => scrollToSection('contact')} 
+            className="hidden md:flex bg-gradient-primary hover:opacity-90 transition-smooth text-white font-semibold px-6 py-2 rounded-full shadow-glow hover:scale-105"
+          >
             Solicitar Demonstração
           </Button>
 
-          {/* Mobile menu button */}
-          <button className="md:hidden text-foreground">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
+          {/* Mobile menu */}
+          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="md:hidden text-white">
+                <Menu className="h-6 w-6" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="glass border-l border-white/10">
+              <div className="flex flex-col gap-4 mt-8">
+                {navItems.map(item => (
+                  <button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className={`
+                      w-full text-left px-4 py-3 rounded-lg transition-all duration-300 font-medium
+                      ${activeSection === item.id 
+                        ? 'bg-gradient-primary text-white shadow-glow' 
+                        : 'text-foreground/70 hover:text-foreground hover:bg-white/5'}
+                    `}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+                <Button 
+                  onClick={() => scrollToSection('contact')} 
+                  className="w-full mt-4 bg-gradient-primary hover:opacity-90 transition-smooth text-white font-semibold px-6 py-3 rounded-full shadow-glow"
+                >
+                  Solicitar Demonstração
+                </Button>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </nav>;

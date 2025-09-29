@@ -84,23 +84,23 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-background">
-      <div className="container mx-auto px-6">
+    <section id="contact" className="py-12 md:py-20 lg:py-24 bg-background">
+      <div className="container mx-auto px-4 md:px-6">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
             Vamos <span className="gradient-text">conversar?</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Está pronto para transformar seu negócio com IA? Nossa equipe está aqui para 
             desenhar a solução perfeita para sua empresa.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 max-w-6xl mx-auto">
           {/* Contact Form */}
-          <div className="glass rounded-2xl p-8 shadow-card">
-            <h3 className="text-2xl font-bold text-white mb-6">Solicite sua demonstração</h3>
+          <div className="glass rounded-xl md:rounded-2xl p-6 md:p-8 shadow-card">
+            <h3 className="text-xl md:text-2xl font-bold text-white mb-6">Solicite sua demonstração</h3>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid sm:grid-cols-2 gap-4">
@@ -198,10 +198,10 @@ const Contact = () => {
           </div>
 
           {/* Contact Information */}
-          <div className="space-y-8">
+          <div className="space-y-6 md:space-y-8">
             {/* Quick Contact */}
-            <div className="glass rounded-2xl p-8 shadow-card">
-              <h3 className="text-2xl font-bold text-white mb-6">Fale conosco diretamente</h3>
+            <div className="glass rounded-xl md:rounded-2xl p-6 md:p-8 shadow-card">
+              <h3 className="text-xl md:text-2xl font-bold text-white mb-6">Fale conosco diretamente</h3>
               
               <div className="space-y-6">
                 <div className="flex items-center space-x-4">
@@ -237,8 +237,8 @@ const Contact = () => {
             </div>
 
             {/* CTA Card */}
-            <div className="bg-gradient-primary rounded-2xl p-8 text-center shadow-glow">
-              <h3 className="text-2xl font-bold text-white mb-4">
+            <div className="bg-gradient-primary rounded-xl md:rounded-2xl p-6 md:p-8 text-center shadow-glow">
+              <h3 className="text-xl md:text-2xl font-bold text-white mb-4">
                 Resposta em até 24 horas
               </h3>
               <p className="text-white/90 mb-6">

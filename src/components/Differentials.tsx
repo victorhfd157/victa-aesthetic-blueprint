@@ -25,47 +25,47 @@ const differentials = [
 
 const Differentials = () => {
   return (
-    <section id="differentials" className="py-24 bg-gradient-to-br from-background via-muted/10 to-background">
-      <div className="container mx-auto px-6">
+    <section id="differentials" className="py-12 md:py-20 lg:py-24 bg-gradient-to-br from-background via-muted/10 to-background">
+      <div className="container mx-auto px-4 md:px-6">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
             <span className="gradient-text">Resultados que fazem diferença</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Mais de 100 empresas já transformaram suas operações conosco. 
             Descubra o que nos torna únicos no mercado de IA empresarial.
           </p>
         </div>
 
         {/* Stats Section */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8 mb-12 md:mb-16">
           <div className="text-center">
-            <div className="text-4xl lg:text-5xl font-bold gradient-text mb-2">100+</div>
-            <div className="text-muted-foreground">Clientes Ativos</div>
+            <div className="text-3xl md:text-4xl lg:text-5xl font-bold gradient-text mb-1 md:mb-2">100+</div>
+            <div className="text-sm md:text-base text-muted-foreground">Clientes Ativos</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl lg:text-5xl font-bold gradient-text mb-2">95%</div>
-            <div className="text-muted-foreground">Taxa de Sucesso</div>
+            <div className="text-3xl md:text-4xl lg:text-5xl font-bold gradient-text mb-1 md:mb-2">95%</div>
+            <div className="text-sm md:text-base text-muted-foreground">Taxa de Sucesso</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl lg:text-5xl font-bold gradient-text mb-2">24/7</div>
-            <div className="text-muted-foreground">Suporte Ativo</div>
+            <div className="text-3xl md:text-4xl lg:text-5xl font-bold gradient-text mb-1 md:mb-2">24/7</div>
+            <div className="text-sm md:text-base text-muted-foreground">Suporte Ativo</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl lg:text-5xl font-bold gradient-text mb-2">3x</div>
-            <div className="text-muted-foreground">ROI Médio</div>
+            <div className="text-3xl md:text-4xl lg:text-5xl font-bold gradient-text mb-1 md:mb-2">3x</div>
+            <div className="text-sm md:text-base text-muted-foreground">ROI Médio</div>
           </div>
         </div>
 
         {/* Differentials Grid */}
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-4 md:gap-6 lg:gap-8">
           {differentials.map((differential, index) => {
             const Icon = differential.icon;
             return (
               <div
                 key={index}
-                className="glass glass-hover rounded-2xl p-8 transition-all duration-300 hover:scale-105 shadow-card"
+                className="glass glass-hover rounded-xl md:rounded-2xl p-4 md:p-6 lg:p-8 transition-all duration-300 hover:scale-105 shadow-card"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="flex items-start space-x-4">
@@ -83,12 +83,12 @@ const Differentials = () => {
         </div>
 
         {/* Process Timeline */}
-        <div className="mt-20">
-          <h3 className="text-3xl font-bold text-center mb-12">
+        <div className="mt-12 md:mt-16 lg:mt-20">
+          <h3 className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12">
             <span className="gradient-text">Como funciona</span>
           </h3>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
             <div className="text-center">
               <div className="w-20 h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-6 shadow-glow">
                 <span className="text-2xl font-bold text-white">1</span>

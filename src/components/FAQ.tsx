@@ -32,14 +32,14 @@ const FAQ = () => {
   };
 
   return (
-    <section className="py-24 bg-gradient-to-br from-background via-muted/10 to-background">
-      <div className="container mx-auto px-6">
+    <section className="py-12 md:py-20 lg:py-24 bg-gradient-to-br from-background via-muted/10 to-background">
+      <div className="container mx-auto px-4 md:px-6">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
             <span className="gradient-text">Perguntas Frequentes</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Tire suas dúvidas sobre as nossas soluções de IA empresarial.
           </p>
         </div>
@@ -53,9 +53,9 @@ const FAQ = () => {
             >
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full px-8 py-6 text-left flex items-center justify-between hover:bg-white/5 transition-colors"
+                className="w-full px-4 md:px-6 lg:px-8 py-4 md:py-5 lg:py-6 text-left flex items-center justify-between hover:bg-white/5 transition-colors"
               >
-                <h3 className="text-lg font-semibold text-white pr-4">
+                <h3 className="text-base md:text-lg font-semibold text-white pr-4">
                   {faq.question}
                 </h3>
                 {openIndex === index ? (
@@ -66,7 +66,7 @@ const FAQ = () => {
               </button>
               
               {openIndex === index && (
-                <div className="px-8 pb-6">
+                <div className="px-4 md:px-6 lg:px-8 pb-4 md:pb-5 lg:pb-6">
                   <div className="border-t border-muted/20 pt-4">
                     <p className="text-muted-foreground leading-relaxed">
                       {faq.answer}

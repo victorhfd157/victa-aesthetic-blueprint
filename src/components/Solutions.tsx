@@ -29,26 +29,26 @@ const solutions = [
 
 const Solutions = () => {
   return (
-    <section id="solutions" className="py-24 bg-background">
-      <div className="container mx-auto px-6">
+    <section id="solutions" className="py-12 md:py-20 lg:py-24 bg-background">
+      <div className="container mx-auto px-4 md:px-6">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
             <span className="gradient-text">As nossas soluções em IA</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Soluções inteligentes que geram resultados comprovados e transformam a sua operação.
           </p>
         </div>
 
         {/* Solutions Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
           {solutions.map((solution, index) => {
             const Icon = solution.icon;
             return (
               <div
                 key={index}
-                className="glass glass-hover rounded-2xl p-8 transition-all duration-300 hover:scale-105 group shadow-card"
+                className="glass glass-hover rounded-xl md:rounded-2xl p-4 md:p-6 lg:p-8 transition-all duration-300 hover:scale-105 group shadow-card"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="mb-6">
@@ -73,9 +73,9 @@ const Solutions = () => {
         </div>
 
         {/* CTA */}
-        <div className="text-center mt-16">
-          <div className="glass rounded-2xl p-8 max-w-4xl mx-auto">
-            <h3 className="text-3xl font-bold text-white mb-4">
+        <div className="text-center mt-12 md:mt-16">
+          <div className="glass rounded-xl md:rounded-2xl p-6 md:p-8 max-w-4xl mx-auto">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
               Pronto para revolucionar seu negócio?
             </h3>
             <p className="text-muted-foreground mb-6 text-lg">

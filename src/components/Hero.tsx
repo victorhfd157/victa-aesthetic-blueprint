@@ -28,8 +28,8 @@ const Hero = () => {
       speed="fast"
       waveOpacity={0.5}
     >
-      <section id="hero" className="container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <section id="hero" className="container mx-auto px-4 md:px-6">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Column - Text Content */}
           <div className="text-center lg:text-left">
             <div className="flex items-center justify-center lg:justify-start mb-6">
@@ -37,7 +37,7 @@ const Hero = () => {
               <span className="text-primary font-semibold">Inteligência Artificial Avançada</span>
             </div>
             
-            <h1 className="text-5xl lg:text-7xl font-bold mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-tight">
               <span className="gradient-text">Soluções de IA</span>
               <br />
               <span className="text-white">que escalam</span>
@@ -45,7 +45,7 @@ const Hero = () => {
               <span className="text-white">o seu negócio</span>
             </h1>
             
-            <p className="text-xl text-foreground/70 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-foreground/70 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
               Automatize processos, aumente conversões e reduza custos com agentes inteligentes 
               e integrações estratégicas.
             </p>
@@ -72,8 +72,8 @@ const Hero = () => {
           </div>
 
           {/* Right Column - Visual Element */}
-          <div className="relative">
-            <div className="glass rounded-3xl p-8 shadow-glass float-animation">
+          <div className="relative mt-8 lg:mt-0">
+            <div className="glass rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-glass float-animation">
               <div className="bg-gradient-primary rounded-2xl p-6 text-center">
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   <div className="bg-white/10 rounded-lg p-4">

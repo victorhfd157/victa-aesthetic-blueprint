@@ -10,14 +10,14 @@ const CTA = () => {
   };
 
   return (
-    <section className="py-24 bg-background">
-      <div className="container mx-auto px-6">
-        <div className="glass rounded-3xl p-12 md:p-16 text-center max-w-5xl mx-auto shadow-card">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+    <section className="py-12 md:py-20 lg:py-24 bg-background">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="glass rounded-2xl md:rounded-3xl p-6 md:p-12 lg:p-16 text-center max-w-5xl mx-auto shadow-card">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
             <span className="gradient-text">Pronto para crescer com IA?</span>
           </h2>
           
-          <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg lg:text-xl text-muted-foreground mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed">
             Transforme processos, reduza custos e conquiste novos resultados com a VICTA.
           </p>
           
