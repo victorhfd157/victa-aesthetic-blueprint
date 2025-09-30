@@ -59,7 +59,15 @@ function validateContactData(data: any): ContactEmailRequest {
   };
 }
 
-async function sendEmail(to: string[], subject: string, html: string, from = 'VICTA <onboarding@resend.dev>') {
+async function sendEmail(
+  to: string[], 
+  subject: string, 
+  html: string, 
+  from = 'VICTA <info@victaaisolutions.com>',
+  retryWithFallback = true
+) {
+  console.log(`Attempting to send email from: ${from} to: ${to.join(', ')}`);
+  
   const response = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: {
@@ -77,10 +85,36 @@ async function sendEmail(to: string[], subject: string, html: string, from = 'VI
   const result = await response.json();
   
   if (!response.ok) {
-    console.error('Resend API error:', result);
+    console.error('Resend API error details:', {
+      status: response.status,
+      statusText: response.statusText,
+      error: result,
+      from,
+      to
+    });
+
+    // Se falhar com 403 (domínio não verificado) e ainda não tentamos o fallback
+    if (response.status === 403 && retryWithFallback && from.includes('victaaisolutions.com')) {
+      console.log('Domain verification issue detected. Attempting fallback with onboarding@resend.dev...');
+      
+      // Tentar com o email padrão do Resend
+      return sendEmail(
+        to,
+        `[FALLBACK] ${subject}`,
+        `<div style="background: #fff3cd; padding: 15px; margin-bottom: 20px; border-left: 4px solid #ffc107;">
+          <strong>⚠️ Aviso:</strong> Este email foi enviado usando o endereço padrão do Resend devido a problemas de verificação de domínio.
+          Por favor, verifique o domínio victaaisolutions.com em https://resend.com/domains
+        </div>
+        ${html}`,
+        'VICTA <onboarding@resend.dev>',
+        false // Não tentar fallback novamente
+      );
+    }
+    
     throw new Error(`Erro ao enviar email: ${result.message || 'Erro desconhecido'}`);
   }
 
+  console.log('Email sent successfully:', { id: result.id, from, to });
   return result;
 }
 
@@ -175,40 +209,67 @@ const handler = async (req: Request): Promise<Response> => {
       </div>
     `;
 
-    // Send both emails in parallel
-    const [notificationResult, confirmationResult] = await Promise.all([
-      // Notification email to VICTA team
-      sendEmail(
-        ['info@victaaisolutions.com'],
-        `Nova Solicitação: ${contactData.name} - ${contactData.company}`,
-        notificationEmailHTML
-      ),
+    // Send both emails with retry and fallback logic
+    console.log('Starting email sending process...');
+    
+    try {
+      const [notificationResult, confirmationResult] = await Promise.all([
+        // Notification email to VICTA team
+        sendEmail(
+          ['info@victaaisolutions.com'],
+          `Nova Solicitação: ${contactData.name} - ${contactData.company}`,
+          notificationEmailHTML,
+          'VICTA <info@victaaisolutions.com>'
+        ),
 
-      // Confirmation email to client
-      sendEmail(
-        [contactData.email],
-        'Demonstração VICTA - Confirmação de Recebimento',
-        confirmationEmailHTML
-      ),
-    ]);
+        // Confirmation email to client
+        sendEmail(
+          [contactData.email],
+          'Demonstração VICTA - Confirmação de Recebimento',
+          confirmationEmailHTML,
+          'VICTA <info@victaaisolutions.com>'
+        ),
+      ]);
 
-    console.log('Notification email sent:', notificationResult);
-    console.log('Confirmation email sent:', confirmationResult);
+      console.log('All emails sent successfully:', {
+        notification: notificationResult.id,
+        confirmation: confirmationResult.id
+      });
 
-    return new Response(
-      JSON.stringify({ 
-        success: true, 
-        message: 'Emails enviados com sucesso',
-        submissionId: submission.id 
-      }),
-      {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-          ...corsHeaders,
-        },
-      }
-    );
+      return new Response(
+        JSON.stringify({ 
+          success: true, 
+          message: 'Emails enviados com sucesso',
+          submissionId: submission.id 
+        }),
+        {
+          status: 200,
+          headers: {
+            'Content-Type': 'application/json',
+            ...corsHeaders,
+          },
+        }
+      );
+    } catch (emailError: any) {
+      console.error('Email sending failed:', emailError);
+      
+      // Mesmo que o email falhe, a submissão já foi salva no banco
+      return new Response(
+        JSON.stringify({ 
+          success: true,
+          warning: 'Dados salvos mas houve erro no envio de email',
+          message: emailError.message,
+          submissionId: submission.id 
+        }),
+        {
+          status: 200,
+          headers: {
+            'Content-Type': 'application/json',
+            ...corsHeaders,
+          },
+        }
+      );
+    }
 
   } catch (error: any) {
     console.error('Error in send-contact-email function:', error);
