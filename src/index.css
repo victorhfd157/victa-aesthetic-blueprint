@@ -207,3 +207,12 @@ All colors MUST be HSL.
 .float-animation {
   animation: float 6s ease-in-out infinite;
 }
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
