@@ -84,7 +84,9 @@ const Clients = () => {
                 <img
                   src={client.logo}
                   alt={`${client.name} logo`}
-                  className="max-h-12 max-w-full object-contain filter brightness-0 invert opacity-60 hover:opacity-90 transition-opacity duration-300"
+                  className="max-h-12 max-w-full object-contain transition-opacity duration-300"
+                  onError={(e) => console.error('Erro ao carregar imagem:', client.name, e)}
+                  onLoad={() => console.log('Imagem carregada:', client.name)}
                 />
               </div>
             ))}
