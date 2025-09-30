@@ -111,15 +111,15 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="text-muted-foreground">
                 <span className="text-white font-medium">Email:</span><br />
-                info@victa.ai
+                info@victaaisolutions.com
               </li>
               <li className="text-muted-foreground">
                 <span className="text-white font-medium">Telefone:</span><br />
-                +55 (11) 9 9999-9999
+                +351 960 263 588
               </li>
               <li className="text-muted-foreground">
                 <span className="text-white font-medium">Localização:</span><br />
-                São Paulo, Brasil
+                Porto, Portugal
               </li>
             </ul>
           </div>
