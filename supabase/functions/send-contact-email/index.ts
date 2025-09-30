@@ -209,27 +209,31 @@ const handler = async (req: Request): Promise<Response> => {
       </div>
     `;
 
-    // Send both emails with retry and fallback logic
+    // Send emails sequentially to avoid rate limiting (max 2 requests/second)
     console.log('Starting email sending process...');
     
     try {
-      const [notificationResult, confirmationResult] = await Promise.all([
-        // Notification email to VICTA team
-        sendEmail(
-          ['info@victaaisolutions.com'],
-          `Nova Solicitação: ${contactData.name} - ${contactData.company}`,
-          notificationEmailHTML,
-          'VICTA <info@victaaisolutions.com>'
-        ),
+      // First: Send notification to VICTA team
+      console.log('Sending notification email to VICTA team...');
+      const notificationResult = await sendEmail(
+        ['info@victaaisolutions.com'],
+        `Nova Solicitação: ${contactData.name} - ${contactData.company}`,
+        notificationEmailHTML,
+        'VICTA <info@victaaisolutions.com>'
+      );
 
-        // Confirmation email to client
-        sendEmail(
-          [contactData.email],
-          'Demonstração VICTA - Confirmação de Recebimento',
-          confirmationEmailHTML,
-          'VICTA <info@victaaisolutions.com>'
-        ),
-      ]);
+      // Wait 600ms to respect rate limit (2 requests/second = 1 request every 500ms minimum)
+      console.log('Waiting to respect rate limit...');
+      await new Promise(resolve => setTimeout(resolve, 600));
+
+      // Second: Send confirmation to client
+      console.log('Sending confirmation email to client...');
+      const confirmationResult = await sendEmail(
+        [contactData.email],
+        'Demonstração VICTA - Confirmação de Recebimento',
+        confirmationEmailHTML,
+        'VICTA <info@victaaisolutions.com>'
+      );
 
       console.log('All emails sent successfully:', {
         notification: notificationResult.id,
