@@ -4,6 +4,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import natachaLogo from '@/assets/clients/natacha.png';
 import tecfilLogo from '@/assets/clients/tecfil.png';
 import wittelLogo from '@/assets/clients/wittel.png';
+import parada021Logo from '@/assets/clients/parada021.png';
 
 const testimonials = [
   {
@@ -52,11 +53,11 @@ const clientLogos = [
   { name: "Natacha", logo: natachaLogo },
   { name: "Tecfil", logo: tecfilLogo },
   { name: "Wittel", logo: wittelLogo },
+  { name: "Parada 021", logo: parada021Logo },
   { name: "Natacha", logo: natachaLogo },
   { name: "Tecfil", logo: tecfilLogo },
   { name: "Wittel", logo: wittelLogo },
-  { name: "Natacha", logo: natachaLogo },
-  { name: "Tecfil", logo: tecfilLogo },
+  { name: "Parada 021", logo: parada021Logo },
 ];
 
 const Clients = () => {
