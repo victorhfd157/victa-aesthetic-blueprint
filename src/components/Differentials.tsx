@@ -41,22 +41,30 @@ const Differentials = () => {
 
         {/* Stats Section */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-16 md:mb-20 px-4">
-          <div className="text-center glass rounded-xl p-4 sm:p-6">
-            <div className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-2">100+</div>
-            <div className="text-xs sm:text-sm md:text-base text-muted-foreground">Clientes Ativos</div>
-          </div>
-          <div className="text-center glass rounded-xl p-4 sm:p-6">
-            <div className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-2">95%</div>
-            <div className="text-xs sm:text-sm md:text-base text-muted-foreground">Taxa de Sucesso</div>
-          </div>
-          <div className="text-center glass rounded-xl p-4 sm:p-6">
-            <div className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-2">24/7</div>
-            <div className="text-xs sm:text-sm md:text-base text-muted-foreground">Suporte Ativo</div>
-          </div>
-          <div className="text-center glass rounded-xl p-4 sm:p-6">
-            <div className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-2">3x</div>
-            <div className="text-xs sm:text-sm md:text-base text-muted-foreground">ROI Médio</div>
-          </div>
+          <GlowingBorder containerClassName="h-full">
+            <div className="text-center glass h-full rounded-xl p-4 sm:p-6 transition-all duration-500 hover:scale-[1.02]">
+              <div className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-2">100+</div>
+              <div className="text-xs sm:text-sm md:text-base text-muted-foreground">Clientes Ativos</div>
+            </div>
+          </GlowingBorder>
+          <GlowingBorder containerClassName="h-full">
+            <div className="text-center glass h-full rounded-xl p-4 sm:p-6 transition-all duration-500 hover:scale-[1.02]">
+              <div className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-2">95%</div>
+              <div className="text-xs sm:text-sm md:text-base text-muted-foreground">Taxa de Sucesso</div>
+            </div>
+          </GlowingBorder>
+          <GlowingBorder containerClassName="h-full">
+            <div className="text-center glass h-full rounded-xl p-4 sm:p-6 transition-all duration-500 hover:scale-[1.02]">
+              <div className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-2">24/7</div>
+              <div className="text-xs sm:text-sm md:text-base text-muted-foreground">Suporte Ativo</div>
+            </div>
+          </GlowingBorder>
+          <GlowingBorder containerClassName="h-full">
+            <div className="text-center glass h-full rounded-xl p-4 sm:p-6 transition-all duration-500 hover:scale-[1.02]">
+              <div className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-2">3x</div>
+              <div className="text-xs sm:text-sm md:text-base text-muted-foreground">ROI Médio</div>
+            </div>
+          </GlowingBorder>
         </div>
 
         {/* Differentials Grid */}
@@ -95,29 +103,35 @@ const Differentials = () => {
           </h3>
           
           <div className="grid sm:grid-cols-3 gap-6 sm:gap-8 md:gap-10">
-            <div className="text-center glass rounded-xl p-6 sm:p-8">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-glow">
-                <span className="text-xl sm:text-2xl font-bold text-white">1</span>
+            <GlowingBorder containerClassName="h-full">
+              <div className="text-center glass h-full rounded-xl p-6 sm:p-8 transition-all duration-500 hover:scale-[1.02]">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-glow">
+                  <span className="text-xl sm:text-2xl font-bold text-white">1</span>
+                </div>
+                <h4 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-2 sm:mb-3">Consultoria Gratuita</h4>
+                <p className="text-sm sm:text-base text-muted-foreground">Diagnóstico inicial com engenheiro de IA.</p>
               </div>
-              <h4 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-2 sm:mb-3">Consultoria Gratuita</h4>
-              <p className="text-sm sm:text-base text-muted-foreground">Diagnóstico inicial com engenheiro de IA.</p>
-            </div>
+            </GlowingBorder>
             
-            <div className="text-center glass rounded-xl p-6 sm:p-8">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-glow">
-                <span className="text-xl sm:text-2xl font-bold text-white">2</span>
+            <GlowingBorder containerClassName="h-full">
+              <div className="text-center glass h-full rounded-xl p-6 sm:p-8 transition-all duration-500 hover:scale-[1.02]">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-glow">
+                  <span className="text-xl sm:text-2xl font-bold text-white">2</span>
+                </div>
+                <h4 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-2 sm:mb-3">Escopo e Proposta</h4>
+                <p className="text-sm sm:text-base text-muted-foreground">Soluções à medida, custos claros e previsíveis.</p>
               </div>
-              <h4 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-2 sm:mb-3">Escopo e Proposta</h4>
-              <p className="text-sm sm:text-base text-muted-foreground">Soluções à medida, custos claros e previsíveis.</p>
-            </div>
+            </GlowingBorder>
             
-            <div className="text-center glass rounded-xl p-6 sm:p-8">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-glow">
-                <span className="text-xl sm:text-2xl font-bold text-white">3</span>
+            <GlowingBorder containerClassName="h-full">
+              <div className="text-center glass h-full rounded-xl p-6 sm:p-8 transition-all duration-500 hover:scale-[1.02]">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-glow">
+                  <span className="text-xl sm:text-2xl font-bold text-white">3</span>
+                </div>
+                <h4 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-2 sm:mb-3">Início do Projeto</h4>
+                <p className="text-sm sm:text-base text-muted-foreground">Implementação rápida com ganhos em semanas.</p>
               </div>
-              <h4 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-2 sm:mb-3">Início do Projeto</h4>
-              <p className="text-sm sm:text-base text-muted-foreground">Implementação rápida com ganhos em semanas.</p>
-            </div>
+            </GlowingBorder>
           </div>
         </div>
       </div>
