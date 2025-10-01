@@ -84,20 +84,20 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-12 md:py-20 lg:py-24 bg-background">
-      <div className="container mx-auto px-4 md:px-6">
+    <section id="contact" className="py-16 md:py-24 lg:py-32 bg-background">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-7xl">
         {/* Header */}
-        <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
+        <div className="text-center mb-16 md:mb-20 px-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6">
             Vamos <span className="gradient-text">conversar?</span>
           </h2>
-          <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Está pronto para transformar seu negócio com IA? Nossa equipe está aqui para 
             desenhar a solução perfeita para sua empresa.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 max-w-6xl mx-auto">
           {/* Contact Form */}
           <div className="glass rounded-xl md:rounded-2xl p-6 md:p-8 shadow-card">
             <h3 className="text-xl md:text-2xl font-bold text-white mb-6">Solicite sua demonstração</h3>

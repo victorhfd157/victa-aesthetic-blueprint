@@ -13,8 +13,8 @@ const Footer = () => {
 
   return (
     <footer className="bg-background border-t border-muted/20">
-      <div className="container mx-auto px-4 md:px-6 py-8 md:py-12">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 py-8 md:py-12 lg:py-16 max-w-7xl">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
           {/* Logo and Description */}
           <div className="sm:col-span-2">
             <img 
