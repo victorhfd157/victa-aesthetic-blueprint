@@ -59,33 +59,33 @@ export const GlowingBorder = ({
         
         {/* Static corner glows */}
         <div
-          className="absolute bottom-0 left-0 w-32 h-32 pointer-events-none"
+          className="absolute bottom-0 left-0 w-24 h-24 pointer-events-none"
           style={{
-            background: `radial-gradient(circle at bottom left, rgba(172, 92, 255, 0.6) 0%, transparent 70%)`,
-            filter: "blur(25px)",
-            opacity: isHovered ? 0.9 : 0.6,
+            background: `radial-gradient(circle at bottom left, rgba(172, 92, 255, 0.3) 0%, transparent 70%)`,
+            filter: "blur(20px)",
+            opacity: isHovered ? 0.7 : 0.4,
             transition: "opacity 0.3s ease",
           }}
         />
         <div
-          className="absolute bottom-0 right-0 w-32 h-32 pointer-events-none"
+          className="absolute bottom-0 right-0 w-24 h-24 pointer-events-none"
           style={{
-            background: `radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.6) 0%, transparent 70%)`,
-            filter: "blur(25px)",
-            opacity: isHovered ? 0.9 : 0.6,
+            background: `radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.3) 0%, transparent 70%)`,
+            filter: "blur(20px)",
+            opacity: isHovered ? 0.7 : 0.4,
             transition: "opacity 0.3s ease",
           }}
         />
         
         {/* Bottom edge glow */}
         <div
-          className="absolute bottom-0 left-0 right-0 h-[2px]"
+          className="absolute bottom-0 left-0 right-0 h-[1px]"
           style={{
-            background: "linear-gradient(90deg, rgba(172, 92, 255, 0.7) 0%, rgba(138, 58, 185, 0.9) 50%, rgba(56, 189, 248, 0.7) 100%)",
+            background: "linear-gradient(90deg, rgba(172, 92, 255, 0.5) 0%, rgba(138, 58, 185, 0.7) 50%, rgba(56, 189, 248, 0.5) 100%)",
             boxShadow: isHovered
-              ? "0 0 20px 4px rgba(172, 92, 255, 0.8), 0 0 30px 6px rgba(138, 58, 185, 0.6)"
-              : "0 0 15px 3px rgba(172, 92, 255, 0.6), 0 0 25px 5px rgba(138, 58, 185, 0.4)",
-            opacity: isHovered ? 1 : 0.8,
+              ? "0 0 15px 3px rgba(172, 92, 255, 0.6), 0 0 20px 4px rgba(138, 58, 185, 0.4)"
+              : "0 0 10px 2px rgba(172, 92, 255, 0.4), 0 0 15px 3px rgba(138, 58, 185, 0.3)",
+            opacity: isHovered ? 1 : 0.7,
             transition: "all 0.3s ease",
           }}
         />
