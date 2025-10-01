@@ -93,8 +93,8 @@ async function sendEmail(
       to
     });
 
-    // Se falhar com 403 (domínio não verificado) e ainda não tentamos o fallback
-    if (response.status === 403 && retryWithFallback && from.includes('victaaisolutions.com')) {
+    // Se falhar com 400 ou 403 (domínio não verificado) e ainda não tentamos o fallback
+    if ((response.status === 400 || response.status === 403) && retryWithFallback && from.includes('victaaisolutions.com')) {
       console.log('Domain verification issue detected. Attempting fallback with onboarding@resend.dev...');
       
       // Tentar com o email padrão do Resend
