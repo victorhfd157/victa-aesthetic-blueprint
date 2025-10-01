@@ -103,15 +103,13 @@ const Differentials = () => {
           </h3>
           
           <div className="grid sm:grid-cols-3 gap-6 sm:gap-8 md:gap-10">
-            <GlowingBorder containerClassName="h-full">
-              <div className="text-center glass h-full rounded-xl p-6 sm:p-8 transition-all duration-500 hover:scale-[1.02]">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-glow">
-                  <span className="text-xl sm:text-2xl font-bold text-white">1</span>
-                </div>
-                <h4 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-2 sm:mb-3">Consultoria Gratuita</h4>
-                <p className="text-sm sm:text-base text-muted-foreground">Diagnóstico inicial com engenheiro de IA.</p>
+            <div className="text-center glass rounded-xl p-6 sm:p-8 transition-all duration-500 hover:scale-[1.02]">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-glow">
+                <span className="text-xl sm:text-2xl font-bold text-white">1</span>
               </div>
-            </GlowingBorder>
+              <h4 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-2 sm:mb-3">Consultoria Gratuita</h4>
+              <p className="text-sm sm:text-base text-muted-foreground">Diagnóstico inicial com engenheiro de IA.</p>
+            </div>
             
             <GlowingBorder containerClassName="h-full">
               <div className="text-center glass h-full rounded-xl p-6 sm:p-8 transition-all duration-500 hover:scale-[1.02]">
