@@ -28,13 +28,13 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <a 
-                href="mailto:info@victa.ai" 
+                href="mailto:info@victaaisolutions.com" 
                 className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center hover:scale-105 transition-transform shadow-glow"
               >
                 <Mail className="h-5 w-5 text-white" />
               </a>
               <a 
-                href="tel:+5511999999999" 
+                href="tel:+351960263588" 
                 className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center hover:scale-105 transition-transform shadow-glow"
               >
                 <Phone className="h-5 w-5 text-white" />
