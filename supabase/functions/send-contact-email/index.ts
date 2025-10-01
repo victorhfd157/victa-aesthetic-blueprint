@@ -1,8 +1,10 @@
-import "https://deno.land/x/xhr@0.1.0/mod.ts";
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.58.0";
 
-const resendApiKey = Deno.env.get('RESEND_API_KEY');
+const smtpHost = Deno.env.get('SMTP_HOST');
+const smtpPort = parseInt(Deno.env.get('SMTP_PORT') || '465');
+const smtpUser = Deno.env.get('SMTP_USER');
+const smtpPassword = Deno.env.get('SMTP_PASSWORD');
 const supabaseUrl = Deno.env.get('SUPABASE_URL');
 const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
 
@@ -63,59 +65,96 @@ async function sendEmail(
   to: string[], 
   subject: string, 
   html: string, 
-  from = 'VICTA <info@victaaisolutions.com>',
-  retryWithFallback = true
+  from = 'VICTA <info@victaaisolutions.com>'
 ) {
-  console.log(`Attempting to send email from: ${from} to: ${to.join(', ')}`);
+  console.log(`Attempting to send email via SMTP from: ${from} to: ${to.join(', ')}`);
   
-  const response = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${resendApiKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      from,
-      to,
-      subject,
+  try {
+    // Extract email from "Name <email@domain.com>" format
+    const fromEmail = from.match(/<(.+)>/) ? from.match(/<(.+)>/)![1] : from;
+    
+    // Build the email message in MIME format
+    const boundary = `----=_Part_${Date.now()}_${Math.random().toString(36).substring(7)}`;
+    const message = [
+      `From: ${from}`,
+      `To: ${to.join(', ')}`,
+      `Subject: ${subject}`,
+      `MIME-Version: 1.0`,
+      `Content-Type: multipart/alternative; boundary="${boundary}"`,
+      '',
+      `--${boundary}`,
+      `Content-Type: text/html; charset=utf-8`,
+      `Content-Transfer-Encoding: 7bit`,
+      '',
       html,
-    }),
-  });
+      '',
+      `--${boundary}--`
+    ].join('\r\n');
 
-  const result = await response.json();
-  
-  if (!response.ok) {
-    console.error('Resend API error details:', {
-      status: response.status,
-      statusText: response.statusText,
-      error: result,
-      from,
-      to
+    // Connect to SMTP server with TLS
+    console.log(`Connecting to SMTP server: ${smtpHost}:${smtpPort}`);
+    const conn = await Deno.connectTls({
+      hostname: smtpHost!,
+      port: smtpPort,
     });
 
-    // Se falhar com 400 ou 403 (domínio não verificado) e ainda não tentamos o fallback
-    if ((response.status === 400 || response.status === 403) && retryWithFallback && from.includes('victaaisolutions.com')) {
-      console.log('Domain verification issue detected. Attempting fallback with onboarding@resend.dev...');
-      
-      // Tentar com o email padrão do Resend
-      return sendEmail(
-        to,
-        `[FALLBACK] ${subject}`,
-        `<div style="background: #fff3cd; padding: 15px; margin-bottom: 20px; border-left: 4px solid #ffc107;">
-          <strong>⚠️ Aviso:</strong> Este email foi enviado usando o endereço padrão do Resend devido a problemas de verificação de domínio.
-          Por favor, verifique o domínio victaaisolutions.com em https://resend.com/domains
-        </div>
-        ${html}`,
-        'VICTA <onboarding@resend.dev>',
-        false // Não tentar fallback novamente
-      );
-    }
-    
-    throw new Error(`Erro ao enviar email: ${result.message || 'Erro desconhecido'}`);
-  }
+    const encoder = new TextEncoder();
+    const decoder = new TextDecoder();
 
-  console.log('Email sent successfully:', { id: result.id, from, to });
-  return result;
+    // Helper function to read response from server
+    async function readResponse(): Promise<string> {
+      const buffer = new Uint8Array(1024);
+      const n = await conn.read(buffer);
+      if (n === null) throw new Error('Connection closed by server');
+      const response = decoder.decode(buffer.subarray(0, n));
+      console.log('SMTP Response:', response.trim());
+      return response;
+    }
+
+    // Helper function to send command
+    async function sendCommand(command: string): Promise<string> {
+      console.log('SMTP Command:', command.replace(smtpPassword || '', '***'));
+      await conn.write(encoder.encode(command + '\r\n'));
+      return await readResponse();
+    }
+
+    try {
+      // Read initial greeting
+      await readResponse();
+
+      // EHLO
+      await sendCommand(`EHLO ${smtpHost}`);
+
+      // AUTH LOGIN
+      await sendCommand('AUTH LOGIN');
+      await sendCommand(btoa(smtpUser!));
+      await sendCommand(btoa(smtpPassword!));
+
+      // MAIL FROM
+      await sendCommand(`MAIL FROM:<${fromEmail}>`);
+
+      // RCPT TO for each recipient
+      for (const recipient of to) {
+        await sendCommand(`RCPT TO:<${recipient}>`);
+      }
+
+      // DATA
+      await sendCommand('DATA');
+      await conn.write(encoder.encode(message + '\r\n.\r\n'));
+      await readResponse();
+
+      // QUIT
+      await sendCommand('QUIT');
+
+      console.log('Email sent successfully via SMTP');
+      return { success: true, id: `smtp-${Date.now()}` };
+    } finally {
+      conn.close();
+    }
+  } catch (error: any) {
+    console.error('SMTP error:', error);
+    throw new Error(`Erro ao enviar email via SMTP: ${error.message}`);
+  }
 }
 
 const handler = async (req: Request): Promise<Response> => {
