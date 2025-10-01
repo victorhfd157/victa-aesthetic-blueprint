@@ -1,4 +1,5 @@
 import { TrendingUp, DollarSign, Zap, BarChart3 } from 'lucide-react';
+import { GlowingBorder } from '@/components/ui/glowing-border';
 
 const differentials = [
   {
@@ -63,21 +64,26 @@ const Differentials = () => {
           {differentials.map((differential, index) => {
             const Icon = differential.icon;
             return (
-              <div
+              <GlowingBorder
                 key={index}
-                className="glass glass-hover rounded-xl md:rounded-2xl p-5 sm:p-6 md:p-8 transition-all duration-300 hover:scale-105 shadow-card"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                containerClassName="h-full"
+                className="h-full"
               >
-                <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-primary rounded-xl flex items-center justify-center flex-shrink-0 shadow-glow">
-                    <Icon className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 sm:mb-3">{differential.title}</h3>
-                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{differential.description}</p>
+                <div
+                  className="glass h-full rounded-xl md:rounded-2xl p-5 sm:p-6 md:p-8 transition-all duration-500 hover:scale-[1.02] shadow-card"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-primary rounded-xl flex items-center justify-center flex-shrink-0 shadow-glow">
+                      <Icon className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 sm:mb-3">{differential.title}</h3>
+                      <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{differential.description}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </GlowingBorder>
             );
           })}
         </div>

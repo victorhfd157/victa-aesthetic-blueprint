@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { WavyBackground } from '@/components/ui/wavy-background';
+import { GlowingBorder } from '@/components/ui/glowing-border';
 
 const Hero = () => {
   const scrollToContact = () => {
@@ -73,7 +74,8 @@ const Hero = () => {
 
           {/* Right Column - Visual Element */}
           <div className="relative mt-8 lg:mt-0 px-4 sm:px-0">
-            <div className="glass rounded-2xl md:rounded-3xl p-4 sm:p-6 md:p-8 shadow-glass float-animation">
+            <GlowingBorder containerClassName="w-full">
+              <div className="glass rounded-2xl md:rounded-3xl p-4 sm:p-6 md:p-8 shadow-glass float-animation">
               <div className="bg-gradient-primary rounded-2xl p-4 sm:p-6 text-center">
                 <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
                   <div className="bg-white/10 rounded-lg p-3 sm:p-4">
@@ -97,7 +99,8 @@ const Hero = () => {
                   Resultados Comprovados
                 </div>
               </div>
-            </div>
+              </div>
+            </GlowingBorder>
           </div>
         </div>
       </section>

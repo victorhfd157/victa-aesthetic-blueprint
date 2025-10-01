@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import { GlowingBorder } from '@/components/ui/glowing-border';
 
 const faqData = [
   {
@@ -47,34 +48,33 @@ const FAQ = () => {
         {/* FAQ Items */}
         <div className="max-w-4xl mx-auto space-y-4">
           {faqData.map((faq, index) => (
-            <div
-              key={index}
-              className="glass rounded-xl overflow-hidden transition-all duration-300 hover:shadow-card"
-            >
-              <button
-                onClick={() => toggleFAQ(index)}
-                className="w-full px-4 md:px-6 lg:px-8 py-4 md:py-5 lg:py-6 text-left flex items-center justify-between hover:bg-white/5 transition-colors"
-              >
-                <h3 className="text-base md:text-lg font-semibold text-white pr-4">
-                  {faq.question}
-                </h3>
-                {openIndex === index ? (
-                  <ChevronUp className="h-5 w-5 text-primary flex-shrink-0" />
-                ) : (
-                  <ChevronDown className="h-5 w-5 text-primary flex-shrink-0" />
-                )}
-              </button>
-              
-              {openIndex === index && (
-                <div className="px-4 md:px-6 lg:px-8 pb-4 md:pb-5 lg:pb-6">
-                  <div className="border-t border-muted/20 pt-4">
-                    <p className="text-muted-foreground leading-relaxed">
-                      {faq.answer}
-                    </p>
+            <GlowingBorder key={index} containerClassName="w-full">
+              <div className="glass rounded-xl overflow-hidden transition-all duration-500">
+                <button
+                  onClick={() => toggleFAQ(index)}
+                  className="w-full px-4 md:px-6 lg:px-8 py-4 md:py-5 lg:py-6 text-left flex items-center justify-between hover:bg-white/5 transition-colors"
+                >
+                  <h3 className="text-base md:text-lg font-semibold text-white pr-4">
+                    {faq.question}
+                  </h3>
+                  {openIndex === index ? (
+                    <ChevronUp className="h-5 w-5 text-primary flex-shrink-0" />
+                  ) : (
+                    <ChevronDown className="h-5 w-5 text-primary flex-shrink-0" />
+                  )}
+                </button>
+                
+                {openIndex === index && (
+                  <div className="px-4 md:px-6 lg:px-8 pb-4 md:pb-5 lg:pb-6">
+                    <div className="border-t border-muted/20 pt-4">
+                      <p className="text-muted-foreground leading-relaxed">
+                        {faq.answer}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              )}
-            </div>
+                )}
+              </div>
+            </GlowingBorder>
           ))}
         </div>
       </div>

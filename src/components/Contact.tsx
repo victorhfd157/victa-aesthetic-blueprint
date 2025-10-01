@@ -6,6 +6,7 @@ import { Phone, Mail, MapPin, ArrowRight } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { z } from 'zod';
+import { GlowingBorder } from '@/components/ui/glowing-border';
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Nome é obrigatório").max(100, "Nome deve ter menos de 100 caracteres"),
@@ -99,7 +100,8 @@ const Contact = () => {
 
         <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 max-w-6xl mx-auto">
           {/* Contact Form */}
-          <div className="glass rounded-xl md:rounded-2xl p-6 md:p-8 shadow-card">
+          <GlowingBorder containerClassName="h-full" className="h-full">
+            <div className="glass h-full rounded-xl md:rounded-2xl p-6 md:p-8 shadow-card">
             <h3 className="text-xl md:text-2xl font-bold text-white mb-6">Solicite sua demonstração</h3>
             
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -195,12 +197,14 @@ const Contact = () => {
                 )}
               </Button>
             </form>
-          </div>
+            </div>
+          </GlowingBorder>
 
           {/* Contact Information */}
           <div className="space-y-6 md:space-y-8">
             {/* Quick Contact */}
-            <div className="glass rounded-xl md:rounded-2xl p-6 md:p-8 shadow-card">
+            <GlowingBorder containerClassName="h-auto">
+              <div className="glass rounded-xl md:rounded-2xl p-6 md:p-8 shadow-card">
               <h3 className="text-xl md:text-2xl font-bold text-white mb-6">Fale conosco diretamente</h3>
               
               <div className="space-y-6">
@@ -234,10 +238,12 @@ const Contact = () => {
                   </div>
                 </div>
               </div>
-            </div>
+              </div>
+            </GlowingBorder>
 
             {/* CTA Card */}
-            <div className="bg-gradient-primary rounded-xl md:rounded-2xl p-6 md:p-8 text-center shadow-glow">
+            <GlowingBorder containerClassName="h-auto">
+              <div className="bg-gradient-primary rounded-xl md:rounded-2xl p-6 md:p-8 text-center shadow-glow">
               <h3 className="text-xl md:text-2xl font-bold text-white mb-4">
                 Resposta em até 24 horas
               </h3>
@@ -255,7 +261,8 @@ const Contact = () => {
                   <div className="text-white/70 text-sm">Demonstração</div>
                 </div>
               </div>
-            </div>
+              </div>
+            </GlowingBorder>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import { GlowingBorder } from '@/components/ui/glowing-border';
 import natachaLogo from '@/assets/clients/natacha.png';
 import tecfilLogo from '@/assets/clients/tecfil.png';
 import wittelLogo from '@/assets/clients/wittel.png';
@@ -106,27 +107,29 @@ const Clients = () => {
             <CarouselContent>
               {testimonials.map((testimonial) => (
                 <CarouselItem key={testimonial.id}>
-                  <div className="glass rounded-xl md:rounded-2xl p-6 md:p-10 lg:p-12 text-center shadow-card transition-all duration-500">
-                    <div className="flex justify-center mb-6">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="h-6 w-6 text-yellow-400 fill-yellow-400" />
-                      ))}
-                    </div>
-                    
-                    <blockquote className="text-lg md:text-xl lg:text-2xl text-white mb-6 md:mb-8 leading-relaxed italic">
-                      "{testimonial.text}"
-                    </blockquote>
-                    
-                    <div className="flex items-center justify-center space-x-4">
-                      <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center">
-                        <span className="text-white font-bold">{testimonial.initials}</span>
+                  <GlowingBorder containerClassName="h-full" className="h-full">
+                    <div className="glass h-full rounded-xl md:rounded-2xl p-6 md:p-10 lg:p-12 text-center shadow-card transition-all duration-500">
+                      <div className="flex justify-center mb-6">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <Star key={i} className="h-6 w-6 text-yellow-400 fill-yellow-400" />
+                        ))}
                       </div>
-                      <div className="text-left">
-                        <div className="text-white font-semibold">{testimonial.author}</div>
-                        <div className="text-muted-foreground text-sm">{testimonial.role}</div>
+                      
+                      <blockquote className="text-lg md:text-xl lg:text-2xl text-white mb-6 md:mb-8 leading-relaxed italic">
+                        "{testimonial.text}"
+                      </blockquote>
+                      
+                      <div className="flex items-center justify-center space-x-4">
+                        <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center">
+                          <span className="text-white font-bold">{testimonial.initials}</span>
+                        </div>
+                        <div className="text-left">
+                          <div className="text-white font-semibold">{testimonial.author}</div>
+                          <div className="text-muted-foreground text-sm">{testimonial.role}</div>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </GlowingBorder>
                 </CarouselItem>
               ))}
             </CarouselContent>
