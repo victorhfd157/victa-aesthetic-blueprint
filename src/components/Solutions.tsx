@@ -1,4 +1,5 @@
 import { Brain, MessageSquare, Zap, BarChart3, Shield, Cog } from 'lucide-react';
+import { GradientCard } from '@/components/ui/gradient-card';
 
 const solutions = [
   {
@@ -42,34 +43,17 @@ const Solutions = () => {
         </div>
 
         {/* Solutions Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
-          {solutions.map((solution, index) => {
-            const Icon = solution.icon;
-            return (
-              <div
-                key={index}
-                className="glass glass-hover rounded-xl md:rounded-2xl p-4 md:p-6 lg:p-8 transition-all duration-300 hover:scale-105 group shadow-card"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="mb-6">
-                  <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <Icon className="h-8 w-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-white mb-3">{solution.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{solution.description}</p>
-                </div>
-
-                <div className="space-y-2">
-                  {solution.features.map((feature, featureIndex) => (
-                    <div key={featureIndex} className="flex items-center text-sm">
-                      <div className="w-2 h-2 bg-primary rounded-full mr-3 flex-shrink-0"></div>
-                      <span className="text-muted-foreground">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto">
+          {solutions.map((solution, index) => (
+            <GradientCard
+              key={index}
+              icon={solution.icon}
+              title={solution.title}
+              description={solution.description}
+              features={solution.features}
+              index={index}
+            />
+          ))}
         </div>
 
         {/* CTA */}
