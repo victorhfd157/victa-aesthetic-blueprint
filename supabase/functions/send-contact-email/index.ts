@@ -1,10 +1,8 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.58.0";
+import { Resend } from "https://esm.sh/resend@4.0.0";
 
-const smtpHost = Deno.env.get('SMTP_HOST');
-const smtpPort = parseInt(Deno.env.get('SMTP_PORT') || '465');
-const smtpUser = Deno.env.get('SMTP_USER');
-const smtpPassword = Deno.env.get('SMTP_PASSWORD');
+const resend = new Resend(Deno.env.get('RESEND_API_KEY'));
 const supabaseUrl = Deno.env.get('SUPABASE_URL');
 const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
 
@@ -65,95 +63,28 @@ async function sendEmail(
   to: string[], 
   subject: string, 
   html: string, 
-  from = 'VICTA <info@victaaisolutions.com>'
+  from = 'VICTA <onboarding@resend.dev>'
 ) {
-  console.log(`Attempting to send email via SMTP from: ${from} to: ${to.join(', ')}`);
+  console.log(`Sending email via Resend from: ${from} to: ${to.join(', ')}`);
   
   try {
-    // Extract email from "Name <email@domain.com>" format
-    const fromEmail = from.match(/<(.+)>/) ? from.match(/<(.+)>/)![1] : from;
-    
-    // Build the email message in MIME format
-    const boundary = `----=_Part_${Date.now()}_${Math.random().toString(36).substring(7)}`;
-    const message = [
-      `From: ${from}`,
-      `To: ${to.join(', ')}`,
-      `Subject: ${subject}`,
-      `MIME-Version: 1.0`,
-      `Content-Type: multipart/alternative; boundary="${boundary}"`,
-      '',
-      `--${boundary}`,
-      `Content-Type: text/html; charset=utf-8`,
-      `Content-Transfer-Encoding: 7bit`,
-      '',
+    const { data, error } = await resend.emails.send({
+      from,
+      to,
+      subject,
       html,
-      '',
-      `--${boundary}--`
-    ].join('\r\n');
-
-    // Connect to SMTP server with TLS
-    console.log(`Connecting to SMTP server: ${smtpHost}:${smtpPort}`);
-    const conn = await Deno.connectTls({
-      hostname: smtpHost!,
-      port: smtpPort,
     });
 
-    const encoder = new TextEncoder();
-    const decoder = new TextDecoder();
-
-    // Helper function to read response from server
-    async function readResponse(): Promise<string> {
-      const buffer = new Uint8Array(1024);
-      const n = await conn.read(buffer);
-      if (n === null) throw new Error('Connection closed by server');
-      const response = decoder.decode(buffer.subarray(0, n));
-      console.log('SMTP Response:', response.trim());
-      return response;
+    if (error) {
+      console.error('Resend error:', error);
+      throw error;
     }
 
-    // Helper function to send command
-    async function sendCommand(command: string): Promise<string> {
-      console.log('SMTP Command:', command.replace(smtpPassword || '', '***'));
-      await conn.write(encoder.encode(command + '\r\n'));
-      return await readResponse();
-    }
-
-    try {
-      // Read initial greeting
-      await readResponse();
-
-      // EHLO
-      await sendCommand(`EHLO ${smtpHost}`);
-
-      // AUTH LOGIN
-      await sendCommand('AUTH LOGIN');
-      await sendCommand(btoa(smtpUser!));
-      await sendCommand(btoa(smtpPassword!));
-
-      // MAIL FROM
-      await sendCommand(`MAIL FROM:<${fromEmail}>`);
-
-      // RCPT TO for each recipient
-      for (const recipient of to) {
-        await sendCommand(`RCPT TO:<${recipient}>`);
-      }
-
-      // DATA
-      await sendCommand('DATA');
-      await conn.write(encoder.encode(message + '\r\n.\r\n'));
-      await readResponse();
-
-      // QUIT
-      await sendCommand('QUIT');
-
-      console.log('Email sent successfully via SMTP');
-      return { success: true, id: `smtp-${Date.now()}` };
-    } finally {
-      conn.close();
-    }
+    console.log('Email sent successfully via Resend:', data);
+    return { success: true, id: data?.id || `resend-${Date.now()}` };
   } catch (error: any) {
-    console.error('SMTP error:', error);
-    throw new Error(`Erro ao enviar email via SMTP: ${error.message}`);
+    console.error('Email sending error:', error);
+    throw new Error(`Erro ao enviar email: ${error.message}`);
   }
 }
 
@@ -258,7 +189,7 @@ const handler = async (req: Request): Promise<Response> => {
         ['info@victaaisolutions.com'],
         `Nova Solicitação: ${contactData.name} - ${contactData.company}`,
         notificationEmailHTML,
-        'VICTA <info@victaaisolutions.com>'
+        'VICTA <onboarding@resend.dev>'
       );
 
       // Wait 600ms to respect rate limit (2 requests/second = 1 request every 500ms minimum)
@@ -271,7 +202,7 @@ const handler = async (req: Request): Promise<Response> => {
         [contactData.email],
         'Demonstração VICTA - Confirmação de Recebimento',
         confirmationEmailHTML,
-        'VICTA <info@victaaisolutions.com>'
+        'VICTA <onboarding@resend.dev>'
       );
 
       console.log('All emails sent successfully:', {
