@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu } from 'lucide-react';
+import { Menu, Presentation } from 'lucide-react';
 import victaLogo from '@/assets/victa-logo.png';
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -80,13 +81,22 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Desktop CTA Button */}
-          <Button 
-            onClick={() => scrollToSection('contact')} 
-            className="hidden md:flex bg-gradient-primary hover:opacity-90 transition-smooth text-white font-semibold px-6 py-2 rounded-full shadow-glow hover:scale-105"
-          >
-            Solicitar Demonstração
-          </Button>
+          {/* Desktop Buttons */}
+          <div className="hidden md:flex items-center gap-3">
+            <Link 
+              to="/servicos"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full border border-white/20 text-foreground/80 hover:text-foreground hover:bg-white/10 transition-all duration-300"
+            >
+              <Presentation className="w-4 h-4" />
+              Serviços
+            </Link>
+            <Button 
+              onClick={() => scrollToSection('contact')} 
+              className="bg-gradient-primary hover:opacity-90 transition-smooth text-white font-semibold px-6 py-2 rounded-full shadow-glow hover:scale-105"
+            >
+              Solicitar Demonstração
+            </Button>
+          </div>
 
           {/* Mobile menu */}
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
@@ -111,6 +121,14 @@ const Navbar = () => {
                     {item.label}
                   </button>
                 ))}
+                <Link 
+                  to="/servicos"
+                  className="flex items-center gap-2 w-full text-left px-4 py-3 rounded-lg transition-all duration-300 font-medium text-foreground/70 hover:text-foreground hover:bg-white/5"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <Presentation className="w-4 h-4" />
+                  Serviços
+                </Link>
                 <Button 
                   onClick={() => scrollToSection('contact')} 
                   className="w-full mt-4 bg-gradient-primary hover:opacity-90 transition-smooth text-white font-semibold px-6 py-3 rounded-full shadow-glow"
