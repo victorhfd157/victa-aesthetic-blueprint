@@ -9,8 +9,8 @@ interface PasswordProtectionProps {
 
 // Credenciais hardcoded
 const VALID_CREDENTIALS = {
-  accessNumber: '001',
-  password: 'victa2024'
+  accessNumber: '157',
+  password: 'anapinho25'
 };
 
 export const PasswordProtection: React.FC<PasswordProtectionProps> = ({
