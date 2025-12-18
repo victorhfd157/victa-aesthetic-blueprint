@@ -1,63 +1,59 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { LessonContent, VocabularyItem, GrammarPoint, QuizQuestion, TextContent, ListeningContent, GapFillSentence, WritingTask, Flashcard, Slide } from './types';
 import { Volume2, CheckCircle2, XCircle, Info, Pause, RefreshCw, Loader2, BookOpen, ChevronLeft, ChevronRight, Monitor, RotateCcw, MessageSquare, Shuffle, Edit3, Headphones, Keyboard, Settings2, Sparkles } from 'lucide-react';
-import { generateSpeech } from './geminiService';
 
 const AudioPlayerButton: React.FC<{ text: string, className?: string, iconSize?: number, lightMode?: boolean }> = ({ text, className, iconSize = 20, lightMode = false }) => {
     const [loading, setLoading] = useState(false);
     const [playing, setPlaying] = useState(false);
-    const audioContextRef = useRef<AudioContext | null>(null);
-    const sourceRef = useRef<AudioBufferSourceNode | null>(null);
 
     const playAudio = async () => {
         if (playing) {
-             sourceRef.current?.stop();
-             setPlaying(false);
-             return;
+            window.speechSynthesis.cancel();
+            setPlaying(false);
+            return;
         }
 
         setLoading(true);
         
         try {
-            const arrayBuffer = await generateSpeech(text);
-            if (!arrayBuffer) {
-                window.speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'en-US';
-                utterance.onend = () => setPlaying(false);
+            // Cancel any ongoing speech
+            window.speechSynthesis.cancel();
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.9;
+            utterance.pitch = 1;
+            
+            // Get available voices and prefer a natural English voice
+            const voices = window.speechSynthesis.getVoices();
+            const englishVoice = voices.find(v => v.lang.startsWith('en') && v.name.includes('Google')) 
+                || voices.find(v => v.lang.startsWith('en-US'))
+                || voices.find(v => v.lang.startsWith('en'));
+            
+            if (englishVoice) {
+                utterance.voice = englishVoice;
+            }
+            
+            utterance.onstart = () => {
                 setPlaying(true);
-                window.speechSynthesis.speak(utterance);
                 setLoading(false);
-                return;
-            }
-
-            if (!audioContextRef.current) {
-                audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
-            }
-            const ctx = audioContextRef.current;
+            };
             
-            const dataView = new DataView(arrayBuffer);
-            const float32Data = new Float32Array(arrayBuffer.byteLength / 2);
-            for (let i = 0; i < float32Data.length; i++) {
-                const int16 = dataView.getInt16(i * 2, true); 
-                float32Data[i] = int16 / 32768.0;
-            }
-
-            const buffer = ctx.createBuffer(1, float32Data.length, 24000);
-            buffer.copyToChannel(float32Data, 0);
-
-            const source = ctx.createBufferSource();
-            source.buffer = buffer;
-            source.connect(ctx.destination);
-            source.onended = () => setPlaying(false);
+            utterance.onend = () => setPlaying(false);
+            utterance.onerror = (e) => {
+                console.error("Speech error:", e);
+                setPlaying(false);
+                setLoading(false);
+            };
             
-            sourceRef.current = source;
-            source.start();
-            setPlaying(true);
+            window.speechSynthesis.speak(utterance);
+            
+            // Fallback timeout in case onstart doesn't fire
+            setTimeout(() => setLoading(false), 500);
 
         } catch (e) {
             console.error("Audio Playback Error", e);
-        } finally {
+            setPlaying(false);
             setLoading(false);
         }
     };
