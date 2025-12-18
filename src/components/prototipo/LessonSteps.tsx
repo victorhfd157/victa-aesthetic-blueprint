@@ -2,9 +2,57 @@ import React, { useState, useEffect } from 'react';
 import { LessonContent, VocabularyItem, GrammarPoint, QuizQuestion, TextContent, ListeningContent, GapFillSentence, WritingTask, Flashcard, Slide } from './types';
 import { Volume2, CheckCircle2, XCircle, Info, Pause, RefreshCw, Loader2, BookOpen, ChevronLeft, ChevronRight, Monitor, RotateCcw, MessageSquare, Shuffle, Edit3, Headphones, Keyboard, Settings2, Sparkles } from 'lucide-react';
 
+// Helper to select the best available voice
+const getBestVoice = (voices: SpeechSynthesisVoice[]): SpeechSynthesisVoice | null => {
+    // Priority order for high-quality voices
+    const premiumPatterns = [
+        /Natural/i,          // Microsoft Neural voices
+        /Neural/i,           // Neural voices
+        /Premium/i,          // Premium voices
+        /Enhanced/i,         // Enhanced voices
+        /Samantha/i,         // High quality macOS voice
+        /Daniel/i,           // High quality macOS UK voice
+        /Karen/i,            // High quality macOS AU voice
+        /Google.*US/i,       // Google US voices
+        /Google/i,           // Any Google voice
+    ];
+    
+    const englishVoices = voices.filter(v => v.lang.startsWith('en'));
+    
+    // Try to find premium voices first
+    for (const pattern of premiumPatterns) {
+        const match = englishVoices.find(v => pattern.test(v.name));
+        if (match) return match;
+    }
+    
+    // Fallback to any en-US, then en-GB, then any English voice
+    return englishVoices.find(v => v.lang === 'en-US') 
+        || englishVoices.find(v => v.lang === 'en-GB')
+        || englishVoices[0]
+        || null;
+};
+
 const AudioPlayerButton: React.FC<{ text: string, className?: string, iconSize?: number, lightMode?: boolean }> = ({ text, className, iconSize = 20, lightMode = false }) => {
     const [loading, setLoading] = useState(false);
     const [playing, setPlaying] = useState(false);
+    const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
+
+    // Load voices on mount
+    useEffect(() => {
+        const loadVoices = () => {
+            const availableVoices = window.speechSynthesis.getVoices();
+            if (availableVoices.length > 0) {
+                setVoices(availableVoices);
+            }
+        };
+        
+        loadVoices();
+        window.speechSynthesis.onvoiceschanged = loadVoices;
+        
+        return () => {
+            window.speechSynthesis.onvoiceschanged = null;
+        };
+    }, []);
 
     const playAudio = async () => {
         if (playing) {
@@ -16,22 +64,18 @@ const AudioPlayerButton: React.FC<{ text: string, className?: string, iconSize?:
         setLoading(true);
         
         try {
-            // Cancel any ongoing speech
             window.speechSynthesis.cancel();
             
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = 'en-US';
-            utterance.rate = 0.9;
+            utterance.rate = 0.95; // Slightly slower for clarity
             utterance.pitch = 1;
+            utterance.volume = 1;
             
-            // Get available voices and prefer a natural English voice
-            const voices = window.speechSynthesis.getVoices();
-            const englishVoice = voices.find(v => v.lang.startsWith('en') && v.name.includes('Google')) 
-                || voices.find(v => v.lang.startsWith('en-US'))
-                || voices.find(v => v.lang.startsWith('en'));
-            
-            if (englishVoice) {
-                utterance.voice = englishVoice;
+            // Select the best available voice
+            const bestVoice = getBestVoice(voices.length > 0 ? voices : window.speechSynthesis.getVoices());
+            if (bestVoice) {
+                utterance.voice = bestVoice;
             }
             
             utterance.onstart = () => {
@@ -48,7 +92,6 @@ const AudioPlayerButton: React.FC<{ text: string, className?: string, iconSize?:
             
             window.speechSynthesis.speak(utterance);
             
-            // Fallback timeout in case onstart doesn't fire
             setTimeout(() => setLoading(false), 500);
 
         } catch (e) {
