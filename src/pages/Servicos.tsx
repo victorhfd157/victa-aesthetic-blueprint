@@ -93,7 +93,7 @@ const ServicosContent: React.FC = () => {
 
 const Servicos: React.FC = () => {
   return (
-    <PasswordProtection password="victa2024" storageKey="servicos_access">
+    <PasswordProtection storageKey="servicos_access">
       <ServicosContent />
     </PasswordProtection>
   );
