@@ -4,7 +4,7 @@ import PrototipoApp from '@/components/prototipo/PrototipoApp';
 
 const Prototipo: React.FC = () => {
   return (
-    <PasswordProtection storageKey="prototipo_access">
+    <PasswordProtection storageKey="servicos_access">
       <PrototipoApp />
     </PasswordProtection>
   );
