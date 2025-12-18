@@ -2,124 +2,116 @@ import React, { useState, useEffect } from 'react';
 import { LessonContent, VocabularyItem, GrammarPoint, QuizQuestion, TextContent, ListeningContent, GapFillSentence, WritingTask, Flashcard, Slide } from './types';
 import { Volume2, CheckCircle2, XCircle, Info, Pause, RefreshCw, Loader2, BookOpen, ChevronLeft, ChevronRight, Monitor, RotateCcw, MessageSquare, Shuffle, Edit3, Headphones, Keyboard, Settings2, Sparkles } from 'lucide-react';
 
-// Helper to select the best available English voice
-const getBestEnglishVoice = (voices: SpeechSynthesisVoice[]): SpeechSynthesisVoice | null => {
-    // Filter ONLY English voices (strict)
-    const englishVoices = voices.filter(v => 
-        v.lang === 'en-US' || 
-        v.lang === 'en-GB' || 
-        v.lang === 'en-AU' || 
-        v.lang === 'en_US' || 
-        v.lang === 'en_GB' ||
-        v.lang.startsWith('en-') ||
-        v.lang.startsWith('en_')
-    );
-    
-    if (englishVoices.length === 0) {
-        console.warn('No English voices found. Available voices:', voices.map(v => `${v.name} (${v.lang})`));
+// ElevenLabs TTS via edge function
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+
+// Audio cache to avoid repeated API calls
+const audioCache = new Map<string, string>();
+
+const generateElevenLabsTTS = async (text: string): Promise<string | null> => {
+    // Check cache first
+    const cacheKey = text.substring(0, 100);
+    if (audioCache.has(cacheKey)) {
+        return audioCache.get(cacheKey)!;
+    }
+
+    try {
+        const response = await fetch(`${SUPABASE_URL}/functions/v1/elevenlabs-tts`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'apikey': SUPABASE_KEY,
+                'Authorization': `Bearer ${SUPABASE_KEY}`,
+            },
+            body: JSON.stringify({ 
+                text,
+                voiceId: 'JBFqnCBsd6RMkjVDRZzb' // George - clear British English
+            }),
+        });
+
+        if (!response.ok) {
+            console.error('ElevenLabs TTS error:', response.status);
+            return null;
+        }
+
+        const data = await response.json();
+        if (data.audioContent) {
+            const audioUrl = `data:audio/mpeg;base64,${data.audioContent}`;
+            audioCache.set(cacheKey, audioUrl);
+            return audioUrl;
+        }
+        return null;
+    } catch (error) {
+        console.error('ElevenLabs TTS error:', error);
         return null;
     }
+};
+
+// Fallback to browser TTS
+const playBrowserTTS = (text: string, onEnd: () => void) => {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US';
+    utterance.rate = 0.95;
     
-    // Priority patterns for high-quality voices
-    const premiumPatterns = [
-        /Samantha/i,         // High quality macOS voice (US)
-        /Google US English/i, // Google US voice
-        /Microsoft.*Natural/i, // Microsoft Neural voices
-        /Natural/i,          // Any natural voice
-        /Neural/i,           // Neural voices  
-        /Premium/i,          // Premium voices
-        /Enhanced/i,         // Enhanced voices
-        /Daniel/i,           // High quality macOS UK voice
-        /Karen/i,            // High quality macOS AU voice
-        /Google/i,           // Any Google voice
-    ];
+    const voices = window.speechSynthesis.getVoices();
+    const englishVoice = voices.find(v => v.lang.startsWith('en-US')) || voices.find(v => v.lang.startsWith('en'));
+    if (englishVoice) utterance.voice = englishVoice;
     
-    // Try to find premium voices first
-    for (const pattern of premiumPatterns) {
-        const match = englishVoices.find(v => pattern.test(v.name));
-        if (match) {
-            console.log('Selected voice:', match.name, match.lang);
-            return match;
-        }
-    }
-    
-    // Fallback: prefer en-US
-    const usVoice = englishVoices.find(v => v.lang === 'en-US' || v.lang === 'en_US');
-    if (usVoice) {
-        console.log('Selected fallback US voice:', usVoice.name, usVoice.lang);
-        return usVoice;
-    }
-    
-    // Last resort: any English voice
-    console.log('Selected fallback English voice:', englishVoices[0].name, englishVoices[0].lang);
-    return englishVoices[0];
+    utterance.onend = onEnd;
+    window.speechSynthesis.speak(utterance);
 };
 
 const AudioPlayerButton: React.FC<{ text: string, className?: string, iconSize?: number, lightMode?: boolean }> = ({ text, className, iconSize = 20, lightMode = false }) => {
     const [loading, setLoading] = useState(false);
     const [playing, setPlaying] = useState(false);
-    const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
+    const [audioElement, setAudioElement] = useState<HTMLAudioElement | null>(null);
 
-    // Load voices on mount
-    useEffect(() => {
-        const loadVoices = () => {
-            const availableVoices = window.speechSynthesis.getVoices();
-            if (availableVoices.length > 0) {
-                setVoices(availableVoices);
-            }
-        };
-        
-        loadVoices();
-        window.speechSynthesis.onvoiceschanged = loadVoices;
-        
-        return () => {
-            window.speechSynthesis.onvoiceschanged = null;
-        };
-    }, []);
+    const stopAudio = () => {
+        if (audioElement) {
+            audioElement.pause();
+            audioElement.currentTime = 0;
+        }
+        window.speechSynthesis.cancel();
+        setPlaying(false);
+    };
 
     const playAudio = async () => {
         if (playing) {
-            window.speechSynthesis.cancel();
-            setPlaying(false);
+            stopAudio();
             return;
         }
 
         setLoading(true);
         
         try {
-            window.speechSynthesis.cancel();
+            // Try ElevenLabs first
+            const audioUrl = await generateElevenLabsTTS(text);
             
-            // Get fresh voices list
-            const currentVoices = voices.length > 0 ? voices : window.speechSynthesis.getVoices();
-            const bestVoice = getBestEnglishVoice(currentVoices);
-            
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'en-US'; // Force English
-            utterance.rate = 0.95;
-            utterance.pitch = 1;
-            utterance.volume = 1;
-            
-            // MUST set voice to ensure English pronunciation
-            if (bestVoice) {
-                utterance.voice = bestVoice;
-            }
-            
-            utterance.onstart = () => {
+            if (audioUrl) {
+                const audio = new Audio(audioUrl);
+                setAudioElement(audio);
+                
+                audio.onplay = () => {
+                    setPlaying(true);
+                    setLoading(false);
+                };
+                audio.onended = () => setPlaying(false);
+                audio.onerror = () => {
+                    console.warn('ElevenLabs audio failed, falling back to browser TTS');
+                    setPlaying(true);
+                    setLoading(false);
+                    playBrowserTTS(text, () => setPlaying(false));
+                };
+                
+                await audio.play();
+            } else {
+                // Fallback to browser TTS
                 setPlaying(true);
                 setLoading(false);
-            };
-            
-            utterance.onend = () => setPlaying(false);
-            utterance.onerror = (e) => {
-                console.error("Speech error:", e);
-                setPlaying(false);
-                setLoading(false);
-            };
-            
-            window.speechSynthesis.speak(utterance);
-            
-            setTimeout(() => setLoading(false), 500);
-
+                playBrowserTTS(text, () => setPlaying(false));
+            }
         } catch (e) {
             console.error("Audio Playback Error", e);
             setPlaying(false);
@@ -140,7 +132,7 @@ const AudioPlayerButton: React.FC<{ text: string, className?: string, iconSize?:
             onClick={(e) => { e.stopPropagation(); playAudio(); }}
             disabled={loading}
             className={`${baseClasses} ${lightMode ? lightClasses : darkClasses} ${className}`}
-            title="Listen to pronunciation"
+            title="Listen to pronunciation (ElevenLabs)"
         >
             {loading ? <Loader2 size={iconSize} className="animate-spin" /> : playing ? <Pause size={iconSize} /> : <Volume2 size={iconSize} />}
         </button>
