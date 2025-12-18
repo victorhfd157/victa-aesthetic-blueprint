@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Lock, Eye, EyeOff, AlertCircle } from 'lucide-react';
+import { Lock, Eye, EyeOff, AlertCircle, User } from 'lucide-react';
 
 interface PasswordProtectionProps {
   children: React.ReactNode;
-  password?: string;
   storageKey?: string;
 }
 
+// Credenciais hardcoded
+const VALID_CREDENTIALS = {
+  accessNumber: '001',
+  password: 'victa2024'
+};
+
 export const PasswordProtection: React.FC<PasswordProtectionProps> = ({
   children,
-  password = 'victa2024',
   storageKey = 'servicos_access'
 }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [inputAccessNumber, setInputAccessNumber] = useState('');
   const [inputPassword, setInputPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
@@ -31,11 +36,12 @@ export const PasswordProtection: React.FC<PasswordProtectionProps> = ({
     e.preventDefault();
     setError('');
 
-    if (inputPassword === password) {
+    if (inputAccessNumber === VALID_CREDENTIALS.accessNumber && 
+        inputPassword === VALID_CREDENTIALS.password) {
       sessionStorage.setItem(storageKey, 'granted');
       setIsAuthenticated(true);
     } else {
-      setError('Senha incorreta. Tente novamente.');
+      setError('Número de acesso ou senha incorretos.');
       setInputPassword('');
     }
   };
@@ -86,22 +92,40 @@ export const PasswordProtection: React.FC<PasswordProtectionProps> = ({
 
           {/* Title */}
           <h1 className="text-xl font-semibold text-white text-center mb-2">
-            Acesso Protegido
+            Acesso ao Meu Projeto
           </h1>
           <p className="text-slate-400 text-center text-sm mb-8">
-            Digite a senha para acessar a apresentação comercial
+            Digite seu número de acesso e senha
           </p>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Access Number Field */}
             <div className="relative">
+              <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
+                <User className="w-5 h-5" />
+              </div>
+              <input
+                type="text"
+                value={inputAccessNumber}
+                onChange={(e) => setInputAccessNumber(e.target.value)}
+                placeholder="Número de Acesso"
+                className="w-full pl-11 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+                autoFocus
+              />
+            </div>
+
+            {/* Password Field */}
+            <div className="relative">
+              <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
+                <Lock className="w-5 h-5" />
+              </div>
               <input
                 type={showPassword ? 'text' : 'password'}
                 value={inputPassword}
                 onChange={(e) => setInputPassword(e.target.value)}
-                placeholder="Digite a senha"
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all pr-12"
-                autoFocus
+                placeholder="Senha"
+                className="w-full pl-11 pr-12 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
               />
               <button
                 type="button"
@@ -128,15 +152,15 @@ export const PasswordProtection: React.FC<PasswordProtectionProps> = ({
 
             <button
               type="submit"
-              className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98]"
+              className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] mt-6"
             >
-              Acessar Apresentação
+              Acessar Meu Projeto
             </button>
           </form>
 
           {/* Footer */}
           <p className="text-slate-500 text-xs text-center mt-8">
-            Proposta Comercial Confidencial
+            Acesso Confidencial
           </p>
         </div>
       </motion.div>

@@ -88,7 +88,7 @@ const Navbar = () => {
               className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full border border-white/20 text-foreground/80 hover:text-foreground hover:bg-white/10 transition-all duration-300"
             >
               <Presentation className="w-4 h-4" />
-              Serviços
+              Meu Projeto
             </Link>
             <Button 
               onClick={() => scrollToSection('contact')} 
@@ -127,7 +127,7 @@ const Navbar = () => {
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <Presentation className="w-4 h-4" />
-                  Serviços
+                  Meu Projeto
                 </Link>
                 <Button 
                   onClick={() => scrollToSection('contact')} 
