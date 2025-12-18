@@ -10,9 +10,10 @@ export const generateCoverImage = async (prompt: string): Promise<string | null>
     return "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80";
 }
 
-// --- TTS Helper (uses browser's speech synthesis as fallback) ---
+// --- TTS Helper (uses browser's speech synthesis) ---
 export const generateSpeech = async (text: string): Promise<ArrayBuffer | null> => {
-    // Return null to trigger browser's speech synthesis fallback
+    // Always return null to use browser's native speech synthesis
+    // The LessonSteps component handles the fallback correctly
     return null;
 };
 
