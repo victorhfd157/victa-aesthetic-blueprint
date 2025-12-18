@@ -2,34 +2,57 @@ import React, { useState, useEffect } from 'react';
 import { LessonContent, VocabularyItem, GrammarPoint, QuizQuestion, TextContent, ListeningContent, GapFillSentence, WritingTask, Flashcard, Slide } from './types';
 import { Volume2, CheckCircle2, XCircle, Info, Pause, RefreshCw, Loader2, BookOpen, ChevronLeft, ChevronRight, Monitor, RotateCcw, MessageSquare, Shuffle, Edit3, Headphones, Keyboard, Settings2, Sparkles } from 'lucide-react';
 
-// Helper to select the best available voice
-const getBestVoice = (voices: SpeechSynthesisVoice[]): SpeechSynthesisVoice | null => {
-    // Priority order for high-quality voices
+// Helper to select the best available English voice
+const getBestEnglishVoice = (voices: SpeechSynthesisVoice[]): SpeechSynthesisVoice | null => {
+    // Filter ONLY English voices (strict)
+    const englishVoices = voices.filter(v => 
+        v.lang === 'en-US' || 
+        v.lang === 'en-GB' || 
+        v.lang === 'en-AU' || 
+        v.lang === 'en_US' || 
+        v.lang === 'en_GB' ||
+        v.lang.startsWith('en-') ||
+        v.lang.startsWith('en_')
+    );
+    
+    if (englishVoices.length === 0) {
+        console.warn('No English voices found. Available voices:', voices.map(v => `${v.name} (${v.lang})`));
+        return null;
+    }
+    
+    // Priority patterns for high-quality voices
     const premiumPatterns = [
-        /Natural/i,          // Microsoft Neural voices
-        /Neural/i,           // Neural voices
+        /Samantha/i,         // High quality macOS voice (US)
+        /Google US English/i, // Google US voice
+        /Microsoft.*Natural/i, // Microsoft Neural voices
+        /Natural/i,          // Any natural voice
+        /Neural/i,           // Neural voices  
         /Premium/i,          // Premium voices
         /Enhanced/i,         // Enhanced voices
-        /Samantha/i,         // High quality macOS voice
         /Daniel/i,           // High quality macOS UK voice
         /Karen/i,            // High quality macOS AU voice
-        /Google.*US/i,       // Google US voices
         /Google/i,           // Any Google voice
     ];
-    
-    const englishVoices = voices.filter(v => v.lang.startsWith('en'));
     
     // Try to find premium voices first
     for (const pattern of premiumPatterns) {
         const match = englishVoices.find(v => pattern.test(v.name));
-        if (match) return match;
+        if (match) {
+            console.log('Selected voice:', match.name, match.lang);
+            return match;
+        }
     }
     
-    // Fallback to any en-US, then en-GB, then any English voice
-    return englishVoices.find(v => v.lang === 'en-US') 
-        || englishVoices.find(v => v.lang === 'en-GB')
-        || englishVoices[0]
-        || null;
+    // Fallback: prefer en-US
+    const usVoice = englishVoices.find(v => v.lang === 'en-US' || v.lang === 'en_US');
+    if (usVoice) {
+        console.log('Selected fallback US voice:', usVoice.name, usVoice.lang);
+        return usVoice;
+    }
+    
+    // Last resort: any English voice
+    console.log('Selected fallback English voice:', englishVoices[0].name, englishVoices[0].lang);
+    return englishVoices[0];
 };
 
 const AudioPlayerButton: React.FC<{ text: string, className?: string, iconSize?: number, lightMode?: boolean }> = ({ text, className, iconSize = 20, lightMode = false }) => {
@@ -66,14 +89,17 @@ const AudioPlayerButton: React.FC<{ text: string, className?: string, iconSize?:
         try {
             window.speechSynthesis.cancel();
             
+            // Get fresh voices list
+            const currentVoices = voices.length > 0 ? voices : window.speechSynthesis.getVoices();
+            const bestVoice = getBestEnglishVoice(currentVoices);
+            
             const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'en-US';
-            utterance.rate = 0.95; // Slightly slower for clarity
+            utterance.lang = 'en-US'; // Force English
+            utterance.rate = 0.95;
             utterance.pitch = 1;
             utterance.volume = 1;
             
-            // Select the best available voice
-            const bestVoice = getBestVoice(voices.length > 0 ? voices : window.speechSynthesis.getVoices());
+            // MUST set voice to ensure English pronunciation
             if (bestVoice) {
                 utterance.voice = bestVoice;
             }
