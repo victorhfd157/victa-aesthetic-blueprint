@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { SLIDES } from '@/data/slides';
 import { SlideRenderer } from '@/components/servicos/SlideRenderer';
-import { ChevronLeft, ChevronRight, Menu } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Menu, ArrowLeft } from 'lucide-react';
 import { AnimatePresence } from 'framer-motion';
 import { PasswordProtection } from '@/components/PasswordProtection';
+import ProjectHub from '@/components/servicos/ProjectHub';
+
+type ViewMode = 'hub' | 'presentation';
 
 const ServicosContent: React.FC = () => {
+  const [viewMode, setViewMode] = useState<ViewMode>('hub');
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -18,6 +22,8 @@ const ServicosContent: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    if (viewMode !== 'presentation') return;
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight') nextSlide();
       if (e.key === 'ArrowLeft') prevSlide();
@@ -25,22 +31,41 @@ const ServicosContent: React.FC = () => {
         e.preventDefault();
         nextSlide();
       }
+      if (e.key === 'Escape') {
+        setViewMode('hub');
+      }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [nextSlide, prevSlide]);
+  }, [nextSlide, prevSlide, viewMode]);
 
   const currentSlide = SLIDES[currentSlideIndex];
   const progress = ((currentSlideIndex + 1) / SLIDES.length) * 100;
 
+  // Show Hub
+  if (viewMode === 'hub') {
+    return <ProjectHub onViewPresentation={() => setViewMode('presentation')} />;
+  }
+
+  // Show Presentation
   return (
     <div className="flex flex-col h-screen w-screen bg-slate-50 text-slate-800 font-sans overflow-hidden">
       {/* Top Bar */}
       <div className="h-14 bg-white border-b border-slate-200 flex items-center justify-between px-6 z-20 shadow-sm">
-        <div className="font-bold text-blue-700 tracking-wider flex items-center space-x-2">
-          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-serif">V</div>
-          <span>VICTA AI</span>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => setViewMode('hub')}
+            className="flex items-center gap-2 text-slate-500 hover:text-slate-700 transition-colors"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            <span className="text-sm font-medium hidden sm:inline">Voltar ao Hub</span>
+          </button>
+          <div className="h-6 w-px bg-slate-200 hidden sm:block" />
+          <div className="font-bold text-blue-700 tracking-wider flex items-center space-x-2">
+            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-serif">V</div>
+            <span className="hidden sm:inline">VICTA AI</span>
+          </div>
         </div>
         <div className="text-sm text-slate-400 font-medium hidden md:block">
           {currentSlideIndex === 0 ? 'Confidencial' : `Slide ${currentSlideIndex + 1} / ${SLIDES.length}`}
