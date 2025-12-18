@@ -22,11 +22,11 @@ export interface SlideData {
   type: SlideType;
   title?: string;
   subtitle?: string;
-  content?: string[];
+  content?: string[]; // For standard bullet points
   footerNote?: string;
-  data?: any;
-  visual?: ReactNode;
-  logo?: ReactNode;
+  data?: any; // For charts, tables, or complex grid data
+  visual?: ReactNode; // Icon name or specific visual instruction identifier
+  logo?: ReactNode; // Optional logo component for the header
   highlight?: boolean;
 }
 
