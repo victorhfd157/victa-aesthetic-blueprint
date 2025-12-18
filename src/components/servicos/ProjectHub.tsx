@@ -39,7 +39,7 @@ const ProjectHub: React.FC<ProjectHubProps> = ({ onViewPresentation }) => {
     },
     {
       title: 'Protótipo LMS',
-      description: 'Explore o protótipo funcional do LMS com geração de conteúdo por IA (Gemini).',
+      description: 'Explore o protótipo funcional do LMS de idiomas.',
       icon: Laptop,
       color: 'from-purple-500 to-purple-700',
       action: () => navigate('/prototipo'),
