@@ -2,14 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { LessonContent, VocabularyItem, GrammarPoint, QuizQuestion, TextContent, ListeningContent, GapFillSentence, WritingTask, Flashcard, Slide } from './types';
 import { Volume2, CheckCircle2, XCircle, Info, Pause, RefreshCw, Loader2, BookOpen, ChevronLeft, ChevronRight, Monitor, RotateCcw, MessageSquare, Shuffle, Edit3, Headphones, Keyboard, Settings2, Sparkles } from 'lucide-react';
 
-// ElevenLabs TTS via edge function
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+// ElevenLabs TTS via edge function (professional voice)
+const ELEVENLABS_TTS_URL = "https://efaasxatkeswqhufuktp.supabase.co/functions/v1/elevenlabs-tts";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmYWFzeGF0a2Vzd3FodWZ1a3RwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkxNTE5NjAsImV4cCI6MjA3NDcyNzk2MH0.VTgYYV4urDXV-jZ0Fk1pKQ4CYNhTRfF2b9PT3SkEDVs";
+
+let elevenLabsDisabledForSession = false;
 
 // Audio cache to avoid repeated API calls
 const audioCache = new Map<string, string>();
 
 const generateElevenLabsTTS = async (text: string): Promise<string | null> => {
+    if (elevenLabsDisabledForSession) return null;
+
     // Check cache first
     const cacheKey = text.substring(0, 100);
     if (audioCache.has(cacheKey)) {
@@ -17,21 +21,37 @@ const generateElevenLabsTTS = async (text: string): Promise<string | null> => {
     }
 
     try {
-        const response = await fetch(`${SUPABASE_URL}/functions/v1/elevenlabs-tts`, {
+        const response = await fetch(ELEVENLABS_TTS_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'apikey': SUPABASE_KEY,
-                'Authorization': `Bearer ${SUPABASE_KEY}`,
+                'apikey': SUPABASE_ANON_KEY,
+                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
             },
-            body: JSON.stringify({ 
+            body: JSON.stringify({
                 text,
                 voiceId: 'JBFqnCBsd6RMkjVDRZzb' // George - clear British English
             }),
         });
 
         if (!response.ok) {
-            console.error('ElevenLabs TTS error:', response.status);
+            let err: any = null;
+            try {
+                err = await response.json();
+            } catch {
+                // ignore
+            }
+
+            console.warn('ElevenLabs TTS error:', response.status, err);
+
+            // If ElevenLabs account is blocked/unauthorized, stop calling it for this session
+            if (response.status === 401) {
+                const providerStatus = err?.elevenlabs_body?.detail?.status;
+                if (providerStatus === 'detected_unusual_activity') {
+                    elevenLabsDisabledForSession = true;
+                }
+            }
+
             return null;
         }
 
