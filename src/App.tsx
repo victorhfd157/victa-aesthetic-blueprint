@@ -7,14 +7,12 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Servicos from "./pages/Servicos";
 import Prototipo from "./pages/Prototipo";
-import { CustomCursor } from "./components/ui/custom-cursor";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <CustomCursor />
       <Toaster />
       <Sonner />
       <BrowserRouter>
