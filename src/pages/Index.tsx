@@ -1,13 +1,17 @@
+import { Suspense, lazy } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import Solutions from '@/components/Solutions';
-import Differentials from '@/components/Differentials';
-import Clients from '@/components/Clients';
-import CTA from '@/components/CTA';
-import FAQ from '@/components/FAQ';
-import Contact from '@/components/Contact';
-import Footer from '@/components/Footer';
 import { LiquidEther } from '@/components/ui/liquid-ether';
+import { HeroSkeleton, CardsSkeleton, ContactSkeleton, SectionSkeleton } from '@/components/ui/section-skeleton';
+
+// Lazy load sections below the fold
+const Solutions = lazy(() => import('@/components/Solutions'));
+const Differentials = lazy(() => import('@/components/Differentials'));
+const Clients = lazy(() => import('@/components/Clients'));
+const CTA = lazy(() => import('@/components/CTA'));
+const FAQ = lazy(() => import('@/components/FAQ'));
+const Contact = lazy(() => import('@/components/Contact'));
+const Footer = lazy(() => import('@/components/Footer'));
 
 const Index = () => {
   return (
@@ -20,13 +24,27 @@ const Index = () => {
           speed={0.5} 
           opacity={0.2}
         />
-        <Solutions />
-        <Differentials />
-        <Clients />
-        <CTA />
-        <FAQ />
-        <Contact />
-        <Footer />
+        <Suspense fallback={<CardsSkeleton count={4} />}>
+          <Solutions />
+        </Suspense>
+        <Suspense fallback={<CardsSkeleton count={4} />}>
+          <Differentials />
+        </Suspense>
+        <Suspense fallback={<SectionSkeleton />}>
+          <Clients />
+        </Suspense>
+        <Suspense fallback={<SectionSkeleton />}>
+          <CTA />
+        </Suspense>
+        <Suspense fallback={<SectionSkeleton />}>
+          <FAQ />
+        </Suspense>
+        <Suspense fallback={<ContactSkeleton />}>
+          <Contact />
+        </Suspense>
+        <Suspense fallback={<SectionSkeleton />}>
+          <Footer />
+        </Suspense>
       </div>
     </div>
   );
