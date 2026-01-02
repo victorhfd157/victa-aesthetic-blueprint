@@ -2,144 +2,118 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Presentation } from 'lucide-react';
+import { Menu, Presentation, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ScrollProgress } from '@/components/ui/scroll-progress';
 import victaLogo from '@/assets/victa-logo.png';
+
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
-
-      // Update active section based on scroll position
-      const sections = ['hero', 'solutions', 'differentials', 'clients', 'contact'];
-      const current = sections.find(section => {
+      const sections = ['hero', 'solutions', 'differentials', 'clients', 'faq', 'contact'];
+      for (const section of [...sections].reverse()) {
         const element = document.getElementById(section);
         if (element) {
           const rect = element.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom >= 100;
+          if (rect.top <= 150) { setActiveSection(section); break; }
         }
-        return false;
-      });
-      if (current) setActiveSection(current);
+      }
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
   const scrollToSection = (sectionId: string) => {
     setActiveSection(sectionId);
     setMobileMenuOpen(false);
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth'
-      });
-    }
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
   };
-  const navItems = [{
-    id: 'hero',
-    label: 'Home'
-  }, {
-    id: 'solutions',
-    label: 'Soluções'
-  }, {
-    id: 'differentials',
-    label: 'Sobre Nós'
-  }, {
-    id: 'clients',
-    label: 'Clientes'
-  }, {
-    id: 'contact',
-    label: 'Contato'
-  }];
-  return <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'glass glass-hover shadow-glass' : 'bg-transparent'}`}>
-      <div className="container px-4 md:px-8 lg:px-[40px] py-2 md:py-[6px]">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center">
-            <img 
-              src={victaLogo} 
-              alt="VICTA AI Solutions" 
-              onClick={() => scrollToSection('hero')} 
-              className="h-20 md:h-28 lg:h-36 w-auto glow-primary transition-smooth hover:scale-105 cursor-pointer" 
-            />
-          </div>
 
-          {/* Desktop Pill Navigation */}
-          <div className="hidden md:flex items-center">
-            <div className="glass rounded-full p-1 backdrop-blur-xl border border-white/10">
-              <div className="flex items-center gap-1">
-                {navItems.map(item => <button key={item.id} onClick={() => scrollToSection(item.id)} className={`
-                      relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-300
-                      ${activeSection === item.id ? 'bg-gradient-primary text-white shadow-glow' : 'text-foreground/70 hover:text-foreground hover:bg-white/5'}
-                    `}>
-                    {item.label}
-                    {activeSection === item.id && <div className="absolute inset-0 rounded-full bg-gradient-primary opacity-20 blur-sm" />}
-                  </button>)}
+  const navItems = [
+    { id: 'hero', label: 'Início' },
+    { id: 'solutions', label: 'Soluções' },
+    { id: 'differentials', label: 'Diferenciais' },
+    { id: 'clients', label: 'Clientes' },
+    { id: 'faq', label: 'FAQ' },
+    { id: 'contact', label: 'Contato' },
+  ];
+
+  return (
+    <>
+      <ScrollProgress />
+      <motion.nav 
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'glass border-b border-glass-border shadow-glass py-3' : 'bg-transparent py-4'}`}
+        initial={{ y: -100 }} animate={{ y: 0 }} transition={{ duration: 0.5 }}
+      >
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between">
+            <motion.button onClick={() => scrollToSection('hero')} className="flex items-center gap-3" whileHover={{ scale: 1.02 }}>
+              <img src={victaLogo} alt="Victa Logo" className="h-12 md:h-16 w-auto" />
+              <span className="text-xl font-bold gradient-text hidden sm:block">VICTA AI</span>
+            </motion.button>
+
+            <div className="hidden lg:flex items-center">
+              <div className="glass rounded-full px-2 py-2 border border-glass-border">
+                <div className="flex items-center gap-1">
+                  {navItems.map((item) => (
+                    <motion.button
+                      key={item.id}
+                      onClick={() => scrollToSection(item.id)}
+                      className={`relative px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeSection === item.id ? 'text-primary' : 'text-foreground/70 hover:text-foreground'}`}
+                      whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+                    >
+                      {activeSection === item.id && (
+                        <motion.div layoutId="activeSection" className="absolute inset-0 bg-primary/10 rounded-full border border-primary/20" transition={{ type: 'spring', stiffness: 400, damping: 30 }} />
+                      )}
+                      <span className="relative z-10">{item.label}</span>
+                    </motion.button>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Desktop Buttons */}
-          <div className="hidden md:flex items-center gap-3">
-            <Link 
-              to="/servicos"
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full border border-white/20 text-foreground/80 hover:text-foreground hover:bg-white/10 transition-all duration-300"
-            >
-              <Presentation className="w-4 h-4" />
-              Meu Projeto
-            </Link>
-            <Button 
-              onClick={() => scrollToSection('contact')} 
-              className="bg-gradient-primary hover:opacity-90 transition-smooth text-white font-semibold px-6 py-2 rounded-full shadow-glow hover:scale-105"
-            >
-              Solicitar Demonstração
-            </Button>
-          </div>
-
-          {/* Mobile menu */}
-          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden text-white">
-                <Menu className="h-6 w-6" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="glass border-l border-white/10">
-              <div className="flex flex-col gap-4 mt-8">
-                {navItems.map(item => (
-                  <button
-                    key={item.id}
-                    onClick={() => scrollToSection(item.id)}
-                    className={`
-                      w-full text-left px-4 py-3 rounded-lg transition-all duration-300 font-medium
-                      ${activeSection === item.id 
-                        ? 'bg-gradient-primary text-white shadow-glow' 
-                        : 'text-foreground/70 hover:text-foreground hover:bg-white/5'}
-                    `}
-                  >
-                    {item.label}
-                  </button>
-                ))}
-                <Link 
-                  to="/servicos"
-                  className="flex items-center gap-2 w-full text-left px-4 py-3 rounded-lg transition-all duration-300 font-medium text-foreground/70 hover:text-foreground hover:bg-white/5"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <Presentation className="w-4 h-4" />
-                  Meu Projeto
-                </Link>
-                <Button 
-                  onClick={() => scrollToSection('contact')} 
-                  className="w-full mt-4 bg-gradient-primary hover:opacity-90 transition-smooth text-white font-semibold px-6 py-3 rounded-full shadow-glow"
-                >
-                  Solicitar Demonstração
+            <div className="hidden lg:flex items-center gap-3">
+              <Link to="/servicos" className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full border border-primary/20 text-foreground/80 hover:text-foreground hover:bg-primary/10 transition-all">
+                <Presentation className="w-4 h-4" /> Meu Projeto
+              </Link>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button onClick={() => scrollToSection('contact')} className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full shadow-glow group">
+                  <span className="flex items-center gap-2">Solicitar Demo <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" /></span>
                 </Button>
-              </div>
-            </SheetContent>
-          </Sheet>
+              </motion.div>
+            </div>
+
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger asChild className="lg:hidden">
+                <Button variant="ghost" size="icon" className="hover:bg-primary/10"><Menu className="h-6 w-6" /></Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="glass border-l border-glass-border w-80">
+                <div className="flex flex-col gap-2 mt-8">
+                  {navItems.map((item) => (
+                    <button key={item.id} onClick={() => scrollToSection(item.id)} className={`text-left px-4 py-3 rounded-xl transition-all ${activeSection === item.id ? 'bg-primary/10 text-primary border border-primary/20' : 'text-foreground/70 hover:text-foreground hover:bg-primary/5'}`}>
+                      {item.label}
+                    </button>
+                  ))}
+                  <div className="border-t border-glass-border my-4" />
+                  <Link to="/servicos" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2 px-4 py-3 rounded-xl text-foreground/70 hover:text-foreground hover:bg-primary/5">
+                    <Presentation className="w-4 h-4" /> Meu Projeto
+                  </Link>
+                  <Button onClick={() => scrollToSection('contact')} className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-glow mt-2">
+                    Solicitar Demonstração
+                  </Button>
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
-      </div>
-    </nav>;
+      </motion.nav>
+    </>
+  );
 };
+
 export default Navbar;

@@ -1,102 +1,144 @@
-import { Brain, Cog, Zap, BarChart3 } from 'lucide-react';
+import { MessageSquare, Bot, Workflow, Link, Sparkles, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { TiltCard } from '@/components/ui/tilt-card';
 import { GlowingBorder } from '@/components/ui/glowing-border';
 
 const solutions = [
   {
-    icon: Brain,
-    title: 'Agentes de IA Personalizados',
-    description: 'Automatizam vendas e atendimento, gerando mais leads qualificados.',
-    features: ['Aumenta conversão em até 40%', 'Qualificação automática de leads', 'Atendimento 24/7 inteligente']
+    icon: MessageSquare,
+    title: 'Atendentes Virtuais',
+    description: 'Chatbots inteligentes que entendem o contexto e respondem como humanos.',
+    features: ['Linguagem Natural', 'Multicanal', 'Personalização'],
   },
   {
-    icon: Cog,
-    title: 'Sistemas Inteligentes',
-    description: 'Eliminam processos manuais e reduzem até 70% do tempo operacional.',
-    features: ['Redução drástica de tarefas manuais', 'Fluxos automatizados', 'Integração total com sistemas existentes']
+    icon: Bot,
+    title: 'Agentes de IA',
+    description: 'Automação de tarefas complexas com agentes que aprendem e evoluem.',
+    features: ['Aprendizado Contínuo', 'Integração Total', 'Relatórios'],
   },
   {
-    icon: Zap,
-    title: 'Integrações Estratégicas',
-    description: 'Unificam operações e centralizam dados para maior eficiência.',
-    features: ['Centralização de dados', 'Operações unificadas', 'Maior eficiência operacional']
+    icon: Workflow,
+    title: 'Automações',
+    description: 'Fluxos de trabalho automatizados que otimizam processos repetitivos.',
+    features: ['Sem Código', 'Escalável', 'Monitoramento'],
   },
   {
-    icon: BarChart3,
-    title: 'Automação de Marketing e Vendas',
-    description: 'Funis otimizados, campanhas mais precisas e maior ROI.',
-    features: ['Funis de venda automatizados', 'Campanhas precisas por IA', 'ROI comprovadamente maior']
-  }
+    icon: Link,
+    title: 'Integrações',
+    description: 'Conecte sistemas e plataformas para um ecossistema unificado.',
+    features: ['APIs Robustas', 'Segurança', 'Tempo Real'],
+  },
 ];
 
 const Solutions = () => {
+  const scrollToContact = () => {
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <section id="solutions" className="py-16 md:py-24 lg:py-32 bg-background overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-7xl">
-        {/* Header */}
-        <div className="text-center mb-16 md:mb-20 lg:mb-24">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 px-4">
-            <span className="gradient-text">As nossas soluções em IA</span>
+    <section id="solutions" className="py-20 md:py-32 relative">
+      <div className="container mx-auto px-4">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+        >
+          <motion.div 
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-primary/20 text-sm text-primary mb-6"
+            whileHover={{ scale: 1.05 }}
+          >
+            <Sparkles className="w-4 h-4" />
+            <span>Nossas Soluções</span>
+          </motion.div>
+          
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">
+            <span className="gradient-text">Soluções Inteligentes</span>
+            <br />
+            para cada desafio
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4">
-            Soluções inteligentes que geram resultados comprovados e transformam a sua operação.
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Tecnologias avançadas de IA adaptadas às necessidades específicas do seu negócio.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Solutions Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-10 mb-16 md:mb-20">
-          {solutions.map((solution, index) => {
-            const Icon = solution.icon;
-            return (
-              <GlowingBorder
-                key={index}
-                containerClassName="h-full"
-                className="h-full"
-              >
-                <div
-                  className="glass h-full rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-10 transition-all duration-500 hover:scale-[1.02] group shadow-card"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <div className="mb-6 md:mb-8">
-                    <div className="w-14 h-14 md:w-16 md:h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 transition-transform shadow-glow">
-                      <Icon className="h-7 w-7 md:h-8 md:w-8 text-white" />
+        <motion.div 
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ staggerChildren: 0.1 }}
+        >
+          {solutions.map((solution, index) => (
+            <motion.div 
+              key={index}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <TiltCard className="h-full" tiltMaxAngleX={8} tiltMaxAngleY={8}>
+                <GlowingBorder containerClassName="h-full">
+                  <div className="glass p-6 rounded-xl h-full flex flex-col group">
+                    <motion.div 
+                      className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors"
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                    >
+                      <solution.icon className="w-7 h-7 text-primary" />
+                    </motion.div>
+                    
+                    <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors">
+                      {solution.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm mb-5 flex-grow">
+                      {solution.description}
+                    </p>
+                    
+                    <div className="flex flex-wrap gap-2">
+                      {solution.features.map((feature, idx) => (
+                        <span 
+                          key={idx}
+                          className="text-xs px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20"
+                        >
+                          {feature}
+                        </span>
+                      ))}
                     </div>
-                    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 md:mb-4">{solution.title}</h3>
-                    <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">{solution.description}</p>
                   </div>
+                </GlowingBorder>
+              </TiltCard>
+            </motion.div>
+          ))}
+        </motion.div>
 
-                  <div className="space-y-3">
-                    {solution.features.map((feature, featureIndex) => (
-                      <div key={featureIndex} className="flex items-start text-sm md:text-base">
-                        <div className="w-2 h-2 bg-primary rounded-full mr-3 flex-shrink-0 mt-1.5"></div>
-                        <span className="text-muted-foreground">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </GlowingBorder>
-            );
-          })}
-        </div>
-
-        {/* CTA */}
-        <div className="text-center">
-          <GlowingBorder containerClassName="max-w-4xl mx-auto">
-            <div className="glass rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-10 lg:p-12">
-              <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 md:mb-6 px-4">
-                Pronto para revolucionar seu negócio?
+        <motion.div 
+          className="mt-16 text-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <GlowingBorder>
+            <div className="glass p-8 md:p-12 rounded-2xl">
+              <h3 className="text-2xl md:text-3xl font-bold mb-4">
+                Não encontrou o que procura?
               </h3>
-              <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 md:mb-8 px-4">
-                Nossa equipe está pronta para desenvolver a solução perfeita para sua empresa.
+              <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
+                Desenvolvemos soluções customizadas para desafios únicos. Fale com nosso time.
               </p>
-              <button 
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-gradient-primary hover:opacity-90 transition-all duration-300 text-white font-semibold px-6 sm:px-8 md:px-12 py-3 sm:py-4 text-sm sm:text-base rounded-full shadow-glow hover:scale-105"
+              <motion.button
+                onClick={scrollToContact}
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-primary text-primary-foreground font-semibold shadow-glow hover:bg-primary/90 transition-colors group"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
               >
-                Conversar com Especialista
-              </button>
+                Falar com Especialista
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </motion.button>
             </div>
           </GlowingBorder>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
