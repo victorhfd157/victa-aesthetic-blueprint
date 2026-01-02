@@ -3,6 +3,7 @@ import { ArrowRight, Sparkles } from 'lucide-react';
 import { WavyBackground } from '@/components/ui/wavy-background';
 import { GlowingBorder } from '@/components/ui/glowing-border';
 import { AnimatedCounter } from '@/components/ui/animated-counter';
+import { Typewriter } from '@/components/ui/typewriter';
 const Hero = () => {
   const scrollToContact = () => {
     const element = document.getElementById('contact');
@@ -41,9 +42,14 @@ const Hero = () => {
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 md:mb-8 leading-tight">
               <span className="gradient-text">Soluções de IA</span>
               <br />
-              <span className="text-white">que escalam</span>
-              <br />
-              <span className="text-white">o seu negócio</span>
+              <span className="text-white">para </span>
+              <Typewriter
+                words={['Inteligência Artificial', 'Automação', 'Resultados', 'Crescimento', 'Inovação']}
+                className="text-primary"
+                typingSpeed={80}
+                deletingSpeed={50}
+                delayBetweenWords={2500}
+              />
             </h1>
             
             <p className="text-base sm:text-lg md:text-xl text-foreground/70 mb-8 md:mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
