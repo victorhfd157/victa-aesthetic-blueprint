@@ -1,8 +1,9 @@
 import { TrendingUp, DollarSign, Zap, Scale, MessageCircle, FileText, Rocket, Award } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { TiltCard } from '@/components/ui/tilt-card';
 import { GlowingBorder } from '@/components/ui/glowing-border';
 import { AnimatedCounter } from '@/components/ui/animated-counter';
+import { useRef } from 'react';
 
 const differentials = [
   { icon: TrendingUp, title: 'Mais Conversões', description: 'Aumente suas vendas em até 40% com atendimento inteligente 24/7.' },
@@ -25,9 +26,26 @@ const steps = [
 ];
 
 const Differentials = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], [50, -50]);
+
   return (
-    <section id="differentials" className="py-20 md:py-32 relative">
-      <div className="container mx-auto px-4">
+    <section id="differentials" className="py-20 md:py-32 relative overflow-hidden" ref={sectionRef}>
+      {/* Parallax background elements */}
+      <motion.div 
+        className="absolute inset-0 pointer-events-none"
+        style={{ y: backgroundY }}
+      >
+        <div className="absolute top-0 left-1/4 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-secondary/5 rounded-full blur-3xl" />
+      </motion.div>
+
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div className="text-center mb-16" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
           <motion.div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-primary/20 text-sm text-primary mb-6" whileHover={{ scale: 1.05 }}>
             <Award className="w-4 h-4" />
@@ -39,7 +57,14 @@ const Differentials = () => {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-16">
           {stats.map((stat, index) => (
-            <motion.div key={index} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }}>
+            <motion.div 
+              key={index} 
+              initial={{ opacity: 0, y: 30 }} 
+              whileInView={{ opacity: 1, y: 0 }} 
+              viewport={{ once: true }} 
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              style={{ y: useTransform(scrollYProgress, [0, 1], [0, -15 * (index % 2 === 0 ? 1 : -1)]) }}
+            >
               <TiltCard tiltMaxAngleX={5} tiltMaxAngleY={5}>
                 <GlowingBorder>
                   <div className="glass p-6 md:p-8 rounded-xl text-center">
@@ -56,7 +81,14 @@ const Differentials = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
           {differentials.map((item, index) => (
-            <motion.div key={index} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }}>
+            <motion.div 
+              key={index} 
+              initial={{ opacity: 0, y: 30 }} 
+              whileInView={{ opacity: 1, y: 0 }} 
+              viewport={{ once: true }} 
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              style={{ y: useTransform(scrollYProgress, [0, 1], [0, 20 * (index % 2 === 0 ? -1 : 1)]) }}
+            >
               <TiltCard className="h-full" tiltMaxAngleX={8} tiltMaxAngleY={8}>
                 <GlowingBorder containerClassName="h-full">
                   <div className="glass p-6 rounded-xl h-full group">
@@ -72,12 +104,24 @@ const Differentials = () => {
           ))}
         </div>
 
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }} 
+          whileInView={{ opacity: 1, y: 0 }} 
+          viewport={{ once: true }} 
+          transition={{ duration: 0.6 }}
+        >
           <h3 className="text-2xl md:text-4xl font-bold text-center mb-12"><span className="gradient-text">Como funciona</span></h3>
           <div className="grid md:grid-cols-3 gap-6 relative">
             <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/0 via-primary/50 to-primary/0 -translate-y-1/2 z-0" />
             {steps.map((step, index) => (
-              <motion.div key={index} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: index * 0.15 }}>
+              <motion.div 
+                key={index} 
+                initial={{ opacity: 0, y: 30 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                viewport={{ once: true }} 
+                transition={{ duration: 0.6, delay: index * 0.15 }}
+                style={{ y: useTransform(scrollYProgress, [0, 1], [0, -25 + index * 15]) }}
+              >
                 <TiltCard tiltMaxAngleX={5} tiltMaxAngleY={5}>
                   <GlowingBorder>
                     <div className="glass p-6 md:p-8 rounded-xl relative z-10 group">
