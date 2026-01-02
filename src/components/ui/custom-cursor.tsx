@@ -77,7 +77,7 @@ export const CustomCursor = () => {
     <>
       {/* Main cursor dot */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
+        className="fixed top-0 left-0 pointer-events-none z-[9999]"
         style={{
           x: cursorX,
           y: cursorY,
@@ -91,7 +91,7 @@ export const CustomCursor = () => {
         transition={{ duration: 0.15 }}
       >
         <div 
-          className={`rounded-full bg-white transition-all duration-200 ${
+          className={`rounded-full bg-cyan-400 transition-all duration-200 shadow-[0_0_10px_hsl(var(--accent))] ${
             isHovering ? 'w-2 h-2' : 'w-3 h-3'
           }`}
         />
@@ -115,8 +115,8 @@ export const CustomCursor = () => {
         <div 
           className={`rounded-full border-2 transition-all duration-300 ${
             isHovering 
-              ? 'w-12 h-12 border-primary bg-primary/10' 
-              : 'w-8 h-8 border-primary/50'
+              ? 'w-12 h-12 border-cyan-400 bg-cyan-400/10' 
+              : 'w-8 h-8 border-cyan-400/50'
           }`}
         />
       </motion.div>
@@ -132,11 +132,11 @@ export const CustomCursor = () => {
         }}
         animate={{
           scale: isHovering ? 2 : 1,
-          opacity: isVisible ? (isHovering ? 0.4 : 0.2) : 0,
+          opacity: isVisible ? (isHovering ? 0.5 : 0.25) : 0,
         }}
         transition={{ duration: 0.3 }}
       >
-        <div className="w-16 h-16 rounded-full bg-primary/30 blur-xl" />
+        <div className="w-16 h-16 rounded-full bg-cyan-400/40 blur-xl" />
       </motion.div>
 
       {/* Hide default cursor globally */}
