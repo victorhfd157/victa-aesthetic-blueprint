@@ -89,25 +89,25 @@ const Hero = () => {
               <div className="glass rounded-2xl md:rounded-3xl p-4 sm:p-6 md:p-8 shadow-glass float-animation">
               <div className="bg-gradient-primary rounded-2xl p-4 sm:p-6 text-center">
                 <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
-                  <div className="bg-white/10 rounded-lg p-3 sm:p-4">
+                  <div className="bg-white/10 rounded-lg p-3 sm:p-4 transition-all duration-300 hover:scale-110 hover:bg-white/20 cursor-default">
                     <div className="text-xl sm:text-2xl font-bold text-white mb-1">
                       <AnimatedCounter value={95} suffix="%" duration={2} />
                     </div>
                     <div className="text-xs sm:text-sm text-white/70">Automação</div>
                   </div>
-                  <div className="bg-white/10 rounded-lg p-3 sm:p-4">
+                  <div className="bg-white/10 rounded-lg p-3 sm:p-4 transition-all duration-300 hover:scale-110 hover:bg-white/20 cursor-default">
                     <div className="text-xl sm:text-2xl font-bold text-white mb-1">
                       <AnimatedCounter value={3} suffix="x" duration={1.5} />
                     </div>
                     <div className="text-xs sm:text-sm text-white/70">ROI Médio</div>
                   </div>
-                  <div className="bg-white/10 rounded-lg p-3 sm:p-4">
+                  <div className="bg-white/10 rounded-lg p-3 sm:p-4 transition-all duration-300 hover:scale-110 hover:bg-white/20 cursor-default">
                     <div className="text-xl sm:text-2xl font-bold text-white mb-1">
                       <AnimatedCounter value={24} suffix="/7" duration={1.5} />
                     </div>
                     <div className="text-xs sm:text-sm text-white/70">Disponibilidade</div>
                   </div>
-                  <div className="bg-white/10 rounded-lg p-3 sm:p-4">
+                  <div className="bg-white/10 rounded-lg p-3 sm:p-4 transition-all duration-300 hover:scale-110 hover:bg-white/20 cursor-default">
                     <div className="text-xl sm:text-2xl font-bold text-white mb-1">
                       <AnimatedCounter value={60} suffix="%" duration={2} />
                     </div>
