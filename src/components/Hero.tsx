@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { WavyBackground } from '@/components/ui/wavy-background';
 import { GlowingBorder } from '@/components/ui/glowing-border';
-
+import { AnimatedCounter } from '@/components/ui/animated-counter';
 const Hero = () => {
   const scrollToContact = () => {
     const element = document.getElementById('contact');
@@ -79,19 +79,27 @@ const Hero = () => {
               <div className="bg-gradient-primary rounded-2xl p-4 sm:p-6 text-center">
                 <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
                   <div className="bg-white/10 rounded-lg p-3 sm:p-4">
-                    <div className="text-xl sm:text-2xl font-bold text-white mb-1">95%</div>
+                    <div className="text-xl sm:text-2xl font-bold text-white mb-1">
+                      <AnimatedCounter value={95} suffix="%" duration={2} />
+                    </div>
                     <div className="text-xs sm:text-sm text-white/70">Automação</div>
                   </div>
                   <div className="bg-white/10 rounded-lg p-3 sm:p-4">
-                    <div className="text-xl sm:text-2xl font-bold text-white mb-1">3x</div>
+                    <div className="text-xl sm:text-2xl font-bold text-white mb-1">
+                      <AnimatedCounter value={3} suffix="x" duration={1.5} />
+                    </div>
                     <div className="text-xs sm:text-sm text-white/70">ROI Médio</div>
                   </div>
                   <div className="bg-white/10 rounded-lg p-3 sm:p-4">
-                    <div className="text-xl sm:text-2xl font-bold text-white mb-1">24/7</div>
+                    <div className="text-xl sm:text-2xl font-bold text-white mb-1">
+                      <AnimatedCounter value={24} suffix="/7" duration={1.5} />
+                    </div>
                     <div className="text-xs sm:text-sm text-white/70">Disponibilidade</div>
                   </div>
                   <div className="bg-white/10 rounded-lg p-3 sm:p-4">
-                    <div className="text-xl sm:text-2xl font-bold text-white mb-1">60%</div>
+                    <div className="text-xl sm:text-2xl font-bold text-white mb-1">
+                      <AnimatedCounter value={60} suffix="%" duration={2} />
+                    </div>
                     <div className="text-xs sm:text-sm text-white/70">Redução Custos</div>
                   </div>
                 </div>
