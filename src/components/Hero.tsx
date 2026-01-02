@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Sparkles, ChevronDown, Mouse } from 'lucide-react';
 import { WavyBackground } from '@/components/ui/wavy-background';
 import { GlowingBorder } from '@/components/ui/glowing-border';
 import { AnimatedCounter } from '@/components/ui/animated-counter';
@@ -143,6 +143,39 @@ const Hero = () => {
             </motion.div>
           </div>
         </motion.section>
+
+        {/* Scroll Indicator */}
+        <motion.div 
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 cursor-pointer"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.5, duration: 0.6 }}
+          onClick={() => document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' })}
+          style={{ opacity: useTransform(scrollYProgress, [0, 0.3], [1, 0]) }}
+        >
+          <motion.div 
+            className="flex flex-col items-center"
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <Mouse className="w-6 h-6 text-primary/70" />
+            <motion.div
+              className="w-1 h-3 mt-1 rounded-full bg-primary/50"
+              animate={{ 
+                scaleY: [1, 0.5, 1],
+                opacity: [1, 0.5, 1]
+              }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </motion.div>
+          <motion.div
+            animate={{ y: [0, 5, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+          >
+            <ChevronDown className="w-5 h-5 text-primary/50" />
+          </motion.div>
+          <span className="text-xs text-muted-foreground/60 font-medium tracking-wider uppercase">Scroll</span>
+        </motion.div>
       </WavyBackground>
     </div>
   );
