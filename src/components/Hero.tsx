@@ -4,6 +4,7 @@ import { WavyBackground } from '@/components/ui/wavy-background';
 import { GlowingBorder } from '@/components/ui/glowing-border';
 import { AnimatedCounter } from '@/components/ui/animated-counter';
 import { Typewriter } from '@/components/ui/typewriter';
+import { FloatingParticles } from '@/components/ui/floating-particles';
 const Hero = () => {
   const scrollToContact = () => {
     const element = document.getElementById('contact');
@@ -30,7 +31,11 @@ const Hero = () => {
       speed="fast"
       waveOpacity={0.5}
     >
-      <section id="hero" className="container mx-auto px-4 sm:px-6 md:px-8 py-12 md:py-16 lg:py-20">
+      <FloatingParticles 
+        particleCount={20} 
+        colors={['#38bdf8', '#818cf8', '#c084fc', '#22d3ee']} 
+      />
+      <section id="hero" className="container mx-auto px-4 sm:px-6 md:px-8 py-12 md:py-16 lg:py-20 relative z-10">
         <div className="grid lg:grid-cols-2 gap-10 md:gap-12 lg:gap-16 items-center max-w-7xl mx-auto">
           {/* Left Column - Text Content */}
           <div className="text-center lg:text-left">
