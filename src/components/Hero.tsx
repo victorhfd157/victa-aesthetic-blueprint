@@ -42,9 +42,9 @@ const Hero = () => {
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 md:mb-8 leading-tight">
               <span className="gradient-text">Soluções de IA</span>
               <br />
-              <span className="text-white">para </span>
+              <span className="text-white">que geram </span>
               <Typewriter
-                words={['Inteligência Artificial', 'Automação', 'Resultados', 'Crescimento', 'Inovação']}
+                words={['Resultados', 'Automação', 'Crescimento', 'Inovação', 'Eficiência']}
                 className="text-primary"
                 typingSpeed={80}
                 deletingSpeed={50}
