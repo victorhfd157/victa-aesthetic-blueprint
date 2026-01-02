@@ -1,7 +1,8 @@
 import { MessageSquare, Bot, Workflow, Link, Sparkles, ArrowRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { TiltCard } from '@/components/ui/tilt-card';
 import { GlowingBorder } from '@/components/ui/glowing-border';
+import { useRef } from 'react';
 
 const solutions = [
   {
@@ -31,13 +32,30 @@ const solutions = [
 ];
 
 const Solutions = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -100]);
+
   const scrollToContact = () => {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <section id="solutions" className="py-20 md:py-32 relative">
-      <div className="container mx-auto px-4">
+    <section id="solutions" className="py-20 md:py-32 relative overflow-hidden" ref={sectionRef}>
+      {/* Parallax background element */}
+      <motion.div 
+        className="absolute inset-0 pointer-events-none"
+        style={{ y: backgroundY }}
+      >
+        <div className="absolute top-1/4 -left-32 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
+      </motion.div>
+
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div 
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -77,6 +95,7 @@ const Solutions = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
+              style={{ y: useTransform(scrollYProgress, [0, 1], [0, -20 * (index % 2 === 0 ? 1 : -1)]) }}
             >
               <TiltCard className="h-full" tiltMaxAngleX={8} tiltMaxAngleY={8}>
                 <GlowingBorder containerClassName="h-full">
