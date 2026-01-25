@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -21,15 +23,15 @@ All colors MUST be HSL.
     --popover: 0 0% 0%;
     --popover-foreground: 0 0% 100%;
 
-    /* Brand Primary - VICTA Cyan */
-    --primary: 188 100% 42%;
+    /* Brand Primary - VICTA Cyan (More Vibrant) */
+    --primary: 188 100% 50%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 188 100% 60%;
+    --primary-glow: 188 100% 70%;
 
-    /* Brand Secondary - VICTA Purple */
-    --secondary: 263 85% 35%;
+    /* Brand Secondary - VICTA Purple (More Vibrant) */
+    --secondary: 263 90% 45%;
     --secondary-foreground: 0 0% 100%;
-    --secondary-glow: 263 85% 55%;
+    --secondary-glow: 263 90% 65%;
 
     /* Accent - Orange complement */
     --accent: 25 95% 53%;
@@ -57,7 +59,7 @@ All colors MUST be HSL.
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
     --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)));
     --gradient-glow: linear-gradient(135deg, hsl(var(--primary-glow)), hsl(var(--secondary-glow)));
-    
+
     /* Shadows & Glows */
     --shadow-glow: 0 0 40px hsl(var(--primary) / 0.3);
     --shadow-glass: 0 8px 32px hsl(0 0% 0% / 0.3);
@@ -99,6 +101,10 @@ All colors MUST be HSL.
 }
 
 @layer base {
+  .glass-card {
+    contain: content;
+  }
+
   * {
     @apply border-border;
   }
@@ -115,11 +121,13 @@ All colors MUST be HSL.
 
 /* Custom animations and effects */
 @layer utilities {
+
   /* Glassmorphism effect */
   .glass {
     background: hsl(var(--glass-bg));
     backdrop-filter: blur(20px);
     border: 1px solid hsl(var(--glass-border));
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   }
 
   .glass-hover:hover {
@@ -163,9 +171,17 @@ All colors MUST be HSL.
 
 /* Keyframe animations */
 @keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes fadeInUp {
@@ -173,6 +189,7 @@ All colors MUST be HSL.
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -184,6 +201,7 @@ All colors MUST be HSL.
     opacity: 0;
     transform: scale(0.9);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -191,8 +209,15 @@ All colors MUST be HSL.
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 /* Animation classes */
@@ -208,10 +233,22 @@ All colors MUST be HSL.
   animation: float 6s ease-in-out infinite;
 }
 
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+/* Existing scroll animation */
 @keyframes scroll {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }

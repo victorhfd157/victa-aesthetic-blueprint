@@ -46,7 +46,7 @@ const Navbar = () => {
   return (
     <>
       <ScrollProgress />
-      <motion.nav 
+      <motion.nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'glass border-b border-glass-border shadow-glass py-3' : 'bg-transparent py-4'}`}
         initial={{ y: -100 }} animate={{ y: 0 }} transition={{ duration: 0.5 }}
       >
@@ -54,7 +54,7 @@ const Navbar = () => {
           <div className="flex items-center justify-between">
             <motion.button onClick={() => scrollToSection('hero')} className="flex items-center gap-3" whileHover={{ scale: 1.02 }}>
               <img src={victaLogo} alt="Victa Logo" className="h-12 md:h-16 w-auto" />
-              <span className="text-xl font-bold gradient-text hidden sm:block">VICTA AI</span>
+              <span className="text-xl font-display font-bold gradient-text hidden sm:block">VICTA AI</span>
             </motion.button>
 
             <div className="hidden lg:flex items-center">

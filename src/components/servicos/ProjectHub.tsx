@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Presentation, FileDown, Laptop, ArrowRight } from 'lucide-react';
+import { Presentation, FileDown, Laptop, ArrowRight, Globe2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 interface ProjectHubProps {
@@ -39,11 +39,19 @@ const ProjectHub: React.FC<ProjectHubProps> = ({ onViewPresentation }) => {
     },
     {
       title: 'Protótipo LMS',
-      description: 'Explore o protótipo funcional do LMS de idiomas.',
+      description: 'Explore o protótipo funcional da plataforma de aprendizagem.',
       icon: Laptop,
       color: 'from-purple-500 to-purple-700',
       action: () => navigate('/prototipo'),
       buttonText: 'Acessar Protótipo',
+    },
+    {
+      title: 'Hub +Idiomas',
+      description: 'Página de marketing e entrada para a plataforma corporativa com apresentação da empresa.',
+      icon: Globe2,
+      color: 'from-cyan-500 to-blue-600',
+      action: () => navigate('/maisidiomas-hub'),
+      buttonText: 'Ver Hub',
     },
   ];
 
@@ -71,7 +79,7 @@ const ProjectHub: React.FC<ProjectHubProps> = ({ onViewPresentation }) => {
       </motion.div>
 
       {/* Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl w-full">
         {cards.map((card, index) => (
           <motion.div
             key={card.title}
@@ -94,13 +102,26 @@ const ProjectHub: React.FC<ProjectHubProps> = ({ onViewPresentation }) => {
               </p>
 
               {/* Action Button */}
-              <button
+              <motion.button
                 onClick={card.action}
-                className={`w-full py-3 px-4 rounded-xl bg-gradient-to-r ${card.color} text-white font-medium flex items-center justify-center gap-2 hover:opacity-90 transition-opacity group-hover:shadow-lg`}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className={`relative w-full py-3 px-4 rounded-xl bg-gradient-to-r ${card.color} text-white font-medium flex items-center justify-center gap-2 overflow-hidden hover:shadow-lg transition-shadow`}
               >
-                {card.buttonText}
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </button>
+                {/* Shimmer Effect */}
+                <div className="absolute inset-0 -translate-x-full group-hover:animate-shimmer bg-gradient-to-r from-transparent via-white/20 to-transparent z-10" />
+
+                <span className="relative z-20 flex items-center gap-2">
+                  {card.buttonText}
+                  <motion.div
+                    initial={{ x: 0 }}
+                    whileHover={{ x: 4 }}
+                    transition={{ repeat: Infinity, repeatType: "reverse", duration: 0.6 }}
+                  >
+                    <ArrowRight className="w-4 h-4" />
+                  </motion.div>
+                </span>
+              </motion.button>
             </div>
           </motion.div>
         ))}

@@ -1,7 +1,6 @@
 import { MessageSquare, Bot, Workflow, Link, Sparkles, ArrowRight } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { TiltCard } from '@/components/ui/tilt-card';
-import { GlowingBorder } from '@/components/ui/glowing-border';
+import { Button } from '@/components/ui/button';
 import { useRef } from 'react';
 
 const solutions = [
@@ -45,119 +44,145 @@ const Solutions = () => {
   };
 
   return (
-    <section id="solutions" className="py-20 md:py-32 relative overflow-hidden" ref={sectionRef}>
-      {/* Parallax background element */}
-      <motion.div 
-        className="absolute inset-0 pointer-events-none"
+    <section id="solutions" className="py-24 md:py-32 relative overflow-hidden bg-background/50" ref={sectionRef}>
+      {/* Background Elements */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none opacity-30"
         style={{ y: backgroundY }}
       >
-        <div className="absolute top-1/4 -left-32 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] mix-blend-screen" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-secondary/20 rounded-full blur-[120px] mix-blend-screen" />
       </motion.div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <motion.div 
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-        >
-          <motion.div 
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-primary/20 text-sm text-primary mb-6"
-            whileHover={{ scale: 1.05 }}
+      <div className="container mx-auto px-4 relative z-10 max-w-7xl">
+        <div className="text-center mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-sm text-primary font-medium mb-6"
           >
             <Sparkles className="w-4 h-4" />
-            <span>Nossas Soluções</span>
+            <span>Ecossistema Completo</span>
           </motion.div>
-          
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            <span className="gradient-text">Soluções Inteligentes</span>
-            <br />
-            para cada desafio
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Tecnologias avançadas de IA adaptadas às necessidades específicas do seu negócio.
-          </p>
-        </motion.div>
 
-        <motion.div 
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ staggerChildren: 0.1 }}
-        >
-          {solutions.map((solution, index) => (
-            <motion.div 
-              key={index}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              style={{ y: useTransform(scrollYProgress, [0, 1], [0, -20 * (index % 2 === 0 ? 1 : -1)]) }}
-            >
-              <TiltCard className="h-full" tiltMaxAngleX={8} tiltMaxAngleY={8}>
-                <GlowingBorder containerClassName="h-full">
-                  <div className="glass p-6 rounded-xl h-full flex flex-col group">
-                    <motion.div 
-                      className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors"
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                    >
-                      <solution.icon className="w-7 h-7 text-primary" />
-                    </motion.div>
-                    
-                    <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors">
-                      {solution.title}
-                    </h3>
-                    <p className="text-muted-foreground text-sm mb-5 flex-grow">
-                      {solution.description}
-                    </p>
-                    
-                    <div className="flex flex-wrap gap-2">
-                      {solution.features.map((feature, idx) => (
-                        <span 
-                          key={idx}
-                          className="text-xs px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20"
-                        >
-                          {feature}
-                        </span>
-                      ))}
-                    </div>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight"
+          >
+            Soluções para <span className="gradient-text">Escalar seu Negócio</span>
+          </motion.h2>
+        </div>
+
+        {/* Bento Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
+          {/* Main Feature - Large Square (2x2 on desktop) */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="md:col-span-2 md:row-span-2 group relative rounded-3xl overflow-hidden border border-white/10 bg-glass/50 hover:border-primary/50 transition-colors duration-500"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="p-8 h-full flex flex-col justify-between relative z-10">
+              <div>
+                <div className="w-16 h-16 rounded-2xl bg-primary/20 flex items-center justify-center mb-6 overflow-hidden">
+                  <Bot className="w-8 h-8 text-primary" />
+                </div>
+                <h3 className="text-3xl font-display font-medium text-white mb-4">Agentes Autônomos</h3>
+                <p className="text-lg text-muted-foreground max-w-md">
+                  Nossos agentes de IA não apenas respondem, eles executam. Automação de ponta a ponta para vendas, suporte e operações.
+                </p>
+              </div>
+              <div className="space-y-2 mt-8">
+                {['Aprendizado Contínuo', 'Execução de Tarefas', 'Multicanal'].map((feat, i) => (
+                  <div key={i} className="flex items-center gap-3 text-sm text-white/80">
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                    {feat}
                   </div>
-                </GlowingBorder>
-              </TiltCard>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        <motion.div 
-          className="mt-16 text-center"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          <GlowingBorder>
-            <div className="glass p-8 md:p-12 rounded-2xl">
-              <h3 className="text-2xl md:text-3xl font-bold mb-4">
-                Não encontrou o que procura?
-              </h3>
-              <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
-                Desenvolvemos soluções customizadas para desafios únicos. Fale com nosso time.
-              </p>
-              <motion.button
-                onClick={scrollToContact}
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-primary text-primary-foreground font-semibold shadow-glow hover:bg-primary/90 transition-colors group"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Falar com Especialista
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </motion.button>
+                ))}
+              </div>
             </div>
-          </GlowingBorder>
-        </motion.div>
+            {/* Decorative UI Preview */}
+            <div className="absolute right-0 bottom-0 w-1/2 h-3/4 bg-background/80 rounded-tl-3xl border-t border-l border-white/10 p-6 overflow-hidden transform translate-y-4 translate-x-4 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-500">
+              <div className="space-y-4 opacity-50">
+                <div className="h-2 w-1/3 bg-white/20 rounded-full" />
+                <div className="h-2 w-2/3 bg-white/10 rounded-full" />
+                <div className="h-2 w-1/2 bg-white/10 rounded-full" />
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Secondary Feature - Tall (1x2) */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="md:col-span-1 md:row-span-2 group relative rounded-3xl overflow-hidden border border-white/10 bg-glass/50 hover:border-secondary/50 transition-colors duration-500 flex flex-col"
+          >
+            <div className="absolute inset-0 bg-gradient-to-tr from-secondary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="p-8 flex-shrink-0">
+              <div className="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center mb-6">
+                <Workflow className="w-6 h-6 text-secondary" />
+              </div>
+              <h3 className="text-2xl font-display font-medium text-white mb-3">Workflows</h3>
+              <p className="text-muted-foreground">Automatize processos complexos sem escrever uma linha de código.</p>
+            </div>
+
+            {/* Animated Diagram */}
+            <div className="flex-grow relative mt-4 overflow-hidden">
+              <div className="absolute inset-x-8 top-0 bottom-8 border-l-2 border-dashed border-white/10 ml-6">
+                {[1, 2, 3].map((_, i) => (
+                  <div key={i} className="absolute left-[-5px]" style={{ top: `${i * 33}%` }}>
+                    <div className="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse" style={{ animationDelay: `${i * 0.5}s` }} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Small Feature 1 */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="md:col-span-1 group relative rounded-3xl overflow-hidden border border-white/10 bg-glass/50 hover:bg-glass/80 transition-colors duration-500 p-8"
+          >
+            <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center mb-4">
+              <Link className="w-6 h-6 text-accent" />
+            </div>
+            <h3 className="text-xl font-display font-medium text-white mb-2">Integrações</h3>
+            <p className="text-sm text-muted-foreground">Conecte-se com +2000 apps via API.</p>
+          </motion.div>
+
+          {/* Small Feature 2 */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="md:col-span-2 group relative rounded-3xl overflow-hidden border border-white/10 bg-glass/50 hover:bg-glass/80 transition-colors duration-500 p-8 flex items-center justify-between"
+          >
+            <div>
+              <div className="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center mb-4">
+                <MessageSquare className="w-6 h-6 text-green-500" />
+              </div>
+              <h3 className="text-xl font-display font-medium text-white mb-2">Chat Inteligente</h3>
+              <p className="text-sm text-muted-foreground">Suporte 24/7 com NLP avançada.</p>
+            </div>
+            <div className="hidden sm:block">
+              <Button variant="outline" className="rounded-full border-white/10 hover:bg-white/5" onClick={scrollToContact} aria-label="Ver demonstração">
+                Ver Demo <ArrowRight className="ml-2 w-4 h-4" />
+              </Button>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
