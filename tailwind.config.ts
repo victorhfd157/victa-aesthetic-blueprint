@@ -69,6 +69,17 @@ export default {
         'glow': 'var(--shadow-glow)',
         'glass': 'var(--shadow-glass)',
         'card': 'var(--shadow-card)',
+        'card-hover': 'var(--shadow-card-hover)',
+        'button': 'var(--shadow-button)',
+        'button-hover': 'var(--shadow-button-hover)',
+      },
+      transitionDuration: {
+        'quick': '200ms',
+        'smooth': '300ms',
+        'entrance': '600ms',
+      },
+      transitionTimingFunction: {
+        'expo': 'cubic-bezier(0.16, 1, 0.3, 1)',
       },
       borderRadius: {
         lg: "var(--radius)",

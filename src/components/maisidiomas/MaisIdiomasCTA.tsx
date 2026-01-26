@@ -1,4 +1,5 @@
 import { ExternalLink, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const MaisIdiomasCTA = () => {
     return (
@@ -19,14 +20,14 @@ const MaisIdiomasCTA = () => {
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                            <a
-                                href="https://maisidiomas.pt"
+                            <Link
+                                to="/prototipo"
                                 className="group inline-flex items-center bg-white hover:bg-gray-50 text-[#2995CC] px-8 py-4 rounded-xl font-['Open_Sans'] font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 cursor-pointer"
                             >
                                 <ExternalLink className="mr-2 w-5 h-5" />
                                 +Idiomas Platform
                                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                            </a>
+                            </Link>
 
                             <a
                                 href="https://maisidiomas.pt/contactos/"

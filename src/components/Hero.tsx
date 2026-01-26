@@ -56,7 +56,7 @@ const Hero = () => {
         >
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center max-w-7xl mx-auto">
             {/* Left Column - Text Content (7 cols) */}
-            <div className="lg:col-span-7 text-center lg:text-left">
+            <div className="lg:col-span-12 xl:col-span-7 text-center lg:text-left">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -109,7 +109,7 @@ const Hero = () => {
 
             {/* Right Column - Holographic Visual (5 cols) */}
             <motion.div
-              className="lg:col-span-5 relative mt-12 lg:mt-0 perspective-1000"
+              className="lg:col-span-12 xl:col-span-5 relative mt-12 lg:mt-0 perspective-1000"
               initial={{ opacity: 0, scale: 0.9, rotateY: 15 }}
               animate={{ opacity: 1, scale: 1, rotateY: -5 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -189,9 +189,9 @@ const Hero = () => {
               </div>
             </motion.div>
           </div>
-        </motion.section>
-      </WavyBackground>
-    </div>
+        </motion.section >
+      </WavyBackground >
+    </div >
   );
 };
 

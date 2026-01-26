@@ -106,13 +106,14 @@ const Solutions = () => {
                   </div>
                 ))}
               </div>
-            </div>
-            {/* Decorative UI Preview */}
-            <div className="absolute right-0 bottom-0 w-1/2 h-3/4 bg-background/80 rounded-tl-3xl border-t border-l border-white/10 p-6 overflow-hidden transform translate-y-4 translate-x-4 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-500">
-              <div className="space-y-4 opacity-50">
-                <div className="h-2 w-1/3 bg-white/20 rounded-full" />
-                <div className="h-2 w-2/3 bg-white/10 rounded-full" />
-                <div className="h-2 w-1/2 bg-white/10 rounded-full" />
+
+              {/* Decorative UI Preview */}
+              <div className="absolute right-0 bottom-0 w-1/2 h-3/4 bg-background/80 rounded-tl-3xl border-t border-l border-white/10 p-6 overflow-hidden transform translate-y-4 translate-x-4 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-500">
+                <div className="space-y-4 opacity-50">
+                  <div className="h-2 w-1/3 bg-white/20 rounded-full" />
+                  <div className="h-2 w-2/3 bg-white/10 rounded-full" />
+                  <div className="h-2 w-1/2 bg-white/10 rounded-full" />
+                </div>
               </div>
             </div>
           </motion.div>

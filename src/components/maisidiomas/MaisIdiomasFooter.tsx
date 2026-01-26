@@ -1,4 +1,5 @@
 import { Mail, Phone, ExternalLink } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const MaisIdiomasFooter = () => {
     return (
@@ -64,13 +65,13 @@ const MaisIdiomasFooter = () => {
                                 <ExternalLink className="w-4 h-4 group-hover:scale-110 transition-transform" />
                                 <span className="font-['Open_Sans'] text-sm">A nossa APP</span>
                             </a>
-                            <a
-                                href="https://maisidiomas.pt"
+                            <Link
+                                to="/prototipo"
                                 className="flex items-center space-x-2 text-gray-400 hover:text-[#2995CC] transition-colors cursor-pointer group"
                             >
                                 <ExternalLink className="w-4 h-4 group-hover:scale-110 transition-transform" />
                                 <span className="font-['Open_Sans'] text-sm">+Idiomas Platform</span>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>

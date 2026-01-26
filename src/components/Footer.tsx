@@ -6,7 +6,7 @@ import { useRef } from 'react';
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const footerRef = useRef<HTMLElement>(null);
-  
+
   const { scrollYProgress } = useScroll({
     target: footerRef,
     offset: ["start end", "end end"]
@@ -65,17 +65,17 @@ const Footer = () => {
     <footer ref={footerRef} className="bg-background border-t border-muted/20 relative overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0 pointer-events-none">
-        <motion.div 
+        <motion.div
           className="absolute -bottom-32 -left-32 w-64 h-64 bg-primary/5 rounded-full blur-3xl"
-          animate={{ 
+          animate={{
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.5, 0.3]
           }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
-        <motion.div 
+        <motion.div
           className="absolute -bottom-32 -right-32 w-80 h-80 bg-secondary/5 rounded-full blur-3xl"
-          animate={{ 
+          animate={{
             scale: [1.2, 1, 1.2],
             opacity: [0.5, 0.3, 0.5]
           }}
@@ -83,11 +83,11 @@ const Footer = () => {
         />
       </div>
 
-      <motion.div 
+      <motion.div
         className="container mx-auto px-4 sm:px-6 md:px-8 py-8 md:py-12 lg:py-16 max-w-7xl relative z-10"
         style={{ opacity, y }}
       >
-        <motion.div 
+        <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10"
           variants={containerVariants}
           initial="hidden"
@@ -95,21 +95,21 @@ const Footer = () => {
           viewport={{ once: true, margin: "-50px" }}
         >
           {/* Logo and Description */}
-          <motion.div className="sm:col-span-2" variants={itemVariants}>
-            <motion.img 
-              src={victaLogo} 
-              alt="VICTA AI Solutions" 
-              className="h-10 md:h-12 w-auto mb-4 md:mb-6 glow-primary"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 400 }}
-            />
-            <p className="text-muted-foreground mb-6 leading-relaxed max-w-md">
-              Transformamos negócios através de soluções inteligentes em IA. 
+          <motion.div className="sm:col-span-2 text-center sm:text-left" variants={itemVariants}>
+            <motion.div className="flex justify-center sm:justify-start">
+              <img
+                src={victaLogo}
+                alt="VICTA AI Solutions"
+                className="h-10 md:h-12 w-auto mb-4 md:mb-6 glow-primary"
+              />
+            </motion.div>
+            <p className="text-muted-foreground mb-6 leading-relaxed max-w-md mx-auto sm:mx-0">
+              Transformamos negócios através de soluções inteligentes em IA.
               Automatização, conversão e crescimento sustentável para empresas que pensam no futuro.
             </p>
-            <div className="flex space-x-3">
+            <div className="flex space-x-3 justify-center sm:justify-start">
               {socialLinks.map((social, index) => (
-                <motion.a 
+                <motion.a
                   key={social.label}
                   href={social.href}
                   target={social.href.startsWith('http') ? "_blank" : undefined}
@@ -130,18 +130,18 @@ const Footer = () => {
           </motion.div>
 
           {/* Quick Links */}
-          <motion.div variants={itemVariants}>
+          <motion.div variants={itemVariants} className="text-center sm:text-left">
             <h3 className="text-white font-semibold mb-4">Links Rápidos</h3>
             <ul className="space-y-3">
               {quickLinks.map((link, index) => (
-                <motion.li 
+                <motion.li
                   key={link.section}
                   initial={{ opacity: 0, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.4 + index * 0.1 }}
                 >
-                  <motion.button 
+                  <motion.button
                     onClick={() => scrollToSection(link.section)}
                     className="text-muted-foreground hover:text-primary transition-colors relative group"
                     whileHover={{ x: 5 }}
@@ -155,7 +155,7 @@ const Footer = () => {
           </motion.div>
 
           {/* Contact Info */}
-          <motion.div variants={itemVariants}>
+          <motion.div variants={itemVariants} className="text-center sm:text-left">
             <h3 className="text-white font-semibold mb-4">Contato</h3>
             <ul className="space-y-3">
               {[
@@ -163,7 +163,7 @@ const Footer = () => {
                 { label: "Telefone", value: "+351 960 263 588" },
                 { label: "Localização", value: "Porto, Portugal" },
               ].map((item, index) => (
-                <motion.li 
+                <motion.li
                   key={item.label}
                   className="text-muted-foreground"
                   initial={{ opacity: 0, x: -10 }}
@@ -172,7 +172,7 @@ const Footer = () => {
                   transition={{ delay: 0.5 + index * 0.1 }}
                 >
                   <span className="text-white font-medium">{item.label}:</span><br />
-                  <motion.span 
+                  <motion.span
                     className="hover:text-primary transition-colors cursor-default"
                     whileHover={{ x: 3 }}
                   >
@@ -185,8 +185,8 @@ const Footer = () => {
         </motion.div>
 
         {/* Bottom Bar */}
-        <motion.div 
-          className="border-t border-muted/20 mt-8 md:mt-12 pt-6 md:pt-8 flex flex-col md:flex-row justify-between items-center gap-4"
+        <motion.div
+          className="border-t border-muted/20 mt-8 md:mt-12 pt-6 md:pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -195,12 +195,12 @@ const Footer = () => {
           <p className="text-muted-foreground text-sm">
             © {currentYear} VICTA AI Solutions. Todos os direitos reservados.
           </p>
-          
-          <div className="flex space-x-6 mt-4 md:mt-0">
+
+          <div className="flex space-x-6 mt-4 md:mt-0 justify-center md:justify-end">
             {["Política de Privacidade", "Termos de Uso", "LGPD"].map((text, index) => (
-              <motion.a 
+              <motion.a
                 key={text}
-                href="#" 
+                href="#"
                 className="text-muted-foreground hover:text-primary text-sm transition-colors relative group"
                 whileHover={{ y: -2 }}
               >

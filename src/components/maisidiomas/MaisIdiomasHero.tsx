@@ -1,5 +1,6 @@
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const MaisIdiomasHero = () => {
     return (
@@ -70,14 +71,14 @@ const MaisIdiomasHero = () => {
                     transition={{ duration: 0.8, delay: 0.8 }}
                     className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-20"
                 >
-                    <a
-                        href="#plataforma"
+                    <Link
+                        to="/prototipo"
                         className="group relative inline-flex items-center justify-center px-8 py-4 font-['Open_Sans'] font-semibold text-white transition-all duration-200 bg-[#2995CC] rounded-full hover:bg-[#2380b3] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#2995CC] shadow-lg shadow-[#2995CC]/30 hover:shadow-[#2995CC]/50 hover:-translate-y-1 overflow-hidden"
                     >
                         <span className="relative mr-2 z-10">Aceder à Plataforma</span>
                         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform z-10" />
                         <div className="absolute inset-0 h-full w-full scale-0 rounded-full transition-all duration-300 group-hover:scale-100 group-hover:bg-[#1c7ab6]/20"></div>
-                    </a>
+                    </Link>
 
                     <a
                         href="#sobre"
