@@ -1,4 +1,5 @@
 import { Suspense, lazy } from 'react';
+import { Helmet } from 'react-helmet-async';
 import MaisIdiomasNavbar from '@/components/maisidiomas/MaisIdiomasNavbar';
 import MaisIdiomasHero from '@/components/maisidiomas/MaisIdiomasHero';
 import { SectionSkeleton, CardsSkeleton } from '@/components/ui/section-skeleton';
@@ -14,6 +15,12 @@ const MaisIdiomasFooter = lazy(() => import('@/components/maisidiomas/MaisIdioma
 const MaisIdiomasHub = () => {
     return (
         <div className="min-h-screen bg-[#F8FAFC]">
+            <Helmet>
+                <title>Mais Idiomas Hub - Plataforma Corporativa</title>
+                <meta name="description" content="Evolua o aprendizado na sua empresa com a plataforma corporativa da Mais Idiomas. Soluções B2B para treinar sua equipe com foco em negócios." />
+                <meta property="og:title" content="Mais Idiomas Hub - Soluções B2B" />
+                <meta property="og:description" content="A excelência do ensino presencial com a flexibilidade do digital para empresas." />
+            </Helmet>
             <MaisIdiomasNavbar />
             <MaisIdiomasHero />
             <MaisIdiomasMarquee />
