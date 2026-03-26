@@ -43,6 +43,20 @@ const MaisIdiomasRoleCards = () => {
                 'Planeamento estratégico',
             ],
         },
+        {
+            icon: BarChart3,
+            title: 'Plano Marketing',
+            subtitle: 'Estratégia B2B v.1',
+            color: '#2995CC',
+            link: '/landing-mi/index.html',
+            features: [
+                'Análise de mercado corporativo',
+                'Definição de personas B2B',
+                'Estratégia "Speak Global, Act Local"',
+                'Funil de conversão tático',
+                'Posicionamento de marca',
+            ],
+        },
     ];
 
     return (
@@ -70,7 +84,7 @@ const MaisIdiomasRoleCards = () => {
                     </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     {roles.map((role, index) => (
                         <SpotlightCard key={index} role={role} index={index} />
                     ))}
@@ -94,6 +108,55 @@ const SpotlightCard = ({ role, index }: { role: any, index: number }) => {
 
     const Icon = role.icon;
 
+    const SpotlightContent = (
+        <div className="relative h-full flex flex-col p-8">
+            {/* Spotlight Effect Layer */}
+            <div
+                className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100"
+                style={{
+                    background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, ${role.color}15, transparent 40%)`,
+                }}
+            />
+
+            {/* Header */}
+            <div className="mb-8">
+                <div
+                    className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-sm transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3"
+                    style={{ backgroundColor: `${role.color}15` }}
+                >
+                    <Icon className="w-7 h-7" style={{ color: role.color }} />
+                </div>
+                <h3 className="font-['Poppins'] font-bold text-2xl text-[#0F172A] mb-2 group-hover:text-[#2995CC] transition-colors">
+                    {role.title}
+                </h3>
+                <p className="font-['Open_Sans'] text-sm font-medium text-[#617798]">
+                    {role.subtitle}
+                </p>
+            </div>
+
+            {/* Divider */}
+            <div className="h-px w-full bg-gray-100 mb-8 group-hover:bg-gray-200 transition-colors" />
+
+            {/* Features */}
+            <ul className="space-y-4 flex-grow">
+                {role.features.map((feature: string, idx: number) => (
+                    <li key={idx} className="flex items-start space-x-3">
+                        <Check className="w-5 h-5 flex-shrink-0 mt-0.5 transition-colors" style={{ color: role.color }} />
+                        <span className="font-['Open_Sans'] text-sm text-[#617798] group-hover:text-[#0F172A] transition-colors">
+                            {feature}
+                        </span>
+                    </li>
+                ))}
+            </ul>
+
+            {/* Bottom Action Hint */}
+            <div className="mt-8 pt-4 flex items-center text-sm font-semibold opacity-0 -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300" style={{ color: role.color }}>
+                {role.link ? 'Ver Plano' : 'Ver funcionalidades'}
+                <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+            </div>
+        </div>
+    );
+
     return (
         <motion.div
             ref={divRef}
@@ -104,55 +167,15 @@ const SpotlightCard = ({ role, index }: { role: any, index: number }) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.2 }}
-            className="group relative h-full bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-xl transition-all duration-300 hover:shadow-2xl hover:border-transparent cursor-default"
+            className="group relative h-full bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-xl transition-all duration-300 hover:shadow-2xl hover:border-transparent cursor-pointer"
         >
-            {/* Spotlight Effect Layer */}
-            <div
-                className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100"
-                style={{
-                    background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, ${role.color}15, transparent 40%)`,
-                }}
-            />
-
-            {/* Card Content */}
-            <div className="relative h-full flex flex-col p-8">
-                {/* Header */}
-                <div className="mb-8">
-                    <div
-                        className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-sm transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3"
-                        style={{ backgroundColor: `${role.color}15` }}
-                    >
-                        <Icon className="w-7 h-7" style={{ color: role.color }} />
-                    </div>
-                    <h3 className="font-['Poppins'] font-bold text-2xl text-[#0F172A] mb-2 group-hover:text-[#2995CC] transition-colors">
-                        {role.title}
-                    </h3>
-                    <p className="font-['Open_Sans'] text-sm font-medium text-[#617798]">
-                        {role.subtitle}
-                    </p>
-                </div>
-
-                {/* Divider */}
-                <div className="h-px w-full bg-gray-100 mb-8 group-hover:bg-gray-200 transition-colors" />
-
-                {/* Features */}
-                <ul className="space-y-4 flex-grow">
-                    {role.features.map((feature: string, idx: number) => (
-                        <li key={idx} className="flex items-start space-x-3">
-                            <Check className="w-5 h-5 flex-shrink-0 mt-0.5 transition-colors" style={{ color: role.color }} />
-                            <span className="font-['Open_Sans'] text-sm text-[#617798] group-hover:text-[#0F172A] transition-colors">
-                                {feature}
-                            </span>
-                        </li>
-                    ))}
-                </ul>
-
-                {/* Bottom Action Hint */}
-                <div className="mt-8 pt-4 flex items-center text-sm font-semibold opacity-0 -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300" style={{ color: role.color }}>
-                    Ver funcionalidades
-                    <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-                </div>
-            </div>
+            {role.link ? (
+                <a href={role.link} target="_blank" rel="noopener noreferrer" className="block h-full w-full">
+                    {SpotlightContent}
+                </a>
+            ) : (
+                SpotlightContent
+            )}
         </motion.div>
     );
 };

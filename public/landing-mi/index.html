@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="pt-PT" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mais Idiomas - O Parceiro Linguístico Estratégico para Empresas</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js for interactivity (Accordions, Menu) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Google Fonts: Outfit (Alternative to Isidora Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            base: '#020A6F',
+                            light: '#031092',
+                        }
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom utilities */
+        .input-underline {
+            background-color: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 0.75rem 0;
+            width: 100%;
+            transition: all 0.3s ease;
+            border-radius: 0;
+            outline: none;
+            font-size: 16px; /* Prevents iOS auto-zoom */
+        }
+
+        .input-underline:focus {
+            border-bottom-color: white;
+            box-shadow: none;
+        }
+
+        .input-underline::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 300;
+        }
+
+        /* Custom selection color */
+        ::selection {
+            background-color: white;
+            color: #020A6F;
+        }
+
+        /* Hide scrollbar for clean look */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="bg-white text-brand-base font-sans antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-brand-base/95 backdrop-blur-md border-b border-white/10" x-data="{ open: false }">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex justify-between items-center h-20 md:h-24">
+                <div class="flex-shrink-0 flex items-center">
+                    <img src="logo.png" alt="Mais Idiomas" class="h-10 md:h-12 w-auto object-contain">
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-12">
+                    <a href="#beneficios"
+                        class="text-white/80 hover:text-white transition-colors text-sm font-bold uppercase tracking-widest">Soluções</a>
+                    <a href="#diferenciacao"
+                        class="text-white/80 hover:text-white transition-colors text-sm font-bold uppercase tracking-widest">A
+                        Marca</a>
+                    <a href="#contacto"
+                        class="text-white/80 hover:text-white transition-colors text-sm font-bold uppercase tracking-widest">Contacto</a>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button @click="open = !open" class="text-white focus:outline-none">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path x-show="!open" stroke-linecap="square" stroke-linejoin="miter" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                            <path x-show="open" stroke-linecap="square" stroke-linejoin="miter" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" style="display: none;"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div x-show="open" x-transition class="md:hidden bg-brand-base border-t border-white/10 absolute w-full"
+            style="display: none;">
+            <div class="px-6 py-6 space-y-4">
+                <a @click="open = false" href="#beneficios" class="block text-white text-lg font-bold">Soluções</a>
+                <a @click="open = false" href="#diferenciacao" class="block text-white text-lg font-bold">A Marca</a>
+                <a @click="open = false" href="#contacto" class="block text-white text-lg font-bold">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header
+        class="bg-brand-base relative flex flex-col justify-center min-h-[90vh] lg:min-h-screen px-6 lg:px-12 pt-32 overflow-hidden">
+        <!-- Abstract depth layers (monochromatic) -->
+        <div
+            class="absolute top-0 right-0 w-[800px] h-[800px] bg-brand-light rounded-full mix-blend-screen filter blur-[100px] opacity-20 transform translate-x-1/2 -translate-y-1/2 pointer-events-none">
+        </div>
+        <div
+            class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-white rounded-full mix-blend-overlay filter blur-[120px] opacity-5 transform -translate-x-1/4 translate-y-1/4 pointer-events-none">
+        </div>
+
+        <div class="max-w-7xl mx-auto w-full relative z-10">
+            <p
+                class="text-white/70 font-bold uppercase tracking-[0.2em] mb-6 text-xs md:text-base border-b border-white/20 pb-4 inline-block">
+                speak global, act local</p>
+            <h1
+                class="text-white font-black text-[13vw] sm:text-6xl md:text-8xl lg:text-9xl leading-[1.05] md:leading-[0.9] tracking-tighter mb-8 max-w-5xl group">
+                A COMUNICAÇÃO<br>
+                GLOBAL <span class="text-brand-light group-hover:text-white transition-colors duration-700">NÃO PODE
+                    TER</span> FALHAS.
+            </h1>
+            <p class="text-white/90 text-lg md:text-2xl font-light max-w-2xl mb-10 leading-relaxed">
+                Formação à medida para a sua equipa e traduções de precisão absoluta. Elevamos a competitividade do seu
+                negócio no mercado, com rigor, rapidez e acompanhamento tático.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-6">
+                <a href="#contacto"
+                    class="bg-white text-brand-base px-10 py-5 text-lg font-bold hover:bg-brand-light hover:text-white transition-colors duration-300 text-center uppercase tracking-wider rounded-none border-2 border-white hover:border-brand-light">
+                    Pedir proposta
+                </a>
+                <a href="#beneficios"
+                    class="border-b-2 border-white/30 text-white px-0 py-5 text-lg font-bold hover:border-white transition-colors duration-300 text-center uppercase tracking-wider inline-flex items-center justify-center gap-2">
+                    Nossos serviços <span class="text-xl">↓</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Estatisticas (Numeros) -->
+    <section class="bg-brand-light text-white py-12 md:py-16 border-t border-white/10">
+        <div
+            class="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 lg:gap-6 divide-x-0 lg:divide-x divide-white/20">
+            <div class="text-center group overflow-hidden">
+                <p
+                    class="text-5xl md:text-7xl font-black mb-2 tracking-tighter transform transition-transform duration-500 group-hover:scale-110">
+                    +18</p>
+                <p class="text-xs uppercase tracking-widest font-bold text-white/70">Anos Experiência</p>
+            </div>
+            <div class="text-center group overflow-hidden">
+                <p
+                    class="text-5xl md:text-7xl font-black mb-2 tracking-tighter transform transition-transform duration-500 group-hover:scale-110">
+                    +100</p>
+                <p class="text-xs uppercase tracking-widest font-bold text-white/70">Empresas Apoiadas</p>
+            </div>
+            <div class="text-center group overflow-hidden">
+                <p
+                    class="text-5xl md:text-7xl font-black mb-2 tracking-tighter transform transition-transform duration-500 group-hover:scale-110">
+                    +10k</p>
+                <p class="text-xs uppercase tracking-widest font-bold text-white/70">Horas de Formação</p>
+            </div>
+            <div class="text-center group overflow-hidden">
+                <p
+                    class="text-5xl md:text-7xl font-black mb-2 tracking-tighter transform transition-transform duration-500 group-hover:scale-110">
+                    Zero</p>
+                <p class="text-xs uppercase tracking-widest font-bold text-white/70">Margem de Erro</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof (Text Logos with Hover) -->
+    <section class="bg-white py-24 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <p class="text-xs font-bold uppercase tracking-widest text-brand-base/50 mb-16 text-center">A confiança de
+                quem lidera o mercado</p>
+            <div class="flex flex-wrap justify-center sm:justify-between items-center gap-6 md:gap-10 lg:gap-20">
+                <!-- Sonae -->
+                <div
+                    class="group relative cursor-pointer text-brand-base/30 hover:text-brand-base transition-colors duration-500 py-4">
+                    <div class="text-3xl lg:text-4xl font-black tracking-tighter">SONAE</div>
+                    <div
+                        class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-hover:-translate-y-2 transition-all duration-300 bg-brand-light text-white text-xs font-bold px-4 py-2 whitespace-nowrap pointer-events-none shadow-xl z-20">
+                        Cliente há +10 anos
+                    </div>
+                </div>
+                <!-- Finerge -->
+                <div
+                    class="group relative cursor-pointer text-brand-base/30 hover:text-brand-base transition-colors duration-500 py-4">
+                    <div class="text-3xl lg:text-4xl font-bold tracking-tight">FINERGE</div>
+                    <div
+                        class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-hover:-translate-y-2 transition-all duration-300 bg-brand-light text-white text-xs font-bold px-4 py-2 whitespace-nowrap pointer-events-none shadow-xl z-20">
+                        Cliente há 5 anos
+                    </div>
+                </div>
+                <!-- Banco Finantia -->
+                <div
+                    class="group relative cursor-pointer text-brand-base/30 hover:text-brand-base transition-colors duration-500 py-4 flex items-center gap-2">
+                    <div class="w-6 h-6 border-[3px] border-current rounded-full"></div>
+                    <div class="text-2xl lg:text-3xl font-black tracking-tight">FINANTIA</div>
+                    <div
+                        class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-hover:-translate-y-2 transition-all duration-300 bg-brand-light text-white text-xs font-bold px-4 py-2 whitespace-nowrap pointer-events-none shadow-xl z-20">
+                        Cliente há 8 anos
+                    </div>
+                </div>
+                <!-- HB Fuller -->
+                <div
+                    class="group relative cursor-pointer text-brand-base/30 hover:text-brand-base transition-colors duration-500 py-4">
+                    <div class="text-2xl lg:text-3xl font-bold tracking-tight">H.B. FULLER</div>
+                    <div
+                        class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-hover:-translate-y-2 transition-all duration-300 bg-brand-light text-white text-xs font-bold px-4 py-2 whitespace-nowrap pointer-events-none shadow-xl z-20">
+                        Cliente há 12 anos
+                    </div>
+                </div>
+                <!-- Voltalia -->
+                <div
+                    class="group relative cursor-pointer text-brand-base/30 hover:text-brand-light transition-colors duration-500 py-4">
+                    <div class="text-3xl lg:text-4xl font-black tracking-tighter italic lowercase">voltalia</div>
+                    <div
+                        class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-hover:-translate-y-2 transition-all duration-300 bg-brand-light text-white text-xs font-bold px-4 py-2 whitespace-nowrap pointer-events-none shadow-xl z-20">
+                        Cliente há 4 anos
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefícios -->
+    <section id="beneficios" class="py-24 lg:py-40 bg-white">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8">
+                <div class="lg:col-span-5 relative">
+                    <h2 class="text-4xl md:text-7xl font-black leading-[1.1] md:leading-none tracking-tighter sticky top-24 md:top-32">
+                        PARA NÓS,<br>
+                        CADA PALAVRA É UM <span class="text-brand-light">ATIVO DE NEGÓCIO.</span>
+                    </h2>
+                </div>
+                <div class="lg:col-span-1"></div>
+                <div class="lg:col-span-6 space-y-20 pt-8 lg:pt-0">
+                    <div class="group cursor-pointer">
+                        <div
+                            class="h-1 w-full bg-brand-base mb-6 transform origin-left transition-transform duration-500 scale-x-50 group-hover:scale-x-100">
+                        </div>
+                        <h3 class="text-3xl font-bold mb-4">Formação Imersiva e Adaptada</h3>
+                        <p class="text-lg text-brand-base/70 font-light leading-relaxed">Não há currículos genéricos. A
+                            nossa formação ajusta-se aos processos, vocabulário técnico e ritmo da sua operação.
+                            Desenhamos programas focados estritamente na vivência corporativa real da sua equipa.</p>
+                    </div>
+                    <div class="group cursor-pointer">
+                        <div
+                            class="h-1 w-full bg-brand-base mb-6 transform origin-left transition-transform duration-500 scale-x-50 group-hover:scale-x-100">
+                        </div>
+                        <h3 class="text-3xl font-bold mb-4">Tradução com Zero Margem de Erro</h3>
+                        <p class="text-lg text-brand-base/70 font-light leading-relaxed">Prazos apertados exigem rigor
+                            extremo. Respondemos com a urgência que o seu negócio dita. Todos os documentos técnicos,
+                            jurídicos e financeiros são processados por especialistas nativos com revisão rigorosa.</p>
+                    </div>
+                    <div class="group cursor-pointer">
+                        <div
+                            class="h-1 w-full bg-brand-base mb-6 transform origin-left transition-transform duration-500 scale-x-50 group-hover:scale-x-100">
+                        </div>
+                        <h3 class="text-3xl font-bold mb-4">Acompanhamento Tático</h3>
+                        <p class="text-lg text-brand-base/70 font-light leading-relaxed">Um gestor de projeto
+                            completamente focado na sua organização. Ajustamos rotas ao longo da formação, avaliamos o
+                            progresso estrutural e entregamos relatórios analíticos claros para as vossas chefias ou HR.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Secção Serviços Accordion (Deep Blue Background) -->
+    <section class="bg-brand-light text-white py-24 lg:py-40">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <h2 class="text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-12 border-b border-white/20 pb-4">
+                Soluções Linguísticas Corporate</h2>
+
+            <div class="border-t border-white/20" x-data="{ expanded: null }">
+
+                <!-- Item 1 -->
+                <div class="border-b border-white/20">
+                    <button @click="expanded = expanded === 1 ? null : 1"
+                        class="w-full text-left py-8 md:py-12 flex justify-between items-center group focus:outline-none">
+                        <span
+                            class="text-3xl md:text-5xl font-bold tracking-tight group-hover:px-4 transition-all duration-300">Formação
+                            de Línguas para Empresas</span>
+                        <span class="text-3xl transition-transform duration-300"
+                            :class="expanded === 1 ? 'rotate-45' : ''">+</span>
+                    </button>
+                    <div x-show="expanded === 1" x-collapse x-transition.duration.300ms
+                        class="pb-12 px-4 md:px-8 text-xl text-white/80 font-light" style="display: none;">
+                        Aulas focadas na prática e fluência, desenhadas para as necessidades das suas equipas. Formatos
+                        in-company ou virtuais geridos num portal corporativo próprio.
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="border-b border-white/20">
+                    <button @click="expanded = expanded === 2 ? null : 2"
+                        class="w-full text-left py-8 md:py-12 flex justify-between items-center group focus:outline-none">
+                        <span
+                            class="text-3xl md:text-5xl font-bold tracking-tight group-hover:px-4 transition-all duration-300">Inglês
+                            Empresarial</span>
+                        <span class="text-3xl transition-transform duration-300"
+                            :class="expanded === 2 ? 'rotate-45' : ''">+</span>
+                    </button>
+                    <div x-show="expanded === 2" x-collapse x-transition.duration.300ms
+                        class="pb-12 px-4 md:px-8 text-xl text-white/80 font-light" style="display: none;">
+                        Preparação intensiva para apresentações comerciais, negociações sensíveis, elaboração de emails
+                        profissionais e interação global com stakeholders internacionais de alto nível.
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="border-b border-white/20">
+                    <button @click="expanded = expanded === 3 ? null : 3"
+                        class="w-full text-left py-8 md:py-12 flex justify-between items-center group focus:outline-none">
+                        <span
+                            class="text-3xl md:text-5xl font-bold tracking-tight group-hover:px-4 transition-all duration-300">Tradução
+                            Profissional</span>
+                        <span class="text-3xl transition-transform duration-300"
+                            :class="expanded === 3 ? 'rotate-45' : ''">+</span>
+                    </button>
+                    <div x-show="expanded === 3" x-collapse x-transition.duration.300ms
+                        class="pb-12 px-4 md:px-8 text-xl text-white/80 font-light" style="display: none;">
+                        Tradutores nativos especializados e criteriosamente selecionados para áreas específicas:
+                        engenharia, medicina, jurídica, tecnológica e financeira. Garantimos coesão terminológica
+                        intra-empresa.
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="border-b border-white/20">
+                    <button @click="expanded = expanded === 4 ? null : 4"
+                        class="w-full text-left py-8 md:py-12 flex justify-between items-center group focus:outline-none">
+                        <span
+                            class="text-3xl md:text-5xl font-bold tracking-tight group-hover:px-4 transition-all duration-300">Tradução
+                            Urgente</span>
+                        <span class="text-3xl transition-transform duration-300"
+                            :class="expanded === 4 ? 'rotate-45' : ''">+</span>
+                    </button>
+                    <div x-show="expanded === 4" x-collapse x-transition.duration.300ms
+                        class="pb-12 px-4 md:px-8 text-xl text-white/80 font-light" style="display: none;">
+                        Resposta imediata para quando o seu negócio não pode esperar. Entrega de projetos expressos sem
+                        sacrificar um único milímetro na precisão estrutural ou terminológica do documento.
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="border-b border-white/20">
+                    <button @click="expanded = expanded === 5 ? null : 5"
+                        class="w-full text-left py-8 md:py-12 flex justify-between items-center group focus:outline-none">
+                        <span
+                            class="text-3xl md:text-5xl font-bold tracking-tight group-hover:px-4 transition-all duration-300">Certificação
+                            Linguística</span>
+                        <span class="text-3xl transition-transform duration-300"
+                            :class="expanded === 5 ? 'rotate-45' : ''">+</span>
+                    </button>
+                    <div x-show="expanded === 5" x-collapse x-transition.duration.300ms
+                        class="pb-12 px-4 md:px-8 text-xl text-white/80 font-light" style="display: none;">
+                        Avaliação objetiva e fidedigna do nível de proficiência linguística dos seus quadros atuais ou
+                        no processo de aquisição de talento (recrutamento), com framework internacional do QECR.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- O Nosso Método Process Timeline -->
+    <section class="bg-gray-50 py-24 lg:py-40 border-t border-gray-100" x-data="{ activeStep: 1 }">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="mb-16 md:mb-24 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+                <div>
+                    <h2 class="text-4xl md:text-6xl font-black tracking-tighter text-brand-base uppercase relative inline-block">
+                        O Nosso Método
+                        <div class="absolute -bottom-4 md:-bottom-6 left-0 w-24 h-1.5 bg-brand-light"></div>
+                    </h2>
+                </div>
+                <div class="max-w-md">
+                    <p class="text-xs md:text-sm font-bold uppercase tracking-widest text-brand-base/50 mb-2">Processo Tático</p>
+                    <h3 class="text-base md:text-lg font-light text-brand-base/80">Um fluxo orgânico e de zero fricção para rápida integração das nossas soluções na sua estrutura empresarial.</h3>
+                </div>
+            </div>
+            
+            <div class="relative pt-4 md:pt-12">
+                <!-- Continuous Line (Desktop) -->
+                <div class="hidden md:block absolute top-[4.75rem] left-[12.5%] right-[12.5%] h-[2px] bg-brand-base/10 z-0">
+                    <div class="absolute top-0 left-0 h-full bg-brand-light transition-all duration-700 ease-in-out" 
+                         :style="'width: ' + ((activeStep - 1) * 33.333) + '%'"></div>
+                </div>
+
+                <!-- Continuous Line (Mobile) -->
+                <div class="md:hidden absolute left-[27px] top-[4rem] bottom-[4rem] w-[2px] bg-brand-base/10 z-0">
+                    <div class="absolute top-0 left-0 w-full bg-brand-light transition-all duration-700 ease-in-out" 
+                         :style="'height: ' + ((activeStep - 1) * 33.333) + '%'"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 relative z-10">
+                    
+                    <!-- Step 1 -->
+                    <div class="cursor-pointer group" @mouseenter="activeStep = 1" @click="activeStep = 1">
+                        <div class="flex md:block items-start gap-6 md:gap-0">
+                            <!-- Node -->
+                            <div class="flex-shrink-0 w-14 h-14 rounded-full flex items-center justify-center font-bold text-xl md:mb-8 transition-all duration-500 border-[3px] shadow-sm relative z-10 mx-0 md:mx-auto"
+                                 :class="activeStep >= 1 ? 'bg-brand-light text-white border-brand-light shadow-brand-light/30 shadow-lg scale-110' : 'bg-white border-brand-base/20 text-brand-base/40 group-hover:border-brand-light/50'">
+                                1
+                            </div>
+                            <!-- Content -->
+                            <div class="pt-2 md:pt-0 transition-all duration-500" :class="activeStep === 1 ? 'opacity-100 translate-y-0' : 'opacity-60 md:translate-y-2 group-hover:opacity-100'">
+                                <h3 class="text-2xl font-bold mb-3 md:text-center transition-colors duration-300" :class="activeStep >= 1 ? 'text-brand-base' : 'text-brand-base/50'">Auditoria</h3>
+                                <p class="text-brand-base/70 font-light leading-relaxed text-sm md:text-base md:text-center">Mapeamento meticuloso do jargão técnico da vossa indústria e avaliação profunda dos objetivos táticos da equipa.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="cursor-pointer group" @mouseenter="activeStep = 2" @click="activeStep = 2">
+                        <div class="flex md:block items-start gap-6 md:gap-0">
+                            <!-- Node -->
+                            <div class="flex-shrink-0 w-14 h-14 rounded-full flex items-center justify-center font-bold text-xl md:mb-8 transition-all duration-500 border-[3px] shadow-sm relative z-10 mx-0 md:mx-auto"
+                                 :class="activeStep >= 2 ? 'bg-brand-light text-white border-brand-light shadow-brand-light/30 shadow-lg scale-110' : 'bg-white border-brand-base/20 text-brand-base/40 group-hover:border-brand-light/50 group-hover:text-brand-light'">
+                                2
+                            </div>
+                            <!-- Content -->
+                            <div class="pt-2 md:pt-0 transition-all duration-500" :class="activeStep === 2 ? 'opacity-100 translate-y-0' : 'opacity-60 md:translate-y-2 group-hover:opacity-100'">
+                                <h3 class="text-2xl font-bold mb-3 md:text-center transition-colors duration-300" :class="activeStep >= 2 ? 'text-brand-base' : 'text-brand-base/50'">Setup Corporativo</h3>
+                                <p class="text-brand-base/70 font-light leading-relaxed text-sm md:text-base md:text-center">Desenho do currículo modular corporativo ou alocação do nosso linguista especializado na vossa área.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="cursor-pointer group" @mouseenter="activeStep = 3" @click="activeStep = 3">
+                        <div class="flex md:block items-start gap-6 md:gap-0">
+                            <!-- Node -->
+                            <div class="flex-shrink-0 w-14 h-14 rounded-full flex items-center justify-center font-bold text-xl md:mb-8 transition-all duration-500 border-[3px] shadow-sm relative z-10 mx-0 md:mx-auto"
+                                 :class="activeStep >= 3 ? 'bg-brand-light text-white border-brand-light shadow-brand-light/30 shadow-lg scale-110' : 'bg-white border-brand-base/20 text-brand-base/40 group-hover:border-brand-light/50 group-hover:text-brand-light'">
+                                3
+                            </div>
+                            <!-- Content -->
+                            <div class="pt-2 md:pt-0 transition-all duration-500" :class="activeStep === 3 ? 'opacity-100 translate-y-0' : 'opacity-60 md:translate-y-2 group-hover:opacity-100'">
+                                <h3 class="text-2xl font-bold mb-3 md:text-center transition-colors duration-300" :class="activeStep >= 3 ? 'text-brand-base' : 'text-brand-base/50'">Execução Imersiva</h3>
+                                <p class="text-brand-base/70 font-light leading-relaxed text-sm md:text-base md:text-center">Formação on-the-job de alto rendimento corporativo ou rigoroso processamento e revisão da tradução requerida.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Step 4 -->
+                    <div class="cursor-pointer group" @mouseenter="activeStep = 4" @click="activeStep = 4">
+                        <div class="flex md:block items-start gap-6 md:gap-0">
+                            <!-- Node -->
+                            <div class="flex-shrink-0 w-14 h-14 rounded-full flex items-center justify-center font-bold text-xl md:mb-8 transition-all duration-500 border-[3px] shadow-sm relative z-10 mx-0 md:mx-auto"
+                                 :class="activeStep >= 4 ? 'bg-brand-light text-white border-brand-light shadow-brand-light/30 shadow-lg scale-110' : 'bg-white border-brand-base/20 text-brand-base/40 group-hover:border-brand-light/50 group-hover:text-brand-light'">
+                                4
+                            </div>
+                            <!-- Content -->
+                            <div class="pt-2 md:pt-0 transition-all duration-500" :class="activeStep === 4 ? 'opacity-100 translate-y-0' : 'opacity-60 md:translate-y-2 group-hover:opacity-100'">
+                                <h3 class="text-2xl font-bold mb-3 md:text-center transition-colors duration-300" :class="activeStep >= 4 ? 'text-brand-base' : 'text-brand-base/50'">Reporting</h3>
+                                <p class="text-brand-base/70 font-light leading-relaxed text-sm md:text-base md:text-center">Avaliação contínua de progresso corporativo com envio pontual de dashboards analíticos aos gestores HR.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Porque escolher Mais Idiomas (Diferenciacao) -->
+    <section id="diferenciacao" class="bg-white py-24 lg:py-40 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="mb-14 md:mb-20">
+                <h2 class="text-5xl md:text-8xl font-black tracking-tighter text-brand-base relative z-10 leading-[1.05] md:leading-none">O SEU
+                    HUB<br>ESTRATÉGICO.</h2>
+                <h3 class="text-lg md:text-3xl font-light text-brand-base/60 mt-4 md:mt-6 max-w-2xl">Não somos apenas uma
+                    escola. Assumimos a responsabilidade total sobre o desempenho linguístico corporativo da vossa
+                    empresa.</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24">
+                <div
+                    class="bg-gray-50 p-12 hover:bg-brand-base hover:text-white transition-colors duration-500 group border border-gray-100">
+                    <p class="text-6xl font-black mb-6 text-brand-light group-hover:text-white transition-colors">01.
+                    </p>
+                    <h4 class="text-2xl font-bold mb-4 uppercase tracking-wider">Especialização B2B</h4>
+                    <p class="font-light text-lg">Mais de duas décadas a resolver os complexos desafios de comunicação
+                        do tecido empresarial. O nosso mindset é 100% corporativo.</p>
+                </div>
+                <div
+                    class="bg-gray-50 p-12 hover:bg-brand-base hover:text-white transition-colors duration-500 group border border-gray-100 mt-0 md:mt-16">
+                    <p class="text-6xl font-black mb-6 text-brand-light group-hover:text-white transition-colors">02.
+                    </p>
+                    <h4 class="text-2xl font-bold mb-4 uppercase tracking-wider">Rapidez Implacável</h4>
+                    <p class="font-light text-lg">O mercado não espera. As nossas respostas a pedidos de tradução,
+                        urgências ou reestruturações formativas acompanham o ritmo vertiginoso da sua gestão.</p>
+                </div>
+                <div
+                    class="bg-gray-50 p-12 hover:bg-brand-base hover:text-white transition-colors duration-500 group border border-gray-100">
+                    <p class="text-6xl font-black mb-6 text-brand-light group-hover:text-white transition-colors">03.
+                    </p>
+                    <h4 class="text-2xl font-bold mb-4 uppercase tracking-wider">Equipa de Elite</h4>
+                    <p class="font-light text-lg">Trabalhamos exclusivamente com profissionais experientes, nativos e,
+                        crucialmente, que detêm um sólido background e vivência no mundo dos negócios.</p>
+                </div>
+                <div
+                    class="bg-gray-50 p-12 hover:bg-brand-base hover:text-white transition-colors duration-500 group border border-gray-100 mt-0 md:mt-16">
+                    <p class="text-6xl font-black mb-6 text-brand-light group-hover:text-white transition-colors">04.
+                    </p>
+                    <h4 class="text-2xl font-bold mb-4 uppercase tracking-wider">Zero Fricção</h4>
+                    <p class="font-light text-lg">Da auditoria inicial, calendarização, até à entrega final das
+                        traduções e envio de dashboards de reporting. Processos otimizados para não gastar o tempo do
+                        vosso staff.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="bg-white py-24 border-t border-gray-100">
+        <div class="max-w-4xl mx-auto px-6 lg:px-12" x-data="{ expanded: null }">
+            <h2 class="text-4xl font-black mb-16 tracking-tight text-center uppercase">Perguntas Frequentes</h2>
+
+            <div class="border-t-2 border-brand-base">
+                <!-- FAQ 1 -->
+                <div class="border-b-2 border-brand-base">
+                    <button @click="expanded = expanded === 1 ? null : 1"
+                        class="w-full text-left py-6 flex justify-between items-center focus:outline-none">
+                        <span class="text-xl md:text-2xl font-bold pr-8">A formação é personalizada para a realidade de
+                            cada empresa?</span>
+                        <span class="text-2xl font-black text-brand-light transition-transform duration-300"
+                            :class="expanded === 1 ? 'rotate-45' : ''">+</span>
+                    </button>
+                    <div x-show="expanded === 1" x-collapse x-transition.duration.300ms
+                        class="pb-8 text-lg font-light text-brand-base/80" style="display: none;">
+                        Sim. Avaliamos o contexto do seu setor de atuação, os objetivos táticos da equipa envolvida e o
+                        jargão técnico imperativo para desenhar um programa 100% focado na vivência e no dia a dia da
+                        empresa.
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="border-b-2 border-brand-base">
+                    <button @click="expanded = expanded === 2 ? null : 2"
+                        class="w-full text-left py-6 flex justify-between items-center focus:outline-none">
+                        <span class="text-xl md:text-2xl font-bold pr-8">Trabalham com diferentes idiomas além do
+                            Inglês?</span>
+                        <span class="text-2xl font-black text-brand-light transition-transform duration-300"
+                            :class="expanded === 2 ? 'rotate-45' : ''">+</span>
+                    </button>
+                    <div x-show="expanded === 2" x-collapse x-transition.duration.300ms
+                        class="pb-8 text-lg font-light text-brand-base/80" style="display: none;">
+                        Absolutamente. Cobrimos todas as principais línguas aplicadas ao mundo dos negócios (incluindo
+                        Espanhol, Francês, Alemão e Mandarim) com a alocação rigorosa de profissionais especializados.
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="border-b-2 border-brand-base">
+                    <button @click="expanded = expanded === 3 ? null : 3"
+                        class="w-full text-left py-6 flex justify-between items-center focus:outline-none">
+                        <span class="text-xl md:text-2xl font-bold pr-8">A formação é estritamente presencial ou também
+                            online?</span>
+                        <span class="text-2xl font-black text-brand-light transition-transform duration-300"
+                            :class="expanded === 3 ? 'rotate-45' : ''">+</span>
+                    </button>
+                    <div x-show="expanded === 3" x-collapse x-transition.duration.300ms
+                        class="pb-8 text-lg font-light text-brand-base/80" style="display: none;">
+                        Inteiramente flexível. O formato é ditado pela conveniência logística da sua empresa: regime
+                        in-company (nas vossas instalações físicas), online num modelo live-training interativo, ou
+                        formatos mistos (blended).
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="border-b-2 border-brand-base">
+                    <button @click="expanded = expanded === 4 ? null : 4"
+                        class="w-full text-left py-6 flex justify-between items-center focus:outline-none">
+                        <span class="text-xl md:text-2xl font-bold pr-8">Como se processa a adjudicação do serviço de
+                            tradução?</span>
+                        <span class="text-2xl font-black text-brand-light transition-transform duration-300"
+                            :class="expanded === 4 ? 'rotate-45' : ''">+</span>
+                    </button>
+                    <div x-show="expanded === 4" x-collapse x-transition.duration.300ms
+                        class="pb-8 text-lg font-light text-brand-base/80" style="display: none;">
+                        De forma extremamente ágil: basta o envio seguro da documentação. Efetuamos uma análise célere à
+                        tecnicidade e volume do texto, enviamo-vos o orçamento fechado de imediato e, mediante
+                        aprovação, alocamos o projeto à equipa especializada correspondente.
+                    </div>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="border-b-2 border-brand-base">
+                    <button @click="expanded = expanded === 5 ? null : 5"
+                        class="w-full text-left py-6 flex justify-between items-center focus:outline-none">
+                        <span class="text-xl md:text-2xl font-bold pr-8">Qual o vosso tempo de resposta (SLA) perante um
+                            pedido corporativo?</span>
+                        <span class="text-2xl font-black text-brand-light transition-transform duration-300"
+                            :class="expanded === 5 ? 'rotate-45' : ''">+</span>
+                    </button>
+                    <div x-show="expanded === 5" x-collapse x-transition.duration.300ms
+                        class="pb-8 text-lg font-light text-brand-base/80" style="display: none;">
+                        A rapidez rigorosa é o nosso standard. Pedidos comerciais e orçamentais corporativos não ficam
+                        pendentes; são processados e respondidos habitualmente dentro de poucas horas úteis.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulário & Footer (Contacto) -->
+    <section id="contacto" class="bg-brand-base text-white py-24 lg:py-40">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-20">
+            <div>
+                <h2 class="text-4xl md:text-7xl font-black leading-[1] md:leading-[0.9] tracking-tighter mb-8 max-w-lg">
+                    A SUA PRÓXIMA NEGOCIAÇÃO GLOBAL<br>
+                    <span class="text-brand-light">COMEÇA AQUI.</span>
+                </h2>
+                <p class="text-xl font-light text-white/80 max-w-lg mb-12">Receba uma proposta clara, ágil e desenhada
+                    milimetricamente para o alcance da sua realidade empresarial.</p>
+
+                <div class="space-y-4">
+                    <p class="font-bold uppercase tracking-widest text-sm flex items-center gap-4">
+                        <span class="w-8 h-[1px] bg-white inline-block"></span>
+                        geral@maisidiomas.pt
+                    </p>
+                    <p class="font-bold uppercase tracking-widest text-sm flex items-center gap-4">
+                        <span class="w-8 h-[1px] bg-white inline-block"></span>
+                        +351 915 285 974
+                    </p>
+                    <p class="font-bold uppercase tracking-widest text-sm flex items-center gap-4 mt-8">
+                        <span class="w-8 h-[1px] bg-white inline-block"></span>
+                        Rua do Passeio Alegre, nº 954<br>4150-570 Porto - Portugal
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-brand-base border border-white/10 p-2 lg:p-12 relative">
+                <!-- Abstract corner element -->
+                <div
+                    class="absolute -top-4 -right-4 w-12 h-12 border-t-2 border-r-2 border-brand-light pointer-events-none hidden lg:block">
+                </div>
+
+                <form class="space-y-8"
+                    @submit.prevent="alert('O formulário seria submetido aqui. Esta é uma versão de demonstração estática.')">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <input type="text" id="nome" placeholder="Seu Nome completo" class="input-underline"
+                                required>
+                        </div>
+                        <div>
+                            <input type="text" id="empresa" placeholder="Nome da Organização" class="input-underline"
+                                required>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <input type="email" id="email" placeholder="E-mail corporativo" class="input-underline"
+                                required>
+                        </div>
+                        <div>
+                            <input type="tel" id="telefone" placeholder="Contacto telefónico" class="input-underline"
+                                required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <select id="servico" class="input-underline appearance-none bg-brand-base/50" required>
+                            <option value="" disabled selected>Selecionar Serviço de Interesse</option>
+                            <option value="formacao" class="text-brand-base bg-white">Formação de Línguas para Equipas
+                            </option>
+                            <option value="traducao" class="text-brand-base bg-white">Tradução Profissional
+                                Especializada</option>
+                            <option value="ambos" class="text-brand-base bg-white">Ambos os serviços</option>
+                            <option value="outro" class="text-brand-base bg-white">Outro assunto</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <textarea id="mensagem" rows="3"
+                            placeholder="Em que podemos ajudar a comunicação da sua empresa?"
+                            class="input-underline resize-none"></textarea>
+                    </div>
+
+                    <div class="flex items-start gap-4 pt-4">
+                        <input type="checkbox" id="rgpd"
+                            class="mt-1 w-5 h-5 bg-transparent border-white text-brand-base focus:ring-brand-base"
+                            required>
+                        <label for="rgpd" class="text-sm font-light text-white/70">Compreendo e aceito que os dados
+                            fornecidos serão recolhidos para efeitos de contacto comercial, respeitando as condições
+                            gerais e obrigações de RGPD da Mais Idiomas.</label>
+                    </div>
+
+                    <div class="pt-8">
+                        <button type="submit"
+                            class="w-full bg-white text-brand-base px-8 py-5 text-xl font-bold hover:bg-brand-light hover:text-white transition-colors duration-300 uppercase tracking-widest border-2 border-white hover:border-brand-light group flex justify-center items-center gap-4">
+                            Pedir Proposta Comercial
+                            <span class="group-hover:translate-x-2 transition-transform duration-300">→</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div
+            class="max-w-7xl mx-auto px-6 lg:px-12 mt-32 border-t border-white/10 pt-12 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <img src="logo.png" alt="Mais Idiomas" class="h-6 w-auto object-contain opacity-50">
+            </div>
+            <p class="text-white/40 text-sm font-light">© 2026 Mais Idiomas Portugal. Speak global, act local.</p>
+        </div>
+    </section>
+
+</body>
+
+</html>
