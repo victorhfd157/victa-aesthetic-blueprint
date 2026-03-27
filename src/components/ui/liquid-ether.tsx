@@ -40,10 +40,10 @@ export const LiquidEther = ({
     // Renderer setup
     const renderer = new THREE.WebGLRenderer({ 
       alpha: true, 
-      antialias: true 
+      antialias: false // Better for performance on blurry backgrounds
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // Capped at 1.5
     containerRef.current.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
