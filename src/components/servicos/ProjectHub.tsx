@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Presentation, FileDown, Laptop, ArrowRight, Globe2, Target } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,6 +9,7 @@ interface ProjectHubProps {
 
 const ProjectHub: React.FC<ProjectHubProps> = ({ onViewPresentation }) => {
   const navigate = useNavigate();
+  const [showMarketingModal, setShowMarketingModal] = useState(false);
 
   const handleDownloadProposta = () => {
     // Download the Word document
@@ -58,7 +59,7 @@ const ProjectHub: React.FC<ProjectHubProps> = ({ onViewPresentation }) => {
       description: 'Landing page B2B interativa focada na captação e conversão de clientes corporativos.',
       icon: Target,
       color: 'from-orange-500 to-red-600',
-      action: () => window.open('/landing-mi/index.html', '_blank'),
+      action: () => setShowMarketingModal(true),
       buttonText: 'Ver Plano',
     },
   ];
@@ -144,6 +145,80 @@ const ProjectHub: React.FC<ProjectHubProps> = ({ onViewPresentation }) => {
       >
         Confidencial • VICTA AI © 2024
       </motion.p>
+
+      {/* Marketing Plan Modal */}
+      <AnimatePresence>
+        {showMarketingModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowMarketingModal(false)}
+              className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm"
+            />
+            
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative w-full max-w-2xl bg-slate-900 border border-white/10 rounded-2xl p-8 overflow-hidden shadow-2xl z-10"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-red-600/10 pointer-events-none" />
+              
+              <div className="relative z-20">
+                <div className="flex justify-between items-start mb-6">
+                  <div>
+                    <h2 className="text-3xl font-bold text-white mb-2">Plano de Marketing B2B</h2>
+                    <p className="text-slate-400">Acesse a Landing Page oficial e baixe os relatórios complementares.</p>
+                  </div>
+                  <button 
+                    onClick={() => setShowMarketingModal(false)}
+                    className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                  </button>
+                </div>
+
+                {/* Primary Action */}
+                <button 
+                  onClick={() => window.open('/landing-mi/index.html', '_blank')}
+                  className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 text-white font-bold text-lg flex items-center justify-center gap-3 mb-8 hover:shadow-lg hover:shadow-orange-500/25 transition-all group"
+                >
+                  Acessar Landing Page de Exemplo
+                  <Globe2 className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                </button>
+
+                {/* Documents Grid */}
+                <h3 className="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-4">Documentos Complementares</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {[
+                    { title: 'Plano de Marketing Completo', file: 'plano_marketing_mais_idiomas.pdf' },
+                    { title: 'Versão Executiva', file: 'versao_executiva_mais_idiomas.pdf' },
+                    { title: 'Análise de Viabilidade', file: 'analise_viabilidade_crescimento_mais_idiomas.pdf' },
+                    { title: 'Diagnóstico SEO', file: 'diagnostico_seo_mais_idiomas.pdf' },
+                  ].map((doc) => (
+                    <a 
+                      key={doc.title}
+                      href={`/landing-mi/docs/${doc.file}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/20 transition-all group"
+                    >
+                      <div className="w-10 h-10 flex-shrink-0 rounded-lg bg-orange-500/20 flex items-center justify-center text-orange-500 group-hover:bg-orange-500 group-hover:text-white transition-colors">
+                        <FileDown className="w-5 h-5" />
+                      </div>
+                      <span className="text-slate-300 text-sm font-medium leading-tight group-hover:text-white transition-colors">
+                        {doc.title}
+                      </span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
