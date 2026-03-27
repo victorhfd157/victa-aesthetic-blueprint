@@ -67,7 +67,12 @@ const Hero = () => {
                 <span className="text-primary font-medium text-sm tracking-wide">Inteligência Artificial de Próxima Geração</span>
               </motion.div>
 
-              <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-8 leading-[1.1] tracking-tight">
+              <motion.h1 
+                className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-8 leading-[1.1] tracking-tight"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+              >
                 <span className="text-white block">Soluções que</span>
                 <span className="gradient-text block mt-2">
                   <Typewriter
@@ -79,18 +84,28 @@ const Hero = () => {
                     delayBetweenWords={2500}
                   />
                 </span>
-              </h1>
+              </motion.h1>
 
-              <p className="font-sans text-lg sm:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+              <motion.p 
+                className="font-sans text-lg sm:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
                 Potencialize seu negócio com agentes de IA autônomos e arquiteturas escaláveis.
                 Do conceito à automação total.
-              </p>
+              </motion.p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <motion.div 
+                className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+              >
                 <Button
                   onClick={scrollToContact}
                   size="lg"
-                  className="h-14 px-8 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base rounded-full shadow-[0_0_30px_-10px_hsl(var(--primary))] hover:shadow-[0_0_50px_-10px_hsl(var(--primary))] transition-all duration-300 hover:scale-105 group"
+                  className="h-14 px-8 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base rounded-full shadow-[0_0_30px_-10px_hsl(var(--primary))] hover:shadow-[0_0_50px_-10px_hsl(var(--primary))] transition-all duration-300 hover:scale-105 active:scale-95 group"
                 >
                   Iniciar Projeto
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -100,11 +115,11 @@ const Hero = () => {
                   onClick={scrollToSolutions}
                   variant="outline"
                   size="lg"
-                  className="h-14 px-8 border-white/10 bg-white/5 hover:bg-white/10 text-white font-medium text-base rounded-full backdrop-blur-md transition-all duration-300 hover:scale-105"
+                  className="h-14 px-8 border-white/10 bg-white/5 hover:bg-white/10 text-white font-medium text-base rounded-full backdrop-blur-md transition-all duration-300 hover:scale-105 active:scale-95"
                 >
-                  Explorar Portfolio
+                  Explorar Portfólio
                 </Button>
-              </div>
+              </motion.div>
             </div>
 
             {/* Right Column - Holographic Visual (5 cols) */}

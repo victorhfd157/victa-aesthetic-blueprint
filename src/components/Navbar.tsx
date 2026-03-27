@@ -47,8 +47,8 @@ const Navbar = () => {
     <>
       <ScrollProgress />
       <motion.nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'glass border-b border-glass-border shadow-glass py-3' : 'bg-transparent py-4'}`}
-        initial={{ y: -100 }} animate={{ y: 0 }} transition={{ duration: 0.5 }}
+        className={`fixed z-50 transition-all duration-500 ${isScrolled ? 'top-4 left-4 right-4 glass border border-glass-border shadow-glass py-2 rounded-2xl mx-auto max-w-7xl' : 'top-0 left-0 right-0 bg-transparent py-6'}`}
+        initial={{ y: -100 }} animate={{ y: 0 }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">

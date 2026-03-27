@@ -43,6 +43,15 @@ const Solutions = () => {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const { currentTarget, clientX, clientY } = e;
+    const { left, top } = currentTarget.getBoundingClientRect();
+    const x = clientX - left;
+    const y = clientY - top;
+    currentTarget.style.setProperty('--mouse-x', `${x}px`);
+    currentTarget.style.setProperty('--mouse-y', `${y}px`);
+  };
+
   return (
     <section id="solutions" className="py-24 md:py-32 relative overflow-hidden bg-background/50" ref={sectionRef}>
       {/* Background Elements */}
@@ -85,9 +94,12 @@ const Solutions = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
+            onMouseMove={handleMouseMove}
             className="md:col-span-2 md:row-span-2 group relative rounded-3xl overflow-hidden border border-white/10 bg-glass/50 hover:border-primary/50 transition-colors duration-500"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
+                 style={{ background: 'radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(56, 189, 248, 0.15), transparent 40%)' }} />
+            
             <div className="p-8 h-full flex flex-col justify-between relative z-10">
               <div>
                 <div className="w-16 h-16 rounded-2xl bg-primary/20 flex items-center justify-center mb-6 overflow-hidden">
@@ -100,7 +112,7 @@ const Solutions = () => {
               </div>
               <div className="space-y-2 mt-8">
                 {['Aprendizado Contínuo', 'Execução de Tarefas', 'Multicanal'].map((feat, i) => (
-                  <div key={i} className="flex items-center gap-3 text-sm text-white/80">
+                  <div key={i} className="flex items-center gap-3 text-sm text-white/80 font-sans">
                     <div className="w-1.5 h-1.5 rounded-full bg-primary" />
                     {feat}
                   </div>
@@ -124,19 +136,22 @@ const Solutions = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
+            onMouseMove={handleMouseMove}
             className="md:col-span-1 md:row-span-2 group relative rounded-3xl overflow-hidden border border-white/10 bg-glass/50 hover:border-secondary/50 transition-colors duration-500 flex flex-col"
           >
-            <div className="absolute inset-0 bg-gradient-to-tr from-secondary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="p-8 flex-shrink-0">
+            <div className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
+                 style={{ background: 'radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), rgba(129, 140, 248, 0.15), transparent 40%)' }} />
+            
+            <div className="p-8 flex-shrink-0 relative z-10">
               <div className="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center mb-6">
                 <Workflow className="w-6 h-6 text-secondary" />
               </div>
               <h3 className="text-2xl font-display font-medium text-white mb-3">Workflows</h3>
-              <p className="text-muted-foreground">Automatize processos complexos sem escrever uma linha de código.</p>
+              <p className="text-sm text-muted-foreground font-sans">Automatize processos complexos sem escrever uma linha de código.</p>
             </div>
 
             {/* Animated Diagram */}
-            <div className="flex-grow relative mt-4 overflow-hidden">
+            <div className="flex-grow relative mt-4 overflow-hidden relative z-10">
               <div className="absolute inset-x-8 top-0 bottom-8 border-l-2 border-dashed border-white/10 ml-6">
                 {[1, 2, 3].map((_, i) => (
                   <div key={i} className="absolute left-[-5px]" style={{ top: `${i * 33}%` }}>
@@ -153,13 +168,19 @@ const Solutions = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="md:col-span-1 group relative rounded-3xl overflow-hidden border border-white/10 bg-glass/50 hover:bg-glass/80 transition-colors duration-500 p-8"
+            onMouseMove={handleMouseMove}
+            className="md:col-span-1 group relative rounded-3xl overflow-hidden border border-white/10 bg-glass/50 hover:border-accent/50 transition-colors duration-500 p-8"
           >
-            <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center mb-4">
-              <Link className="w-6 h-6 text-accent" />
+            <div className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
+                 style={{ background: 'radial-gradient(300px circle at var(--mouse-x) var(--mouse-y), rgba(192, 132, 252, 0.15), transparent 40%)' }} />
+            
+            <div className="relative z-10">
+              <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center mb-4">
+                <Link className="w-6 h-6 text-accent" />
+              </div>
+              <h3 className="text-xl font-display font-medium text-white mb-2">Integrações</h3>
+              <p className="text-xs text-muted-foreground font-sans">Conecte-se com +2000 apps via API.</p>
             </div>
-            <h3 className="text-xl font-display font-medium text-white mb-2">Integrações</h3>
-            <p className="text-sm text-muted-foreground">Conecte-se com +2000 apps via API.</p>
           </motion.div>
 
           {/* Small Feature 2 */}
@@ -168,17 +189,21 @@ const Solutions = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="md:col-span-2 group relative rounded-3xl overflow-hidden border border-white/10 bg-glass/50 hover:bg-glass/80 transition-colors duration-500 p-8 flex items-center justify-between"
+            onMouseMove={handleMouseMove}
+            className="md:col-span-2 group relative rounded-3xl overflow-hidden border border-white/10 bg-glass/50 hover:border-green-500/50 transition-colors duration-500 p-8 flex items-center justify-between"
           >
-            <div>
+            <div className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
+                 style={{ background: 'radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), rgba(34, 197, 94, 0.1), transparent 40%)' }} />
+            
+            <div className="relative z-10">
               <div className="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center mb-4">
                 <MessageSquare className="w-6 h-6 text-green-500" />
               </div>
               <h3 className="text-xl font-display font-medium text-white mb-2">Chat Inteligente</h3>
-              <p className="text-sm text-muted-foreground">Suporte 24/7 com NLP avançada.</p>
+              <p className="text-xs text-muted-foreground font-sans">Suporte 24/7 com NLP avançada.</p>
             </div>
-            <div className="hidden sm:block">
-              <Button variant="outline" className="rounded-full border-white/10 hover:bg-white/5" onClick={scrollToContact} aria-label="Ver demonstração">
+            <div className="hidden sm:block relative z-20">
+              <Button variant="outline" className="rounded-full border-white/10 hover:bg-white/5 active:scale-95 transition-all" onClick={scrollToContact} aria-label="Ver demonstração">
                 Ver Demo <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </div>
