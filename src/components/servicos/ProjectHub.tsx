@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Presentation, FileDown, Laptop, ArrowRight, Globe2 } from 'lucide-react';
+import { Presentation, FileDown, Laptop, ArrowRight, Globe2, Target } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 interface ProjectHubProps {
@@ -53,6 +53,14 @@ const ProjectHub: React.FC<ProjectHubProps> = ({ onViewPresentation }) => {
       action: () => navigate('/maisidiomas-hub'),
       buttonText: 'Ver Hub',
     },
+    {
+      title: 'Plano de Marketing',
+      description: 'Landing page B2B interativa focada na captação e conversão de clientes corporativos.',
+      icon: Target,
+      color: 'from-orange-500 to-red-600',
+      action: () => window.open('/landing-mi/index.html', '_blank'),
+      buttonText: 'Ver Plano',
+    },
   ];
 
   return (
@@ -79,7 +87,7 @@ const ProjectHub: React.FC<ProjectHubProps> = ({ onViewPresentation }) => {
       </motion.div>
 
       {/* Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 max-w-[96rem] w-full px-4">
         {cards.map((card, index) => (
           <motion.div
             key={card.title}
