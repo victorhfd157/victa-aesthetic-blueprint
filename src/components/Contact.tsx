@@ -338,7 +338,7 @@ const Contact = () => {
                     {[
                       { icon: Phone, title: "Telefone", value: "+351 960 263 588" },
                       { icon: Mail, title: "Email", value: "info@victaaisolutions.com" },
-                      { icon: MapPin, title: "Localização", value: "Porto, Portugal" },
+                      { icon: MapPin, title: "Localização", value: "Portugal e Global" },
                     ].map((item, index) => (
                       <motion.div 
                         key={item.title}

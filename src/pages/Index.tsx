@@ -43,7 +43,7 @@ const Index = () => {
               "name": "VICTA AI Solutions",
               "url": "https://victaaisolutions.com",
               "logo": "https://storage.googleapis.com/gpt-engineer-file-uploads/rF1B2QstAUfuAwPCXFmZDf9t0UF2/uploads/1759176761396-Imagem Gerada Gemini (4).png",
-              "description": "Soluções de Inteligência Artificial que escalam negócios através de automação inteligente.",
+              "description": "Soluções de Inteligência Artificial que escalam negócios globalmente através de automação inteligente.",
               "address": {
                 "@type": "PostalAddress",
                 "addressCountry": "Portugal"
@@ -63,12 +63,14 @@ const Index = () => {
                 {
                   "@type": "Service",
                   "name": "Agentes Autônomos de IA",
-                  "description": "Desenvolvimento de agentes que executam tarefas complexas."
+                  "description": "Desenvolvimento de agentes que executam tarefas complexas.",
+                  "areaServed": { "@type": "Country", "name": "Global" }
                 },
                 {
                   "@type": "Service",
                   "name": "Automação de Workflows",
-                  "description": "Otimização de processos repetitivos sem código."
+                  "description": "Otimização de processos repetitivos sem código.",
+                  "areaServed": { "@type": "Country", "name": "Global" }
                 }
               ]
             }

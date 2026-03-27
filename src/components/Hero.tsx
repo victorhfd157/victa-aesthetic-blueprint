@@ -64,7 +64,7 @@ const Hero = () => {
                 className="inline-flex items-center justify-center lg:justify-start mb-6 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-sm"
               >
                 <Sparkles className="h-4 w-4 md:h-5 md:w-5 text-primary mr-2 animate-pulse" />
-                <span className="text-primary font-medium text-sm tracking-wide">Agentes de IA Autônomos em Portugal</span>
+                <span className="text-primary font-medium text-sm tracking-wide">Agentes de IA: Portugal e o Mundo</span>
               </motion.div>
 
               <motion.h1 

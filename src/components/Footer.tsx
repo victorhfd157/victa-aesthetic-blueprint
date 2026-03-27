@@ -161,7 +161,7 @@ const Footer = () => {
               {[
                 { label: "Email", value: "info@victaaisolutions.com" },
                 { label: "Telefone", value: "+351 960 263 588" },
-                { label: "Localização", value: "Porto, Portugal" },
+                { label: "Localização", value: "Portugal e Global" },
               ].map((item, index) => (
                 <motion.li
                   key={item.label}

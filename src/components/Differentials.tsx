@@ -58,8 +58,8 @@ const Differentials = () => {
               <span>Resultados Comprovados</span>
             </motion.div>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight">
-              Consultoria em IA no <br />
-              <span className="gradient-text">Porto e Portugal</span>
+              Consultoria em IA com <br />
+              <span className="gradient-text">Alcance Global</span>
             </h2>
           </motion.div>
 
