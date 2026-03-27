@@ -95,6 +95,7 @@ const Solutions = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             onMouseMove={handleMouseMove}
+            aria-label="Agentes Autônomos de IA para Vendas e Operações"
             className="md:col-span-2 md:row-span-2 group relative rounded-3xl overflow-hidden border border-white/10 bg-glass/50 hover:border-primary/50 transition-colors duration-500"
           >
             <div className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
@@ -137,6 +138,7 @@ const Solutions = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
             onMouseMove={handleMouseMove}
+            aria-label="Workflows de Automação de Processos Empresariais"
             className="md:col-span-1 md:row-span-2 group relative rounded-3xl overflow-hidden border border-white/10 bg-glass/50 hover:border-secondary/50 transition-colors duration-500 flex flex-col"
           >
             <div className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
@@ -169,6 +171,7 @@ const Solutions = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
             onMouseMove={handleMouseMove}
+            aria-label="Integração de Sistemas e APIs via Inteligência Artificial"
             className="md:col-span-1 group relative rounded-3xl overflow-hidden border border-white/10 bg-glass/50 hover:border-accent/50 transition-colors duration-500 p-8"
           >
             <div className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300" 

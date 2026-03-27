@@ -124,6 +124,40 @@ const Index = () => {
             }
           `}
         </script>
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Início",
+                  "item": "https://victaaisolutions.com/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Soluções",
+                  "item": "https://victaaisolutions.com/#solutions"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "Diferenciais",
+                  "item": "https://victaaisolutions.com/#differentials"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 4,
+                  "name": "Contato",
+                  "item": "https://victaaisolutions.com/#contact"
+                }
+              ]
+            }
+          `}
+        </script>
       </Helmet>
       <Navbar />
       <Hero />
