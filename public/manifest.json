@@ -1,0 +1,21 @@
+{
+  "name": "VICTA AI Solutions",
+  "short_name": "VICTA AI",
+  "description": "Automação e Inteligência Artificial Empresarial",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "https://storage.googleapis.com/gpt-engineer-file-uploads/rF1B2QstAUfuAwPCXFmZDf9t0UF2/uploads/1759176761396-Imagem Gerada Gemini (4).png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://storage.googleapis.com/gpt-engineer-file-uploads/rF1B2QstAUfuAwPCXFmZDf9t0UF2/uploads/1759176761396-Imagem Gerada Gemini (4).png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

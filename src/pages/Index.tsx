@@ -19,11 +19,22 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Helmet>
         <title>VICTA AI Solutions | Automação e Inteligência Artificial Empresarial</title>
-        <meta name="description" content="Escale seu negócio com agentes de IA autônomos. Soluções personalizadas em automação, chatbots inteligentes e arquiteturas escaláveis para empresas inovadoras." />
+        <meta name="description" content="Líder em Agentes de IA e Automação Empresarial. Transformamos negócios com soluções escaláveis, chatbots inteligentes e inovação digital sob medida." />
         <meta name="keywords" content="inteligência artificial, automação empresarial, agentes de IA, chatbots personalizados, transformação digital, VICTA AI" />
         <link rel="canonical" href="https://victaaisolutions.com/" />
         <meta property="og:title" content="VICTA AI Solutions - IA de Próxima Geração" />
         <meta property="og:description" content="Potencialize seu negócio com agentes de IA autônomos e arquiteturas escaláveis." />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "VICTA AI Solutions",
+              "alternateName": ["VICTA AI", "VICTA"],
+              "url": "https://victaaisolutions.com"
+            }
+          `}
+        </script>
         <script type="application/ld+json">
           {`
             {
@@ -37,6 +48,11 @@ const Index = () => {
                 "@type": "PostalAddress",
                 "addressCountry": "Portugal"
               },
+              "sameAs": [
+                "https://linkedin.com/company/victa-ai",
+                "https://instagram.com/victa.ai",
+                "https://twitter.com/victa_ai"
+              ],
               "contactPoint": {
                 "@type": "ContactPoint",
                 "telephone": "+351-960-263-588",
