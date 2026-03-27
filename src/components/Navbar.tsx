@@ -53,7 +53,7 @@ const Navbar = () => {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
             <motion.button onClick={() => scrollToSection('hero')} className="flex items-center gap-3" whileHover={{ scale: 1.02 }}>
-              <img src={victaLogo} alt="Victa Logo" className="h-12 md:h-16 w-auto" />
+              <img src={victaLogo} alt="VICTA AI Solutions - Agentes Inteligentes e Automação" className="h-12 md:h-16 w-auto" />
               <span className="text-xl font-display font-bold gradient-text hidden sm:block">VICTA AI</span>
             </motion.button>
 

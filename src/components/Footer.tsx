@@ -99,7 +99,7 @@ const Footer = () => {
             <motion.div className="flex justify-center sm:justify-start">
               <img
                 src={victaLogo}
-                alt="VICTA AI Solutions"
+                alt="VICTA AI Solutions - Soluções de IA Empresarial"
                 className="h-10 md:h-12 w-auto mb-4 md:mb-6 glow-primary"
               />
             </motion.div>

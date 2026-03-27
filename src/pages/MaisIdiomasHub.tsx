@@ -18,8 +18,31 @@ const MaisIdiomasHub = () => {
             <Helmet>
                 <title>Mais Idiomas Hub - Plataforma Corporativa</title>
                 <meta name="description" content="Evolua o aprendizado na sua empresa com a plataforma corporativa da Mais Idiomas. Soluções B2B para treinar sua equipe com foco em negócios." />
+                <link rel="canonical" href="https://victaaisolutions.com/maisidiomas-hub" />
                 <meta property="og:title" content="Mais Idiomas Hub - Soluções B2B" />
                 <meta property="og:description" content="A excelência do ensino presencial com a flexibilidade do digital para empresas." />
+                <script type="application/ld+json">
+                    {`
+                        {
+                            "@context": "https://schema.org",
+                            "@type": "BreadcrumbList",
+                            "itemListElement": [
+                                {
+                                    "@type": "ListItem",
+                                    "position": 1,
+                                    "name": "VICTA AI Solutions",
+                                    "item": "https://victaaisolutions.com"
+                                },
+                                {
+                                    "@type": "ListItem",
+                                    "position": 2,
+                                    "name": "Mais Idiomas Hub",
+                                    "item": "https://victaaisolutions.com/maisidiomas-hub"
+                                }
+                            ]
+                        }
+                    `}
+                </script>
             </Helmet>
             <MaisIdiomasNavbar />
             <MaisIdiomasHero />

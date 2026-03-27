@@ -18,19 +18,93 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>VICTA AI Solutions - Transforme seu negócio com Inteligência Artificial</title>
-        <meta name="description" content="Soluções de IA que escalam seu negócio. Automatize processos, aumente conversões e reduza custos com agentes inteligentes e integrações estratégicas." />
-        <meta property="og:title" content="VICTA AI Solutions - Transforme seu negócio com IA" />
-        <meta property="og:description" content="Automatize processos, aumente conversões e reduza custos com agentes inteligentes." />
+        <title>VICTA AI Solutions | Automação e Inteligência Artificial Empresarial</title>
+        <meta name="description" content="Escale seu negócio com agentes de IA autônomos. Soluções personalizadas em automação, chatbots inteligentes e arquiteturas escaláveis para empresas inovadoras." />
+        <meta name="keywords" content="inteligência artificial, automação empresarial, agentes de IA, chatbots personalizados, transformação digital, VICTA AI" />
+        <link rel="canonical" href="https://victaaisolutions.com/" />
+        <meta property="og:title" content="VICTA AI Solutions - IA de Próxima Geração" />
+        <meta property="og:description" content="Potencialize seu negócio com agentes de IA autônomos e arquiteturas escaláveis." />
         <script type="application/ld+json">
           {`
             {
               "@context": "https://schema.org",
               "@type": "Organization",
               "name": "VICTA AI Solutions",
-              "url": "https://victa.ai",
+              "url": "https://victaaisolutions.com",
               "logo": "https://storage.googleapis.com/gpt-engineer-file-uploads/rF1B2QstAUfuAwPCXFmZDf9t0UF2/uploads/1759176761396-Imagem Gerada Gemini (4).png",
-              "description": "Soluções de IA que escalam seu negócio."
+              "description": "Soluções de Inteligência Artificial que escalam negócios através de automação inteligente.",
+              "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "Portugal"
+              },
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+351-960-263-588",
+                "contactType": "customer service",
+                "email": "info@victaaisolutions.com"
+              },
+              "service": [
+                {
+                  "@type": "Service",
+                  "name": "Agentes Autônomos de IA",
+                  "description": "Desenvolvimento de agentes que executam tarefas complexas."
+                },
+                {
+                  "@type": "Service",
+                  "name": "Automação de Workflows",
+                  "description": "Otimização de processos repetitivos sem código."
+                }
+              ]
+            }
+          `}
+        </script>
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "Em quanto tempo verei resultados?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Em até 30 dias, na maioria dos projetos. Implementamos soluções que geram impacto imediato, com melhorias contínuas ao longo do tempo."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Preciso de equipa de tecnologia interna?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Não, a VICTA trata da implementação e suporte. Nossa equipe especializada cuida de todo o processo técnico, desde o desenvolvimento até a manutenção."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Quais sectores podem usar as soluções da VICTA?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Retalho, serviços, financeiro, saúde e muito mais. Nossas soluções são adaptáveis a qualquer sector que busque automatização e eficiência."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Qual é o investimento necessário?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "O investimento varia conforme a complexidade e escopo do projeto. Oferecemos soluções escaláveis que se adequam ao orçamento e necessidades da sua empresa."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Como garantem a segurança dos dados?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Utilizamos protocolos de segurança avançados, criptografia end-to-end e compliance total com LGPD. Seus dados estão sempre protegidos e seguros."
+                  }
+                }
+              ]
             }
           `}
         </script>
