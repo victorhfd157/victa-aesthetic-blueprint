@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        display: ['Outfit', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['"Space Grotesk"', 'Inter', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -146,6 +146,31 @@ export default {
           "0%": { transform: "translateY(20px)", opacity: "0" },
           "100%": { transform: "translateY(0)", opacity: "1" },
         },
+        "aurora-1": {
+          "0%, 100%": { transform: "translate(0, 0) scale(1)" },
+          "33%": { transform: "translate(8%, 12%) scale(1.1)" },
+          "66%": { transform: "translate(-6%, 6%) scale(0.95)" },
+        },
+        "aurora-2": {
+          "0%, 100%": { transform: "translate(0, 0) scale(1)" },
+          "50%": { transform: "translate(-10%, -8%) scale(1.15)" },
+        },
+        "aurora-3": {
+          "0%, 100%": { transform: "translate(-50%, 0) scale(1)" },
+          "50%": { transform: "translate(-50%, -10%) scale(1.1)" },
+        },
+        "shimmer-cta": {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
+        },
+        "border-rotate": {
+          "0%": { "--angle": "0deg" } as never,
+          "100%": { "--angle": "360deg" } as never,
+        },
+        "eyebrow-bar": {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100%)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -157,6 +182,11 @@ export default {
         "scroll": "scroll 20s linear infinite",
         "glow-pulse": "glow-pulse 4s ease-in-out infinite",
         "reveal": "reveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        "aurora-1": "aurora-1 18s ease-in-out infinite",
+        "aurora-2": "aurora-2 22s ease-in-out infinite",
+        "aurora-3": "aurora-3 26s ease-in-out infinite",
+        "shimmer-cta": "shimmer-cta 2.5s linear infinite",
+        "eyebrow-bar": "eyebrow-bar 2.8s ease-in-out infinite",
       },
     },
   },

@@ -90,35 +90,42 @@ const Clients = () => {
           </p>
         </motion.div>
 
-        {/* Client Logos - Infinite Scroll with fade edges */}
-        <motion.div 
-          className="relative overflow-hidden mb-16 md:mb-20"
+        {/* Client Logos — 3D perspective marquee with stronger fade edges (I) */}
+        <motion.div
+          className="relative mb-16 md:mb-20"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
+          style={{ perspective: '1200px' }}
         >
-          {/* Fade edges */}
-          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
-          
-          <div className="flex animate-[scroll_25s_linear_infinite] hover:[animation-play-state:paused]">
-            {[...clientLogos, ...clientLogos].map((client, index) => (
-              <motion.div
-                key={index}
-                className="flex-shrink-0 w-40 h-20 mx-8 flex items-center justify-center"
-                whileHover={{ scale: 1.15, opacity: 1 }}
-                initial={{ opacity: 0.5 }}
-                animate={{ opacity: 0.7 }}
-                transition={{ duration: 0.3 }}
-              >
-                <img
-                  src={client.logo}
-                  alt={`${client.name} logo`}
-                  className="max-h-12 max-w-full object-contain filter grayscale hover:grayscale-0 transition-all duration-500"
-                />
-              </motion.div>
-            ))}
+          {/* Fade edges (wider for cinematic feel) */}
+          <div className="absolute left-0 top-0 bottom-0 w-32 md:w-48 bg-gradient-to-r from-background via-background/80 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 md:w-48 bg-gradient-to-l from-background via-background/80 to-transparent z-10 pointer-events-none" />
+
+          <div
+            className="overflow-hidden"
+            style={{ transform: 'rotateX(8deg)', transformStyle: 'preserve-3d' }}
+          >
+            <div className="flex animate-[scroll_30s_linear_infinite] hover:[animation-play-state:paused] py-6">
+              {[...clientLogos, ...clientLogos].map((client, index) => (
+                <div
+                  key={index}
+                  className="flex-shrink-0 w-40 h-20 mx-8 flex items-center justify-center transition-transform duration-500 hover:scale-110 hover:-translate-y-1"
+                  style={{ transformStyle: 'preserve-3d' }}
+                >
+                  <img
+                    src={client.logo}
+                    alt={`${client.name} logo`}
+                    loading="lazy"
+                    className="max-h-12 max-w-full object-contain opacity-60 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-500"
+                    style={{
+                      filter: 'drop-shadow(0 8px 20px hsl(var(--primary) / 0.15))',
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </motion.div>
 

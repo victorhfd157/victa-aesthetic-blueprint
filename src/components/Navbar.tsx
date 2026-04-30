@@ -13,19 +13,30 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
+    const sections = ['hero', 'solutions', 'differentials', 'clients', 'faq', 'contact'];
+    let rafId: number | null = null;
+
+    const update = () => {
+      rafId = null;
       setIsScrolled(window.scrollY > 20);
-      const sections = ['hero', 'solutions', 'differentials', 'clients', 'faq', 'contact'];
-      for (const section of [...sections].reverse()) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 150) { setActiveSection(section); break; }
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const element = document.getElementById(sections[i]);
+        if (element && element.getBoundingClientRect().top <= 150) {
+          setActiveSection(sections[i]);
+          break;
         }
       }
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    const handleScroll = () => {
+      if (rafId === null) rafId = window.requestAnimationFrame(update);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (rafId !== null) window.cancelAnimationFrame(rafId);
+    };
   }, []);
 
   const scrollToSection = (sectionId: string) => {
@@ -47,6 +58,7 @@ const Navbar = () => {
     <>
       <ScrollProgress />
       <motion.nav
+        aria-label="Navegação principal"
         className={`fixed z-50 transition-all duration-500 ${isScrolled ? 'top-4 left-4 right-4 glass border border-glass-border shadow-glass py-2 rounded-2xl mx-auto max-w-7xl' : 'top-0 left-0 right-0 bg-transparent py-6'}`}
         initial={{ y: -100 }} animate={{ y: 0 }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       >
@@ -72,6 +84,7 @@ const Navbar = () => {
                     <motion.button
                       key={item.id}
                       onClick={() => scrollToSection(item.id)}
+                      aria-current={activeSection === item.id ? 'page' : undefined}
                       className={`relative px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeSection === item.id ? 'text-primary' : 'text-foreground/70 hover:text-foreground'}`}
                       whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
                     >
@@ -98,12 +111,17 @@ const Navbar = () => {
 
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild className="lg:hidden">
-                <Button variant="ghost" size="icon" className="hover:bg-primary/10"><Menu className="h-6 w-6" /></Button>
+                <Button variant="ghost" size="icon" aria-label="Abrir menu de navegação" className="hover:bg-primary/10"><Menu className="h-6 w-6" aria-hidden="true" /></Button>
               </SheetTrigger>
               <SheetContent side="right" className="glass border-l border-glass-border w-80">
                 <div className="flex flex-col gap-2 mt-8">
                   {navItems.map((item) => (
-                    <button key={item.id} onClick={() => scrollToSection(item.id)} className={`text-left px-4 py-3 rounded-xl transition-all ${activeSection === item.id ? 'bg-primary/10 text-primary border border-primary/20' : 'text-foreground/70 hover:text-foreground hover:bg-primary/5'}`}>
+                    <button
+                      key={item.id}
+                      onClick={() => scrollToSection(item.id)}
+                      aria-current={activeSection === item.id ? 'page' : undefined}
+                      className={`text-left px-4 py-3 rounded-xl transition-all ${activeSection === item.id ? 'bg-primary/10 text-primary border border-primary/20' : 'text-foreground/70 hover:text-foreground hover:bg-primary/5'}`}
+                    >
                       {item.label}
                     </button>
                   ))}

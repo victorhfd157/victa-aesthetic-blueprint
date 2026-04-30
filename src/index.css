@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+/* Variable axes for smooth weight animation (J) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Space+Grotesk:wght@400..700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -59,32 +60,33 @@ All colors MUST be HSL.
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
     --gradient-hero: linear-gradient(135deg, hsl(var(--primary) / 0.2), hsl(var(--secondary) / 0.2), hsl(var(--accent) / 0.2));
     --gradient-glow: linear-gradient(135deg, hsl(var(--primary-glow)), hsl(var(--secondary-glow)));
-    /* Shadows & Glows - Multi-layer system */
+    /* Shadows & Glows - Multi-layer system (HSL-based for theme consistency) */
     --shadow-glow: 0 0 50px hsl(var(--primary) / 0.25);
-    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    --shadow-glass: 0 8px 32px 0 hsl(222 47% 4% / 0.3);
 
     /* Card shadows: border highlight + soft diffuse + ambient darkness */
-    --shadow-card: 0 0 0 1px rgba(255, 255, 255, 0.1),
-      0 4px 20px rgba(0, 0, 0, 0.4),
-      0 0 40px rgba(0, 0, 0, 0.2);
+    --shadow-card: 0 0 0 1px hsl(var(--foreground) / 0.1),
+      0 4px 20px hsl(222 47% 4% / 0.4),
+      0 0 40px hsl(222 47% 4% / 0.2);
 
-    --shadow-card-hover: 0 0 0 1px rgba(255, 255, 255, 0.15),
-      0 8px 40px rgba(0, 0, 0, 0.5),
-      0 0 80px rgba(0, 179, 255, 0.1);
+    --shadow-card-hover: 0 0 0 1px hsl(var(--foreground) / 0.15),
+      0 8px 40px hsl(222 47% 4% / 0.5),
+      0 0 80px hsl(var(--primary) / 0.1);
 
     /* Button shadows: inner highlight + glow + outer shadow */
-    --shadow-button: inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
-      0 0 20px rgba(94, 106, 210, 0.3),
-      0 4px 12px rgba(0, 0, 0, 0.3);
+    --shadow-button: inset 0 1px 0 0 hsl(var(--foreground) / 0.1),
+      0 0 20px hsl(var(--secondary) / 0.3),
+      0 4px 12px hsl(222 47% 4% / 0.3);
 
-    --shadow-button-hover: inset 0 1px 0 0 rgba(255, 255, 255, 0.15),
-      0 0 30px rgba(94, 106, 210, 0.4),
-      0 6px 20px rgba(0, 0, 0, 0.4);
+    --shadow-button-hover: inset 0 1px 0 0 hsl(var(--foreground) / 0.15),
+      0 0 30px hsl(var(--secondary) / 0.4),
+      0 6px 20px hsl(222 47% 4% / 0.4);
 
     /* Animations - Linear precision timing */
     --transition-quick: all 200ms cubic-bezier(0.16, 1, 0.3, 1);
     --transition-smooth: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
     --transition-entrance: all 600ms cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-bounce: all 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
     --radius: 0.75rem;
 
@@ -98,14 +100,27 @@ All colors MUST be HSL.
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
-  /* Force dark mode */
+  /* Dark mode (currently identical to root — site is dark by default) */
   .dark {
-    --background: 222 47% 6%;
-    --foreground: 210 40% 98%;
-    --card: 222 47% 8%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222 47% 8%;
-    --popover-foreground: 210 40% 98%;
+    color-scheme: dark;
+  }
+}
+
+/* Hide native cursor when custom cursor is active (K) */
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none !important;
+}
+
+/* Respect users who prefer reduced motion (a11y) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
@@ -143,9 +158,17 @@ All colors MUST be HSL.
   .glass {
     background: hsl(var(--glass-bg));
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid hsl(var(--glass-border));
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-glass);
     position: relative;
+  }
+
+  /* Solid surface for use when bg-glass class was assumed (was missing in Tailwind) */
+  .bg-glass {
+    background: hsl(var(--glass-bg));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
   }
 
   /* Inner highlight for elevated surfaces */
